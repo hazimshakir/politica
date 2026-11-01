@@ -8,15 +8,16 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to main content</a>
 <header class="topbar"><div class="wrap topinner"><div class="brand">POLI<span>T</span>ICA</div><div class="topnote">An independent political self-assessment</div></div></header>
 <section class="hero"><div class="wrap">
 <div class="eyebrow">A clearer picture of your political values</div>
 <h1>Understand your<br><em>political thinking.</em></h1>
 <p>A thoughtful exploration of your beliefs across economics, society, culture, democracy and governance. Discover patterns in your answers — without being told what to believe.</p>
 <div class="hero-actions"><button class="btn btn-primary" onclick="startAssessment()">Begin assessment&nbsp; →</button><button class="btn btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">How it works</button></div>
-<div class="meta"><span>◷ <b>10–15 minutes</b></span><span>◉ <b>35 questions</b></span><span>⌁ <b>No party affiliation questions</b></span></div>
+<div class="meta"><span><span aria-hidden="true">◷</span> <b>10–15 minutes</b></span><span><span aria-hidden="true">◉</span> <b>35 questions</b></span><span><span aria-hidden="true">⌁</span> <b>No party affiliation questions</b></span></div>
 </div></section>
-<main>
+<main id="main">
 <section class="intro wrap" id="about"><div class="section-kicker">The framework</div><h2>Seven dimensions. More than one label.</h2><p>Political beliefs rarely fit on a single left-to-right line. This assessment looks at different dimensions independently and treats mixed or uncertain views as meaningful answers, not mistakes.</p>
 <div class="dimension-grid">
 <div class="dim"><div class="num">01 / ECONOMY</div><strong>Economic philosophy</strong><small>Markets, tax, welfare</small></div>
@@ -29,12 +30,12 @@
 </div></section>
 <section class="assessment wrap hidden" id="assessment">
 <div class="quiz-shell">
-<aside class="side"><h3>Your progress</h3><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-copy" id="progressCopy">0 of 35 answered</div><div class="steps" id="steps"></div><div class="privacy">Your answers stay in this browser session. This demo does not send responses to a server or call an AI API.</div></aside><div class="quiz-card" id="quizCard"></div>
+<aside class="side" aria-label="Assessment progress"><h3>Your progress</h3><div class="progress-track" id="progressTrack" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="35" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div><div class="progress-copy" id="progressCopy">0 of 35 answered</div><div class="steps" id="steps" role="group" aria-label="Assessment sections"></div><div class="privacy">Your answers stay in this browser session. This demo does not send responses to a server or call an AI API.</div></aside><div class="quiz-card" id="quizCard"></div>
 </div></section>
 <section class="results wrap hidden" id="results"></section>
 </main>
 <footer class="footer"><div class="wrap"><strong>POLITICA</strong> &nbsp;·&nbsp; A non-partisan educational self-reflection tool.<br><br>This is an experimental, non-validated questionnaire. Results are descriptive, provisional and not a scientific diagnosis or a recommendation about parties, candidates or votes.</div></footer>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="js/scoring.js"></script>
 <script src="js/render.js"></script>
 <script src="js/app.js"></script>
