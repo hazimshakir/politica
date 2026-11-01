@@ -148,3 +148,7 @@ legend.qtext{padding:0;display:block;width:100%}
 .step{color:#5b6b80}
 .scale-labels{color:#64748b}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+/* ===== Saved progress (Stage 6) ===== */
+.resume{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px;color:#c3cedb;font-size:14px}
+.resume .btn{padding:9px 14px}
+.linkbtn{background:none;border:0;padding:6px 0;margin-top:14px;color:var(--teal);font-size:12px;text-decoration:underline}
