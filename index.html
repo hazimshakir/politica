@@ -12,6 +12,22 @@
 @media(max-width:520px){.wrap{padding:0 17px}.hero{padding:55px 0 65px}.topnote{display:none}.dimension-grid{grid-template-columns:1fr 1fr}.dim{min-height:95px}.quiz-card{padding:22px 18px}.quiz-card h2{font-size:25px}.qtext{font-size:18px}.steps{grid-template-columns:1fr 1fr}.step{font-size:11px;padding:7px}.navrow .btn{padding:11px 13px}}
 @media print{.topbar,.hero,.intro,.assessment,.actions,.footer{display:none!important}.results{padding:0}.result-hero{background:#fff;color:#111;border:1px solid #ddd}.result-hero p{color:#444}.panel{break-inside:avoid;box-shadow:none}.caveat{break-inside:avoid}}
 </style>
+<style>
+/* ===== STAGE 3 FIX: print styling (bars, labels and disclaimer now appear in the printed/PDF report) ===== */
+@media print{
+@page{size:A4;margin:14mm}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#fff}
+.wrap{max-width:none;padding:0}
+.result-hero{padding:22px 26px}
+.profile-pill{background:#e3f4f1;color:#0b5f58}
+.panel{padding:18px}
+.bar{background:#e3e8ee;border:1px solid #cfd8e0}
+.footer{display:block!important;background:#fff;color:#444;border-top:1px solid #ddd;margin-top:14px;padding:10px 0}
+.footer strong{color:#111}
+}
+/* ===== END STAGE 3 FIX ===== */
+</style>
 </head>
 <body>
 <header class="topbar"><div class="wrap topinner"><div class="brand">POLI<span>T</span>ICA</div><div class="topnote">An independent political self-assessment</div></div></header>
