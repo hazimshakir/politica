@@ -8,14 +8,6 @@ Politics is more than choosing a party or supporting a leader. It involves persp
 
 POLITICA aims to make that exploration easier through a structured, scenario-based assessment.
 
----
-
-## 🌐 Live Demo
-
-[Visit POLITICA](https://politica.onrender.com)
-
----
-
 ## 🎯 Project Objectives
 
 * Help individuals understand their political perspectives.
