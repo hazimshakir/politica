@@ -133,3 +133,18 @@ button{font:inherit;cursor:pointer}
   .footer{background:#fff;color:#444;border-top:1px solid #ddd;margin-top:14px;padding:10px 0}
   .footer strong{color:#111}
 }
+/* ===== Accessibility (Stage 5) ===== */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:8px;z-index:20;background:#fff;color:#101b2d;padding:10px 14px;border-radius:8px;font-weight:700}
+.skip:focus{left:12px}
+:focus-visible{outline:3px solid #0a9b92;outline-offset:2px}
+.fs{border:0;margin:0;padding:0;min-width:0}
+.fs:focus{outline:none}
+legend.qtext{padding:0;display:block;width:100%}
+.scenario{margin-bottom:24px}
+.option{position:relative}
+.option input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.option:has(input:focus-visible){outline:3px solid #0a9b92;outline-offset:2px}
+.step{color:#5b6b80}
+.scale-labels{color:#64748b}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
