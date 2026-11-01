@@ -5,29 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101b2d">
 <title>POLITICA — Understand your political thinking</title>
-<style>
-:root{--ink:#172235;--muted:#64748b;--paper:#f6f7f9;--card:#fff;--navy:#101b2d;--navy2:#1b2b43;--teal:#087f78;--mint:#dff4ef;--line:#e5e9ef;--gold:#e8b75a;--shadow:0 18px 55px rgba(22,34,53,.09)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}button{font:inherit;cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:0 26px}.topbar{height:76px;background:var(--navy);color:white;display:flex;align-items:center;border-bottom:1px solid #ffffff18}.topinner{display:flex;justify-content:space-between;align-items:center;width:100%}.brand{font-weight:850;letter-spacing:.18em;font-size:19px}.brand span{color:#72d2c4}.topnote{font-size:12px;color:#b8c4d4;letter-spacing:.08em;text-transform:uppercase}.hero{background:var(--navy);color:#fff;padding:76px 0 88px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid #ffffff16;border-radius:50%;right:-90px;top:-260px;box-shadow:0 0 0 55px #ffffff08,0 0 0 110px #ffffff05}.eyebrow{color:#80d6c9;text-transform:uppercase;font-size:11px;letter-spacing:.19em;font-weight:800}.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-.055em;max-width:780px;margin:18px 0}.hero h1 em{font-style:normal;color:#83d8ca}.hero p{color:#c3cedb;max-width:610px;font-size:17px}.hero-actions{display:flex;gap:13px;align-items:center;margin-top:30px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:13px 19px;font-weight:750;transition:.2s}.btn-primary{background:#83d8ca;color:#102238}.btn-primary:hover{background:#a1e7dc;transform:translateY(-1px)}.btn-ghost{background:transparent;border:1px solid #ffffff45;color:#fff}.meta{display:flex;gap:22px;margin-top:36px;color:#b8c4d4;font-size:13px;flex-wrap:wrap}.meta b{color:#fff}.intro{padding:48px 0 30px}.section-kicker{color:var(--teal);font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.intro h2{font-size:30px;letter-spacing:-.035em;margin:8px 0}.intro p{color:var(--muted);max-width:760px;margin:0}.dimension-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:26px 0 48px}.dim{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;min-height:112px}.dim .num{font-size:11px;color:var(--teal);font-weight:850}.dim strong{display:block;margin-top:9px}.dim small{color:var(--muted)}.assessment{padding:26px 0 80px}.quiz-shell{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}.side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;position:sticky;top:18px}.side h3{font-size:14px;margin:0 0 14px}.progress-track{height:7px;background:#edf0f4;border-radius:10px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--teal);transition:width .25s}.progress-copy{font-size:12px;color:var(--muted);margin:8px 0 22px}.steps{display:grid;gap:7px}.step{border:0;background:transparent;text-align:left;padding:10px;border-radius:9px;color:#718096;font-size:13px;display:flex;gap:10px;align-items:center}.step .dot{width:22px;height:22px;border-radius:50%;border:1px solid #d7dee7;display:grid;place-items:center;font-size:10px;flex-shrink:0}.step.active{background:#eaf7f4;color:#125f5a;font-weight:750}.step.active .dot,.step.done .dot{background:var(--teal);border-color:var(--teal);color:white}.step.done{color:#334155}.privacy{border-top:1px solid var(--line);padding-top:16px;margin-top:18px;color:var(--muted);font-size:11px}.quiz-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:clamp(22px,4vw,42px);box-shadow:var(--shadow);min-height:530px}.quiz-head{display:flex;justify-content:space-between;gap:15px;align-items:center}.tag{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);font-weight:850}.counter{font-size:12px;color:var(--muted)}.quiz-card h2{font-size:30px;letter-spacing:-.04em;line-height:1.15;margin:17px 0 8px}.hint{color:var(--muted);font-size:14px;margin:0 0 27px}.qtext{font-size:20px;font-weight:720;line-height:1.4;max-width:720px;margin:24px 0}.scenario{font-size:13px;color:#607086;background:#f5f8fa;border-left:3px solid #8ccfc4;padding:12px 15px;border-radius:0 8px 8px 0;margin:0 0 20px}.options{display:grid;gap:10px}.option{display:flex;align-items:center;gap:13px;border:1px solid #e2e7ed;border-radius:11px;padding:13px 15px;cursor:pointer;transition:.15s}.option:hover{border-color:#8bcfc4;background:#f8fcfb}.option.selected{border-color:var(--teal);background:#eaf7f4;box-shadow:inset 0 0 0 1px var(--teal)}.radio{width:19px;height:19px;border:1.5px solid #bac5d1;border-radius:50%;display:grid;place-items:center;flex-shrink:0}.selected .radio{border-color:var(--teal)}.selected .radio:after{content:"";width:9px;height:9px;background:var(--teal);border-radius:50%}.option span:last-child{font-size:14px}.navrow{display:flex;justify-content:space-between;gap:12px;margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}.btn-light{background:#f0f3f6;color:#334155}.btn-dark{background:var(--navy);color:white}.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}.hidden{display:none!important}.results{padding:55px 0 90px}.result-hero{background:var(--navy);color:white;border-radius:20px;padding:clamp(26px,5vw,52px);position:relative;overflow:hidden}.result-hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #ffffff20;border-radius:50%;right:-80px;top:-180px;box-shadow:0 0 0 45px #ffffff08,0 0 0 90px #ffffff05}.result-hero h1{font-size:clamp(34px,5vw,55px);letter-spacing:-.05em;margin:12px 0}.result-hero p{color:#c4d0dc;max-width:690px}.profile-pill{display:inline-block;background:#174d4c;color:#9ae4d8;padding:7px 12px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:20px 0}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:24px}.panel h3{margin:0 0 6px;font-size:17px}.sub{color:var(--muted);font-size:12px;margin:0 0 20px}.dimension-row{margin:18px 0}.rowtop{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:700}.rowtop span:last-child{color:var(--teal)}.bar{height:9px;background:#edf1f4;border-radius:10px;margin-top:8px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#9bd8ce,#087f78);border-radius:10px}.scale-labels{display:flex;justify-content:space-between;color:#8491a1;font-size:10px;margin-top:5px}.insight{padding:14px 0;border-top:1px solid var(--line)}.insight:first-of-type{border-top:0}.insight strong{font-size:13px}.insight p{font-size:13px;color:#5f6d7f;margin:5px 0 0}.chip{display:inline-block;background:#edf7f5;color:#176b63;border-radius:30px;padding:7px 11px;font-size:12px;font-weight:700;margin:5px 5px 0 0}.caveat{background:#fff8e8;border:1px solid #f2e3bf;color:#715a2e;padding:14px 16px;border-radius:11px;font-size:12px;margin-top:17px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.footer{background:#101b2d;color:#aebccd;padding:28px 0;font-size:12px}.footer strong{color:white}.modal{position:fixed;inset:0;background:#081322bb;display:grid;place-items:center;padding:20px;z-index:9}.modalbox{background:white;border-radius:16px;padding:26px;max-width:490px;width:100%}.modalbox h3{margin-top:0}.modalbox p{color:var(--muted);font-size:14px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#122238;color:white;padding:11px 17px;border-radius:9px;font-size:13px;z-index:10;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
-@media(max-width:850px){.dimension-grid{grid-template-columns:repeat(2,1fr)}.quiz-shell{grid-template-columns:1fr}.side{position:static}.steps{grid-template-columns:repeat(2,1fr)}.privacy{display:none}.result-grid{grid-template-columns:1fr}}
-@media(max-width:520px){.wrap{padding:0 17px}.hero{padding:55px 0 65px}.topnote{display:none}.dimension-grid{grid-template-columns:1fr 1fr}.dim{min-height:95px}.quiz-card{padding:22px 18px}.quiz-card h2{font-size:25px}.qtext{font-size:18px}.steps{grid-template-columns:1fr 1fr}.step{font-size:11px;padding:7px}.navrow .btn{padding:11px 13px}}
-@media print{.topbar,.hero,.intro,.assessment,.actions,.footer{display:none!important}.results{padding:0}.result-hero{background:#fff;color:#111;border:1px solid #ddd}.result-hero p{color:#444}.panel{break-inside:avoid;box-shadow:none}.caveat{break-inside:avoid}}
-</style>
-<style>
-/* ===== STAGE 3 FIX: print styling (bars, labels and disclaimer now appear in the printed/PDF report) ===== */
-@media print{
-@page{size:A4;margin:14mm}
-*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{background:#fff}
-.wrap{max-width:none;padding:0}
-.result-hero{padding:22px 26px}
-.profile-pill{background:#e3f4f1;color:#0b5f58}
-.panel{padding:18px}
-.bar{background:#e3e8ee;border:1px solid #cfd8e0}
-.footer{display:block!important;background:#fff;color:#444;border-top:1px solid #ddd;margin-top:14px;padding:10px 0}
-.footer strong{color:#111}
-}
-/* ===== END STAGE 3 FIX ===== */
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header class="topbar"><div class="wrap topinner"><div class="brand">POLI<span>T</span>ICA</div><div class="topnote">An independent political self-assessment</div></div></header>
@@ -51,158 +29,14 @@ body{background:#fff}
 </div></section>
 <section class="assessment wrap hidden" id="assessment">
 <div class="quiz-shell">
-<aside class="side"><h3>Your progress</h3><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-copy" id="progressCopy">0 of 35 answered</div><div class="steps" id="steps"></div><div class="privacy">Your answers stay in this browser session. This demo does not send responses to a server or call an AI API.</div></aside>
-<div class="quiz-card" id="quizCard"></div>
+<aside class="side"><h3>Your progress</h3><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-copy" id="progressCopy">0 of 35 answered</div><div class="steps" id="steps"></div><div class="privacy">Your answers stay in this browser session. This demo does not send responses to a server or call an AI API.</div></aside><div class="quiz-card" id="quizCard"></div>
 </div></section>
 <section class="results wrap hidden" id="results"></section>
 </main>
 <footer class="footer"><div class="wrap"><strong>POLITICA</strong> &nbsp;·&nbsp; A non-partisan educational self-reflection tool.<br><br>This is an experimental, non-validated questionnaire. Results are descriptive, provisional and not a scientific diagnosis or a recommendation about parties, candidates or votes.</div></footer>
 <div class="toast" id="toast"></div>
-<script>
-const sections = [
-{title:"Economic philosophy",short:"Economics",desc:"Markets, taxation, public services and economic opportunity.",questions:[
-["A government should guarantee access to healthcare and education, even if this requires higher taxes or public spending.","scenario","Imagine public hospitals and schools are underfunded. The government can raise revenue or leave more services to private providers."],
-["Private enterprise and competition are generally the best engines of innovation and economic growth.","plain"],
-["People with very high incomes should pay a larger share of their income in tax to fund public services.","plain"],
-["Workers need strong legal protections, even when those rules increase costs for employers.","plain"],
-["When an essential service is failing, public ownership or direct public provision should be considered.","plain"]
-]},
-{title:"Social philosophy",short:"Society",desc:"Individual autonomy, equal opportunity and shared responsibilities.",questions:[
-["Adults should be free to make personal choices as long as they do not violate other people's rights.","plain"],
-["Government should actively address disadvantages linked to caste, class, gender or family background.","plain"],
-["Public policy should focus more on equal opportunity than on making everyone's outcomes equal.","plain"],
-["A society has obligations to people who cannot meet basic needs through no fault of their own.","plain"],
-["People should generally be responsible for the consequences of their own choices, with limited exceptions.","plain"]
-]},
-{title:"Cultural philosophy",short:"Culture",desc:"Tradition, social change, identity and personal freedom.",questions:[
-["Longstanding cultural traditions deserve respect, but should not be immune from criticism.","plain"],
-["Social change should generally happen gradually, with care for community continuity.","plain"],
-["Personal freedom should take priority when a tradition conflicts with an adult's fundamental rights.","scenario","A long-standing custom is challenged because some members of the community say it restricts their choices."],
-["Schools should teach students to examine competing cultural and moral viewpoints rather than promote one worldview.","plain"],
-["A society can preserve cultural heritage while becoming more inclusive and changing its practices.","plain"]
-]},
-{title:"Democratic philosophy",short:"Democracy",desc:"Opposition, free expression, institutions and political accountability.",questions:[
-["Peaceful protest and criticism of the government should be protected, even when deeply unpopular.","plain"],
-["A party or movement I support should be criticised if it violates democratic principles.","plain"],
-["Independent courts, media and oversight institutions should be able to scrutinise elected governments.","plain"],
-["An elected government should usually be able to carry out its programme even when independent institutions disagree.","plain"],
-["A political leader should never be treated as beyond criticism or accountability.","plain"]
-]},
-{title:"Government & individual liberty",short:"Governance",desc:"The appropriate reach of the state and limits on public power.",questions:[
-["Government regulation is necessary to prevent companies from exploiting consumers, workers or the environment.","plain"],
-["The state should have limited powers to restrict speech, privacy or peaceful assembly.","plain"],
-["Public safety rules are justified when they are evidence-based, proportionate and open to review.","plain"],
-["People and communities should be able to make many decisions without unnecessary government interference.","plain"],
-["In a crisis, emergency powers should have strict time limits and independent oversight.","scenario","A government announces temporary emergency powers after a serious threat. What safeguards should apply?"]
-]},
-{title:"National & global outlook",short:"World outlook",desc:"National identity, international cooperation, migration and borders.",questions:[
-["International cooperation is essential for addressing problems such as climate change, pandemics and conflict.","plain"],
-["A government should prioritise its citizens' interests when making major policy decisions.","plain"],
-["Immigration policy should balance border management with humanitarian obligations and fair treatment.","plain"],
-["A strong sense of national identity can coexist with respect for other countries and cultures.","plain"],
-["International rules and institutions should influence national policy when countries have freely agreed to them.","plain"]
-]},
-{title:"Personal values",short:"Values",desc:"Fairness, merit, responsibility and how you judge political proposals.",questions:[
-["People should be rewarded for effort, skill and innovation, while recognising that opportunity is not equally distributed.","plain"],
-["Reducing severe poverty is a more urgent priority than reducing every difference in wealth.","plain"],
-["When judging a policy, its real-world effects matter more than which political party proposes it.","plain"],
-["Fairness sometimes requires treating people differently to account for unequal starting conditions.","plain"],
-["I am comfortable changing my political view when credible evidence challenges it.","plain"]
-]}
-];
-const scale=[["Strongly disagree",1],["Disagree",2],["Neither / unsure",3],["Agree",4],["Strongly agree",5]];
-const all=[]; sections.forEach((s,si)=>s.questions.forEach((q,qi)=>all.push({section:si,index:qi,text:q[0],kind:q[1],scenario:q[2]})));
-let answers={},current=0;
-const polarities=[
-{key:"economic",label:"Economic orientation",left:"More public provision & redistribution",right:"More market-led allocation",items:[[0,0,-1],[0,1,1],[0,2,-1],[0,3,-1],[0,4,-1]]},
-{key:"social",label:"Social equality & responsibility",left:"Collective support & equality",right:"Individual responsibility & opportunity",items:[[1,0,-1],[1,1,-1],[1,2,1],[1,3,-1],[1,4,1]]},
-{key:"culture",label:"Cultural outlook",left:"More open to social change",right:"More emphasis on continuity",items:[[2,0,-1],[2,1,1],[2,2,-1],[2,3,-1],[2,4,-1]]},
-{key:"democracy",label:"Democratic pluralism",left:"Checks, dissent & accountability",right:"Greater executive latitude",items:[[3,0,-1],[3,1,-1],[3,2,-1],[3,3,1],[3,4,-1]]},
-{key:"liberty",label:"State power & civil liberty",left:"More safeguards for liberty",right:"More scope for state intervention",items:[[4,0,1],[4,1,-1],[4,2,1],[4,3,-1],[4,4,-1]]},
-{key:"global",label:"Global outlook",left:"International cooperation",right:"National priority & sovereignty",items:[[5,0,-1],[5,1,1],[5,2,-1],[5,3,-1],[5,4,-1]]},
-{key:"values",label:"Fairness & merit",left:"Correct unequal starting points",right:"Emphasise individual merit",items:[[6,0,1],[6,1,-1],[6,2,0],[6,3,-1],[6,4,0]]}
-];
-function startAssessment(){document.getElementById("assessment").classList.remove("hidden");document.getElementById("assessment").scrollIntoView({behavior:"smooth"});render()}
-function buildSteps(){document.getElementById("steps").innerHTML=sections.map((s,i)=>`<button class="step ${i===all[current].section?'active':''} ${sections[i].questions.every((q,j)=>answers[sections[i].questions.indexOf(q)+sections.slice(0,i).reduce((n,x)=>n+x.questions.length,0)]!==undefined)?'done':''}" onclick="jumpSection(${i})"><span class="dot">${i+1}</span>${s.short}</button>`).join("")}
-function jumpSection(i){let n=sections.slice(0,i).reduce((a,s)=>a+s.questions.length,0);let next=all.findIndex((q,j)=>j>=n&&answers[j]===undefined);current=next<0?n:next;render()}
-function render(){let q=all[current],s=sections[q.section],answered=Object.keys(answers).length;document.getElementById("progressFill").style.width=(answered/all.length*100)+"%";document.getElementById("progressCopy").textContent=`${answered} of ${all.length} answered`;buildSteps();
-let opts=scale.map(([label,val])=>`<div class="option ${answers[current]===val?'selected':''}" onclick="choose(${val})"><span class="radio"></span><span>${label}</span></div>`).join("");
-document.getElementById("quizCard").innerHTML=`<div class="quiz-head"><span class="tag">${String(q.section+1).padStart(2,'0')} / ${s.title}</span><span class="counter">QUESTION ${current+1} OF ${all.length}</span></div><h2>${s.title}</h2><p class="hint">${s.desc}</p>${q.scenario?`<div class="scenario">${q.scenario}</div>`:''}<div class="qtext">${q.text}</div><div class="options">${opts}</div><div class="navrow"><button class="btn btn-light" onclick="previous()" ${current===0?'disabled':''}>← Back</button><button class="btn btn-dark" onclick="next()" ${answers[current]===undefined?'disabled':''}>${current===all.length-1?'View my profile':'Continue →'}</button></div>`;
-}
-function choose(v){answers[current]=v;render()}
-function previous(){if(current>0){current--;render()}}
-function next(){if(answers[current]===undefined)return;if(current<all.length-1){current++;render()}else showResults()}
-function band(v){if(v<=-45)return"Leans toward the left-hand description";if(v>=45)return"Leans toward the right-hand description";return"Mixed or relatively balanced"}
-function calculate(p){let vals=p.items.filter(([s,q,d])=>d!==0).map(([s,q,d])=>(answers[sections.slice(0,s).reduce((n,x)=>n+x.questions.length,0)+q]-3)*d);if(!vals.length)return 0;return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*50)}
-function ideology(scores){let e=scores.economic,c=scores.culture,d=scores.democracy,l=scores.liberty,g=scores.global;
-let tags=[];
-if(e<=-20)tags.push("Social-democratic themes");else if(e>=20)tags.push("Market-liberal themes");else tags.push("Mixed-economy themes");
-if(c<=-20)tags.push("Socially progressive themes");else if(c>=20)tags.push("Culturally traditionalist themes");
-if(d<=-15)tags.push("Pluralist-democratic themes");
-if(l<=-15)tags.push("Civil-libertarian themes");
-if(g<=-20)tags.push("Internationalist themes");else if(g>=20)tags.push("National-priority themes");
-return tags}
-function descriptor(p,v){let abs=Math.abs(v);if(abs<15)return"Mixed / balanced";let strength=abs<35?"Some tendency":abs<60?"Clear tendency":"Strong tendency";return strength+" · "+(v<0?p.left:p.right)}
-function showResults(){document.getElementById("assessment").classList.add("hidden");let scores={};polarities.forEach(p=>scores[p.key]=calculate(p));
-let e=scores.economic,dem=scores.democracy,lib=scores.liberty,cult=scores.culture;
-let summary=[];
-if(e<-20)summary.push("Your answers lean toward a stronger public role in the economy, including public services, regulation or redistribution.");else if(e>20)summary.push("Your answers lean toward market-led economic organisation and a more limited role for public provision or redistribution.");else summary.push("Your economic answers combine market mechanisms with public responsibilities, without a strong one-sided tilt.");
-if(dem<-20)summary.push("You place notable weight on dissent, checks on executive power and institutional accountability.");else summary.push("Your democratic answers show a more mixed balance between institutional checks and executive discretion.");
-if(lib<-20)summary.push("You favour stronger safeguards for civil liberties and limits on state power.");else if(lib>20)summary.push("Your answers allow a comparatively broader role for state action in the liberty-versus-intervention trade-off.");
-if(cult<-20)summary.push("Your cultural answers lean toward openness to social change and individual autonomy.");else if(cult>20)summary.push("Your cultural answers place relatively more weight on continuity and tradition.");
-let overall=e<-20?(cult<-15?"Pluralist centre-left themes":"Centre-left economic themes"):e>20?"Market-oriented themes":"Mixed / cross-pressured political outlook";
-let html=`<div class="result-hero"><span class="profile-pill">Your POLITICA profile</span><h1>${overall}</h1><p>This is a provisional description of patterns in your responses — not a fixed identity, a scientific diagnosis or a recommendation about any party or candidate.</p></div><div class="result-grid"><div class="panel"><h3>Your dimensions</h3><p class="sub">Each line compares two broad tendencies. These are descriptive axes, not a ranking.</p>${polarities.map(p=>{let v=scores[p.key],pct=50+v/2;return `<div class="dimension-row"><div class="rowtop"><span>${p.label}</span><span>${descriptor(p,v)}</span></div><div class="bar"><i style="width:${pct}%"></i></div><div class="scale-labels"><span>${p.left}</span><span>${p.right}</span></div></div>`}).join("")}</div><div class="panel"><h3>AI-style interpretation</h3><p class="sub">A transparent, questionnaire-based summary</p>${summary.map((x,i)=>`<div class="insight"><strong>${["Economic outlook","Democratic values","Civil liberties","Cultural outlook"][i]}</strong><p>${x}</p></div>`).join("")}<div class="insight"><strong>Ideological similarities to explore</strong><p>These are areas of conceptual overlap, not definitive labels or an assessment of which ideology is better.</p><div>${ideology(scores).map(t=>`<span class="chip">${t}</span>`).join("")}</div></div></div></div><div class="panel"><h3>What your answers suggest</h3><p class="sub">A concise reading across the seven sections</p><div class="insight"><strong>Potential strengths in your reasoning</strong><p>Your answers can reveal where you balance competing principles — for example, economic freedom and social protection, or public safety and individual liberty. Look at the dimensions with mixed scores as places where context matters to you.</p></div><div class="insight"><strong>Nuance and possible tensions</strong><p>Political principles can pull in different directions. Supporting both entrepreneurship and public welfare, or national sovereignty and international cooperation, is not automatically inconsistent. The practical details of each policy matter.</p></div><div class="insight"><strong>What this assessment cannot tell you</strong><p>It cannot infer your party preference, vote, religion, caste, identity or political behaviour. It does not measure knowledge, morality or intelligence. Some statements are broad and may mean different things in different countries.</p></div></div><div class="caveat"><b>Method note:</b> This demo uses transparent, simple scoring rules to summarise your selections. It does not call an AI model, and the result is not a validated psychometric instrument. For a deeper interpretation, you can copy your answers into ChatGPT using the optional prompt below. Avoid sharing identifying or sensitive details.</div><div class="actions"><button class="btn btn-dark" onclick="copyPrompt()">Copy answers + AI analysis prompt</button><button class="btn btn-light" onclick="window.print()">Download / print report</button><button class="btn btn-light" onclick="downloadAnswers()">Export answers (JSON)</button><button class="btn btn-light" onclick="restart()">Retake assessment</button></div>`;
-document.getElementById("results").innerHTML=html;document.getElementById("results").classList.remove("hidden");document.getElementById("results").scrollIntoView({behavior:"smooth"});window.lastScores=scores}
-function answerText(){return all.map((q,i)=>`${i+1}. [${sections[q.section].title}] ${q.text}\nAnswer: ${scale.find(x=>x[1]===answers[i])[0]} (${answers[i]}/5)`).join("\n\n")}
-function copyPrompt(){let prompt=`Please provide a politically neutral, nuanced interpretation of my voluntary political self-assessment. Do not recommend parties, candidates or votes. Treat this as self-reflection, not a validated psychological test. Analyse each dimension separately, identify evidence from my answers, explain mixed or contradictory preferences without forcing a label, distinguish established ideologies carefully, and state what cannot be inferred. Do not infer my identity, religion, caste or voting preference.\n\nMY ANSWERS:\n${answerText()}\n\nPlease discuss economic philosophy, social equality, culture, democracy, government and civil liberties, national/global outlook, and personal values. End with a cautious summary and useful follow-up questions.`;navigator.clipboard.writeText(prompt).then(()=>toast("Copied. Open ChatGPT and paste your prompt." )).catch(()=>{let t=document.createElement("textarea");t.value=prompt;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();toast("Copied. Open ChatGPT and paste your prompt.")});}
-function downloadAnswers(){let data={product:"POLITICA",notice:"Voluntary self-assessment; not validated.",answers:all.map((q,i)=>({section:sections[q.section].title,question:q.text,answer:scale.find(x=>x[1]===answers[i])[0],value:answers[i]})),scores:window.lastScores};let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="politica-assessment.json";a.click();URL.revokeObjectURL(a.href)}
-function restart(){answers={};current=0;document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");render();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
-function toast(t){let el=document.getElementById("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2600)}
-
-/* ===== STAGE 1 FIX: no results while questions are unanswered =====
-   These functions replace the earlier versions of next() and calculate()
-   (in JavaScript, the last definition of a function is the one that is used). */
-let reviewMode=false;
-function firstUnanswered(){return all.findIndex((q,i)=>answers[i]===undefined)}
-function next(){
-  if(answers[current]===undefined)return;
-  if(reviewMode){
-    const m=firstUnanswered();
-    if(m===-1){reviewMode=false;showResults()}else{current=m;render()}
-    return}
-  if(current<all.length-1){current++;render();return}
-  const missing=firstUnanswered();
-  if(missing===-1){showResults();return}
-  reviewMode=true;current=missing;render();
-  const left=all.length-Object.keys(answers).length;
-  toast(`Please answer all questions first: ${left} left. Going to question ${missing+1}.`)}
-function calculate(p){
-  const vals=[];
-  p.items.forEach(([s,q,d])=>{
-    if(d===0)return;
-    const a=answers[sections.slice(0,s).reduce((n,x)=>n+x.questions.length,0)+q];
-    if(a!==undefined)vals.push((a-3)*d)});
-  if(!vals.length)return 0;
-  return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*50)}
-/* ===== END STAGE 1 FIX ===== */
-
-/* ===== STAGE 2 FIX: headings always match their explanations =====
-   Each explanation now carries its own heading, so they can never get out of step.
-   showResults() below replaces the earlier version (the last definition wins). */
-function buildSummary(scores){
-  const e=scores.economic,dem=scores.democracy,lib=scores.liberty,cult=scores.culture;
-  return [
-    {title:"Economic outlook",text:e<-20?"Your answers lean toward a stronger public role in the economy, including public services, regulation or redistribution.":e>20?"Your answers lean toward market-led economic organisation and a more limited role for public provision or redistribution.":"Your economic answers combine market mechanisms with public responsibilities, without a strong one-sided tilt."},
-    {title:"Democratic values",text:dem<-20?"You place notable weight on dissent, checks on executive power and institutional accountability.":dem>20?"Your democratic answers give relatively more weight to the ability of elected governments to act, with comparatively less emphasis on institutional checks.":"Your democratic answers show a more mixed balance between institutional checks and executive discretion."},
-    {title:"Civil liberties",text:lib<-20?"You favour stronger safeguards for civil liberties and limits on state power.":lib>20?"Your answers allow a comparatively broader role for state action in the liberty-versus-intervention trade-off.":"Your answers on civil liberties and state power are relatively balanced, without a strong tilt either way."},
-    {title:"Cultural outlook",text:cult<-20?"Your cultural answers lean toward openness to social change and individual autonomy.":cult>20?"Your cultural answers place relatively more weight on continuity and tradition.":"Your cultural answers are relatively balanced between openness to change and continuity of tradition."}
-  ]}
-function showResults(){document.getElementById("assessment").classList.add("hidden");let scores={};polarities.forEach(p=>scores[p.key]=calculate(p));
-let e=scores.economic,cult=scores.culture;
-let summary=buildSummary(scores);
-let overall=e<-20?(cult<-15?"Pluralist centre-left themes":"Centre-left economic themes"):e>20?"Market-oriented themes":"Mixed / cross-pressured political outlook";
-let html=`<div class="result-hero"><span class="profile-pill">Your POLITICA profile</span><h1>${overall}</h1><p>This is a provisional description of patterns in your responses — not a fixed identity, a scientific diagnosis or a recommendation about any party or candidate.</p></div><div class="result-grid"><div class="panel"><h3>Your dimensions</h3><p class="sub">Each line compares two broad tendencies. These are descriptive axes, not a ranking.</p>${polarities.map(p=>{let v=scores[p.key],pct=50+v/2;return `<div class="dimension-row"><div class="rowtop"><span>${p.label}</span><span>${descriptor(p,v)}</span></div><div class="bar"><i style="width:${pct}%"></i></div><div class="scale-labels"><span>${p.left}</span><span>${p.right}</span></div></div>`}).join("")}</div><div class="panel"><h3>AI-style interpretation</h3><p class="sub">A transparent, questionnaire-based summary</p>${summary.map(x=>`<div class="insight"><strong>${x.title}</strong><p>${x.text}</p></div>`).join("")}<div class="insight"><strong>Ideological similarities to explore</strong><p>These are areas of conceptual overlap, not definitive labels or an assessment of which ideology is better.</p><div>${ideology(scores).map(t=>`<span class="chip">${t}</span>`).join("")}</div></div></div></div><div class="panel"><h3>What your answers suggest</h3><p class="sub">A concise reading across the seven sections</p><div class="insight"><strong>Potential strengths in your reasoning</strong><p>Your answers can reveal where you balance competing principles — for example, economic freedom and social protection, or public safety and individual liberty. Look at the dimensions with mixed scores as places where context matters to you.</p></div><div class="insight"><strong>Nuance and possible tensions</strong><p>Political principles can pull in different directions. Supporting both entrepreneurship and public welfare, or national sovereignty and international cooperation, is not automatically inconsistent. The practical details of each policy matter.</p></div><div class="insight"><strong>What this assessment cannot tell you</strong><p>It cannot infer your party preference, vote, religion, caste, identity or political behaviour. It does not measure knowledge, morality or intelligence. Some statements are broad and may mean different things in different countries.</p></div></div><div class="caveat"><b>Method note:</b> This demo uses transparent, simple scoring rules to summarise your selections. It does not call an AI model, and the result is not a validated psychometric instrument. For a deeper interpretation, you can copy your answers into ChatGPT using the optional prompt below. Avoid sharing identifying or sensitive details.</div><div class="actions"><button class="btn btn-dark" onclick="copyPrompt()">Copy answers + AI analysis prompt</button><button class="btn btn-light" onclick="window.print()">Download / print report</button><button class="btn btn-light" onclick="downloadAnswers()">Export answers (JSON)</button><button class="btn btn-light" onclick="restart()">Retake assessment</button></div>`;
-document.getElementById("results").innerHTML=html;document.getElementById("results").classList.remove("hidden");document.getElementById("results").scrollIntoView({behavior:"smooth"});window.lastScores=scores}
-/* ===== END STAGE 2 FIX ===== */
-</script>
-</body></html>
+<script src="js/scoring.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
