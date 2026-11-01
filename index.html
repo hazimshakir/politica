@@ -142,5 +142,32 @@ function copyPrompt(){let prompt=`Please provide a politically neutral, nuanced 
 function downloadAnswers(){let data={product:"POLITICA",notice:"Voluntary self-assessment; not validated.",answers:all.map((q,i)=>({section:sections[q.section].title,question:q.text,answer:scale.find(x=>x[1]===answers[i])[0],value:answers[i]})),scores:window.lastScores};let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="politica-assessment.json";a.click();URL.revokeObjectURL(a.href)}
 function restart(){answers={};current=0;document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");render();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
 function toast(t){let el=document.getElementById("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2600)}
+
+/* ===== STAGE 1 FIX: no results while questions are unanswered =====
+   These functions replace the earlier versions of next() and calculate()
+   (in JavaScript, the last definition of a function is the one that is used). */
+let reviewMode=false;
+function firstUnanswered(){return all.findIndex((q,i)=>answers[i]===undefined)}
+function next(){
+  if(answers[current]===undefined)return;
+  if(reviewMode){
+    const m=firstUnanswered();
+    if(m===-1){reviewMode=false;showResults()}else{current=m;render()}
+    return}
+  if(current<all.length-1){current++;render();return}
+  const missing=firstUnanswered();
+  if(missing===-1){showResults();return}
+  reviewMode=true;current=missing;render();
+  const left=all.length-Object.keys(answers).length;
+  toast(`Please answer all questions first: ${left} left. Going to question ${missing+1}.`)}
+function calculate(p){
+  const vals=[];
+  p.items.forEach(([s,q,d])=>{
+    if(d===0)return;
+    const a=answers[sections.slice(0,s).reduce((n,x)=>n+x.questions.length,0)+q];
+    if(a!==undefined)vals.push((a-3)*d)});
+  if(!vals.length)return 0;
+  return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*50)}
+/* ===== END STAGE 1 FIX ===== */
 </script>
 </body></html>
