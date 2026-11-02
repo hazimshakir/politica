@@ -2,99 +2,226 @@
 
 ### Understand Your Political Thinking.
 
-**POLITICA** is an interactive political self-assessment platform designed to help individuals explore, understand, and reflect on their political beliefs and values.
+**One world. Many ideologies. Discover the ideas and values that shape your political worldview.**
 
-Politics is more than choosing a party or supporting a leader. It involves perspectives on economics, society, culture, democracy, governance, national identity, and individual freedom.
+POLITICA is an independent, non-partisan political self-assessment platform designed to help individuals explore and reflect on their political beliefs across multiple dimensions.
 
-POLITICA aims to make that exploration easier through a structured, scenario-based assessment.
+Political beliefs rarely fit neatly into a single left-to-right spectrum. POLITICA approaches political thinking through seven dimensions, encouraging users to understand their own positions, mixed preferences and competing values.
 
-## 🎯 Project Objectives
+🌐 **Live Website:** https://politica-ynnr.onrender.com/
 
-* Help individuals understand their political perspectives.
-* Explore political beliefs across multiple dimensions.
-* Identify similarities with different political ideologies.
-* Encourage independent thinking and critical reflection.
-* Promote political awareness without partisan influence.
+---
 
-## 🧭 Seven Dimensions of Political Thinking
+## Overview
 
-The assessment explores seven major dimensions:
+POLITICA provides an interactive assessment consisting of **35 questions**, designed to take approximately **10–15 minutes**.
 
-1. **Economic Philosophy** – Views on capitalism, socialism, taxation, wealth distribution, and economic equality.
-2. **Social Philosophy** – Perspectives on social justice, individual rights, and social responsibilities.
-3. **Cultural Philosophy** – Attitudes towards traditions, cultural change, and personal freedoms.
-4. **Democratic Philosophy** – Views on democracy, political accountability, pluralism, and institutional integrity.
-5. **Government Philosophy** – Opinions on the role, responsibilities, and limitations of government.
-6. **National & Global Outlook** – Perspectives on nationalism, international cooperation, and global responsibilities.
-7. **Personal Values** – Individual priorities concerning freedom, equality, justice, and responsibility.
+Rather than asking users which political party they support, the platform explores their perspectives on economics, society, culture, democracy, governance, international outlook and personal values.
 
-## ✨ Features
+The objective is political self-understanding, not political persuasion.
 
-* Interactive political assessment.
-* Scenario-based questions.
+## Seven Dimensions of Political Thinking
+
+The assessment explores seven dimensions:
+
+| No. | Dimension                 | What it explores                                         |
+| --- | ------------------------- | -------------------------------------------------------- |
+| 01  | Economic Philosophy       | Markets, taxation and welfare                            |
+| 02  | Social Philosophy         | Freedom, equality and responsibilities                   |
+| 03  | Cultural Outlook          | Tradition, cultural change and personal freedoms         |
+| 04  | Democratic Values         | Dissent, accountability and democratic institutions      |
+| 05  | Government & Liberty      | State power, individual rights and freedom               |
+| 06  | National & Global Outlook | International cooperation, national identity and borders |
+| 07  | Personal Principles       | Merit, justice and responsibility                        |
+
+POLITICA treats these dimensions independently because individuals can hold different or even competing positions across different areas of political thought.
+
+## Features
+
+### Interactive Landing Page
+
+* Premium dark visual design.
+* Animated dotted globe.
+* Network connections and particle effects.
+* Floating geometric elements.
+* Cursor-responsive and scroll-based visual effects.
+* Seven-dimension framework introduction.
+* Reduced-motion accessibility support.
+
+### Political Self-Assessment
+
+* 35 assessment questions.
+* Five-point agreement scale.
 * One-question-at-a-time interface.
 * Progress tracking.
-* Seven-dimensional results analysis.
-* Political ideology comparisons.
-* Identification of nuanced or potentially conflicting views.
-* Downloadable and printable assessment reports.
-* Export assessment responses as JSON.
-* Option to copy responses and an AI analysis prompt.
+* Seven-dimensional assessment framework.
+* Browser-based progress saving.
+* Resume assessment after refreshing the page.
+* Clear saved answers option.
 
-## 🛠️ Technology
+### Privacy and Accessibility
 
-The current prototype uses:
+* No account registration required.
+* Assessment answers remain in the user's browser.
+* Saved progress expires after 30 days.
+* Keyboard accessibility.
+* Skip-to-content navigation.
+* Responsive desktop and mobile layouts.
+* Support for reduced-motion preferences.
 
-* HTML5
-* CSS3
-* JavaScript
+### Sharing and Results
 
-It is designed as a lightweight, responsive web application without requiring a backend server.
+The assessment includes result interpretation and tools for working with assessment responses, including export and AI-analysis prompt functionality.
 
-## 🚀 Deployment
+Users can also print their assessment results.
 
-POLITICA is deployed as a static website using [Render](https://render.com/).
+## How It Works
 
-To run it locally:
+**1. Answer**
 
-1. Clone this repository.
+Respond to 35 political statements using a five-point scale, from strongly disagree to strongly agree. Some questions include short scenarios.
 
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/politica.git
-   ```
+**2. Explore**
 
+Review your positions across the seven dimensions and read the explanations of what your answers suggest.
+
+**3. Reflect**
+
+Consider the mixed or competing views in your answers. Political beliefs are complex, and these differences can be meaningful.
+
+## Technology Stack
+
+POLITICA is currently a lightweight static web application built using:
+
+* **HTML5** — Page structure.
+* **CSS3** — Responsive styling, animations and visual design.
+* **JavaScript** — Assessment logic, scoring, rendering and interactive effects.
+* **Canvas API** — Animated globe and visual effects.
+* **localStorage** — Browser-based assessment progress.
+* **Render** — Static website hosting.
+* **GitHub** — Source code management.
+
+The current version does not require a backend server or database.
+
+## Project Structure
+
+```text
+politica/
+│
+├── index.html
+├── assessment.html
+├── README.md
+│
+├── assets/
+│   ├── favicon.svg
+│   └── og-image.png
+│
+├── css/
+│   ├── base.css
+│   ├── landing.css
+│   ├── assessment.css
+│   └── style.css
+│
+└── js/
+    ├── app.js
+    ├── fx.js
+    ├── globe.js
+    ├── landing.js
+    ├── render.js
+    ├── scoring.js
+    └── storage.js
+```
+
+### Main Files
+
+| File                 | Purpose                                    |
+| -------------------- | ------------------------------------------ |
+| `index.html`         | Main landing page                          |
+| `assessment.html`    | Political assessment page                  |
+| `css/base.css`       | Shared design foundation                   |
+| `css/landing.css`    | Landing page styling                       |
+| `css/assessment.css` | Assessment page styling                    |
+| `js/globe.js`        | Animated globe                             |
+| `js/fx.js`           | Visual effects                             |
+| `js/landing.js`      | Landing page interactions                  |
+| `js/app.js`          | Assessment application logic               |
+| `js/scoring.js`      | Assessment scoring and interpretation      |
+| `js/render.js`       | Assessment interface and results rendering |
+| `js/storage.js`      | Browser-based progress storage             |
+| `assets/`            | Website visual assets                      |
+
+## Running Locally
+
+POLITICA currently requires no package installation or backend configuration.
+
+1. Download or clone the repository.
 2. Open the project folder.
+3. Open `index.html` in a modern web browser.
 
-3. Open `index.html` in your web browser.
+For a more representative local test, serve the project through a local static HTTP server.
 
-No additional dependencies or installation steps are required for the current prototype.
+## Deployment
 
-## 🔮 Future Development
+POLITICA is hosted on Render as a static website.
+
+* **Repository:** https://github.com/hazimshakir/politica
+* **Branch:** `main`
+* **Live website:** https://politica-ynnr.onrender.com/
+
+The website is deployed from the repository's root directory.
+
+## Privacy
+
+POLITICA currently does not require registration or collect assessment answers through a backend.
+
+Assessment progress is stored locally in the user's browser using localStorage and is automatically removed after 30 days.
+
+According to the current website's privacy notice, assessment answers are not transmitted to a server or AI service.
+
+Users can clear their saved answers using the available control on the assessment page.
+
+## Political Neutrality
+
+POLITICA is designed as an independent, non-partisan educational project.
+
+It:
+
+* Does not endorse political parties or candidates.
+* Does not recommend voting choices.
+* Does not ask users to identify their party affiliation.
+* Does not judge users for their political views.
+* Encourages independent thinking and critical reflection.
+
+## Important Disclaimer
+
+POLITICA is an experimental educational and self-reflection tool.
+
+Its questionnaire is not scientifically validated. Results are descriptive and provisional, not a definitive assessment of someone's political identity.
+
+Political beliefs are complex and cannot always be represented accurately through a single ideological label.
+
+POLITICA is not a scientific diagnosis, political recommendation or substitute for independent research.
+
+## Future Development
 
 Planned improvements include:
 
+* Cinematic transitions between website pages.
+* Further assessment interface improvements.
+* Standardised and more balanced assessment questions.
+* A "Not familiar enough to judge" response option.
+* More nuanced ideological classifications.
 * AI-powered personalised political analysis.
-* More comprehensive political assessment questions.
-* Multilingual support (English, Malayalam, and Hindi).
-* User authentication and personalised profiles.
-* Database integration for saving assessment history.
-* Shareable political profile cards.
-* More detailed ideological comparisons.
+* Documented comparisons with political thinkers and ideological traditions.
+* Political book recommendations.
+* An assessment-aware AI chatbot.
+* Multilingual support in English, Malayalam and Hindi.
+* Downloadable and shareable political reports.
 
-## 🔒 Privacy
-
-The current prototype does not require user registration or a backend database. Assessment responses are processed within the browser, and the application does not currently provide server-side account storage.
-
-Users should review the privacy implications before sharing their assessment responses with external AI platforms.
-
-## ⚖️ Disclaimer
-
-POLITICA is an educational and self-reflection project. It is not a scientifically validated psychological or political assessment, nor does it determine a person's definitive political identity.
-
-Political ideology is complex, and individual beliefs may not fit neatly into established ideological categories.
-
-POLITICA does not endorse any political party, candidate, or ideology. Its purpose is to encourage independent thinking and a better understanding of political perspectives.
+These are future development goals and are not all available in the current version.
 
 ---
 
 **POLITICA — Understand your political thinking.**
+
+*One world. Many ideologies.*
