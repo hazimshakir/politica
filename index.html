@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101b2d">
 <title>POLITICA — Understand your political thinking</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -14,9 +15,9 @@
 <div class="eyebrow">A clearer picture of your political values</div>
 <h1>Understand your<br><em>political thinking.</em></h1>
 <p>A thoughtful exploration of your beliefs across economics, society, culture, democracy and governance. Discover patterns in your answers — without being told what to believe.</p>
-<div class="hero-actions"><button class="btn btn-primary" id="beginBtn" onclick="startAssessment()">Begin assessment&nbsp; →</button><button class="btn btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">How it works</button></div>
+<div class="hero-actions"><a class="btn btn-primary" id="beginBtn" href="assessment.html">Begin assessment&nbsp; →</a><button class="btn btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">How it works</button></div>
 <div class="meta"><span><span aria-hidden="true">◷</span> <b>10–15 minutes</b></span><span><span aria-hidden="true">◉</span> <b>35 questions</b></span><span><span aria-hidden="true">⌁</span> <b>No party affiliation questions</b></span></div>
-<div class="resume hidden" id="resumeBox" role="region" aria-label="Saved progress"><span id="resumeText"></span><button class="btn btn-ghost" onclick="startOver()">Start over</button></div>
+<div class="resume hidden" id="resumeBox" role="region" aria-label="Saved progress"><span id="resumeText" aria-live="polite"></span><button class="btn btn-ghost" id="resumeClear" type="button">Start over</button></div>
 </div></section>
 <main id="main">
 <section class="intro wrap" id="about"><div class="section-kicker">The framework</div><h2>Seven dimensions. More than one label.</h2><p>Political beliefs rarely fit on a single left-to-right line. This assessment looks at different dimensions independently and treats mixed or uncertain views as meaningful answers, not mistakes.</p>
@@ -29,16 +30,10 @@
 <div class="dim"><div class="num">06 / WORLD</div><strong>National & global outlook</strong><small>Cooperation and borders</small></div>
 <div class="dim"><div class="num">07 / VALUES</div><strong>Personal principles</strong><small>Merit, justice, responsibility</small></div>
 </div></section>
-<section class="assessment wrap hidden" id="assessment">
-<div class="quiz-shell">
-<aside class="side" aria-label="Assessment progress"><h3>Your progress</h3><div class="progress-track" id="progressTrack" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="35" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div><div class="progress-copy" id="progressCopy">0 of 35 answered</div><div class="steps" id="steps" role="group" aria-label="Assessment sections"></div><button class="linkbtn" onclick="startOver()">Clear saved answers</button><div class="privacy">Your answers are saved only in this browser, so a page refresh will not erase them, and they are removed after 30 days. They are never sent to a server or an AI. Use Clear saved answers to delete them now.</div></aside><div class="quiz-card" id="quizCard"></div>
-</div></section>
-<section class="results wrap hidden" id="results"></section>
 </main>
 <footer class="footer"><div class="wrap"><strong>POLITICA</strong> &nbsp;·&nbsp; A non-partisan educational self-reflection tool.<br><br>This is an experimental, non-validated questionnaire. Results are descriptive, provisional and not a scientific diagnosis or a recommendation about parties, candidates or votes.</div></footer>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="js/scoring.js"></script>
-<script src="js/render.js"></script>
-<script src="js/app.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/landing.js"></script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+/* POLITICA landing.css — the home page (hero, framework intro, saved-progress banner). Loads after base.css. */
+.hero{background:var(--navy);color:#fff;padding:76px 0 88px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid #ffffff16;border-radius:50%;right:-90px;top:-260px;box-shadow:0 0 0 55px #ffffff08,0 0 0 110px #ffffff05}
+.eyebrow{color:#80d6c9;text-transform:uppercase;font-size:11px;letter-spacing:.19em;font-weight:800}
+.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-.055em;max-width:780px;margin:18px 0}
+.hero h1 em{font-style:normal;color:#83d8ca}
+.hero p{color:#c3cedb;max-width:610px;font-size:17px}
+.hero-actions{display:flex;gap:13px;align-items:center;margin-top:30px;flex-wrap:wrap}
+.meta{display:flex;gap:22px;margin-top:36px;color:#b8c4d4;font-size:13px;flex-wrap:wrap}
+.meta b{color:#fff}
+.intro{padding:48px 0 30px}
+.section-kicker{color:var(--teal);font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+.intro h2{font-size:30px;letter-spacing:-.035em;margin:8px 0}
+.intro p{color:var(--muted);max-width:760px;margin:0}
+.dimension-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:26px 0 48px}
+.dim{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;min-height:112px}
+.dim .num{font-size:11px;color:var(--teal);font-weight:850}
+.dim strong{display:block;margin-top:9px}
+.dim small{color:var(--muted)}
+.resume{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px;color:#c3cedb;font-size:14px}
+.resume .btn{padding:9px 14px}
+@media(max-width:850px){
+  .dimension-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .hero{padding:55px 0 65px}
+  .dimension-grid{grid-template-columns:1fr 1fr}
+  .dim{min-height:95px}
+}
+@media(max-width:520px){
+  .wrap{padding:0 17px}
+}
