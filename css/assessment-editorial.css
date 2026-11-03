@@ -183,3 +183,23 @@
  .assess .radar-label{fill:#222}
  .assess .radar-value{fill:#176c61}
 }
+
+/* Primary political orientation hierarchy. */
+@media screen{
+ .assess .primary-tendency{
+   margin:18px 0 22px;padding:20px 22px;border:1px solid #cbded3;
+   border-left:4px solid var(--teal);border-radius:var(--radius-sm);
+   background:linear-gradient(110deg,#edf4ed 0%,#f8f7f0 100%)
+ }
+ .assess .primary-kicker{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;color:var(--teal)}
+ .assess .primary-tendency h4{margin:7px 0 6px;color:var(--ink);font:600 clamp(20px,2.8vw,26px)/1.2 var(--serif);letter-spacing:-.02em}
+ .assess .primary-tendency p{margin:0;color:var(--ink-soft);font-size:13px;line-height:1.7}
+ .assess .secondary-heading{margin:18px 0 8px;color:var(--teal);font:800 10px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+}
+@media(max-width:520px){
+ .assess .primary-tendency{padding:17px 15px}
+}
+@media print{
+ .assess .primary-tendency{background:#f4f4f0!important;border:1px solid #bbb;border-left:4px solid #176c61;break-inside:avoid}
+ .assess .primary-tendency h4,.assess .primary-tendency p{color:#111}
+}
