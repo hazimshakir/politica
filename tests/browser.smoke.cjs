@@ -45,6 +45,33 @@ const assert = require("node:assert/strict");
     assert.match(await page.locator("#results .profile-pill").innerText(), /your politica profile/i);
     assert.equal(await page.locator("#results .dimension-row").count(), 7);
 
+    // Stress-test the political tendency labels with deliberately varied profiles.
+    const classifications = await page.evaluate(() => {
+      const profile = (economic, social, culture=0, democracy=0, liberty=0, global=0, values=0) =>
+        politicalTendencyHtml({economic,social,culture,democracy,liberty,global,values});
+      return {
+        left: profile(-60,-45),
+        right: profile(60,45),
+        centrist: profile(5,-5),
+        leftEconomicsResponsibilitySocial: profile(-55,40),
+        marketEconomicsSocialProtection: profile(55,-40),
+        liberalDemocratic: profile(0,0,-10,-55,-50),
+        culturallyConservative: profile(0,0,55,0,0)
+      };
+    });
+    assert.match(classifications.left, /Centre-left tendency/);
+    assert.match(classifications.right, /Centre-right tendency/);
+    assert.match(classifications.centrist, /Centrist \/ mixed-economy tendency/);
+    assert.match(classifications.leftEconomicsResponsibilitySocial, /economically left, responsibility-oriented socially/i);
+    assert.match(classifications.marketEconomicsSocialProtection, /market-oriented economics, stronger social protection/i);
+    assert.match(classifications.liberalDemocratic, /Liberal-democratic \/ civil-libertarian themes/);
+    assert.match(classifications.culturallyConservative, /Culturally conservative \/ gradualist themes/);
+    for (const html of Object.values(classifications)) {
+      assert.doesNotMatch(html, /\b(communist|fascist|far-right extremist)\b/i,
+        "the questionnaire must not assign unsupported extreme ideology labels");
+      assert.match(html, /Important limits/);
+    }
+
     // A completed assessment should restore its results after refresh.
     await page.reload();
     await page.locator("#results").waitFor({ state: "visible" });
