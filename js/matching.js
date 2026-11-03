@@ -1,7 +1,7 @@
-/* POLITICA matching.js — rule-based thinker and book matching (pure functions; no DOM, no network, not loaded by any page yet).
-   Loaded after questions.js, thinkers.js and books.js. Draft or unverified data can never be used: every function filters to
-   reviewed entries and reviewed cells. The distance D only orders candidates internally; it is never shown to users and is
-   never mapped onto a single left-right line. The seven dimensions stay independent. */
+/* POLITICA matching.js — rule-based thinker and book matching.
+   AI-reviewed pilot entries may be displayed with provisional-status disclosure; fully reviewed entries retain stricter source/review checks.
+   The distance D only orders candidates internally; it is never shown to users or mapped onto a single left-right line.
+*/
 const MATCH_DIMS=["economic","social","culture","democracy","liberty","global","values"];
 const MATCH_CONFIG={weights:{high:1,medium:.6,low:.3},minDims:4,minWeight:2.5,close:30,different:60,maxSpread:25,mixedBelow:20,
   overlapSlots:3,contrastSlots:2,maxWestern:2,minContrastClose:2,minContrastDifferent:2,maxBooksPerFamily:2};
@@ -13,7 +13,9 @@ function cellProblem(cell,sources){
   if(!(cell.conf in C.weights))return"no confidence level";
   if(!cell.documented||!cell.rationale||/^DRAFT/i.test(cell.rationale))return"missing documented position or rationale";
   if(!Array.isArray(cell.sourceIds)||!cell.sourceIds.length)return"no sources";
-  for(const id of cell.sourceIds){const s=(sources||[]).find(x=>x.id===id);if(!s||s.verified!==true||!s.locator)return"unverified source"}
+  const ai=cell.assessment&&cell.assessment.method==="AI-assisted"&&cell.assessment.assessedOn;
+  for(const id of cell.sourceIds){const s=(sources||[]).find(x=>x.id===id);if(!s||!s.citation)return"missing source citation";if(!ai&&(s.verified!==true||!s.locator))return"unverified source"}
+  if(ai)return null;
   const r=cell.reviews||[];
   if(r.length<2||new Set(r.map(x=>x.reviewer)).size<r.length||r.some(x=>!_num(x.score)))return"needs two independent reviews";
   const sc=r.map(x=>x.score);
@@ -21,10 +23,10 @@ function cellProblem(cell,sources){
   if(Math.abs(cell.score-sc.reduce((a,b)=>a+b,0)/sc.length)>1)return"score is not the reviewers' mean";
   return null}
 function publishedPhases(t){
-  if(!t||t.status!=="reviewed"||!t.reviewedOn)return[];
+  if(!t||!["reviewed","ai-reviewed"].includes(t.status)||!t.reviewedOn)return[];
   return(t.phases||[]).map(p=>{const dims={};MATCH_DIMS.forEach(d=>{if(p.dims&&p.dims[d]&&!cellProblem(p.dims[d],t.sources))dims[d]=p.dims[d]});return{id:p.id,label:p.label,years:p.years,dims}}).filter(p=>Object.keys(p.dims).length)}
 function publishedBooks(books){
-  return(books||[]).filter(b=>b&&b.status==="reviewed"&&b.reviewedOn&&b.premise).map(b=>{const argues={};MATCH_DIMS.forEach(d=>{if(b.argues&&b.argues[d]&&!cellProblem(b.argues[d],b.sources))argues[d]=b.argues[d]});return Object.assign({},b,{argues})}).filter(b=>Object.keys(b.argues).length)}
+  return(books||[]).filter(b=>b&&["reviewed","ai-reviewed"].includes(b.status)&&b.reviewedOn&&b.premise).map(b=>{const argues={};MATCH_DIMS.forEach(d=>{if(b.argues&&b.argues[d]&&!cellProblem(b.argues[d],b.sources))argues[d]=b.argues[d]});return Object.assign({},b,{argues})}).filter(b=>Object.keys(b.argues).length)}
 /* Near zero is described as mixed or less pronounced; it is never read as support for both positions. */
 function orientation(dim,score){
   const d=(typeof DIMENSIONS!=="undefined"&&DIMENSIONS.find(x=>x.key===dim))||{left:"the lower pole",right:"the higher pole"};
@@ -91,7 +93,7 @@ function validateData(thinkers,books){
   const e=[],ids=new Set(),bad=(m)=>e.push(m);
   (thinkers||[]).forEach(t=>{const w="thinker "+(t.id||"?");
     if(!t.id||ids.has(t.id))bad(w+": missing or duplicate id");ids.add(t.id);
-    if(!["draft","reviewed"].includes(t.status))bad(w+": bad status");
+    if(!["draft","reviewed","ai-reviewed"].includes(t.status))bad(w+": bad status");
     if(!FAMILIES.includes(t.family))bad(w+": unknown family");
     (t.traditions||[]).forEach(x=>{if(!TRADITION_TAGS.includes(x))bad(w+": unknown tradition "+x)});
     if(t.status==="reviewed"&&!t.reviewedOn)bad(w+": reviewed without reviewedOn");
@@ -100,13 +102,13 @@ function validateData(thinkers,books){
       if(!c){bad(w+"/"+p.id+": dimension "+d+" missing (use nullCell)");return}
       if(c.score===null){if(!c.note)bad(w+"/"+d+": null needs a note");return}
       if(!Number.isInteger(c.score)||c.score<-100||c.score>100)bad(w+"/"+d+": bad score");
-      if(t.status==="reviewed"){const m=cellProblem(c,t.sources);if(m)bad(w+"/"+d+": "+m+" (use nullCell if unresolved)")}}))});
+      if(t.status==="reviewed"||t.status==="ai-reviewed"){const m=cellProblem(c,t.sources);if(m)bad(w+"/"+d+": "+m+" (use nullCell if unresolved)") }}))});
   const bids=new Set();
   (books||[]).forEach(b=>{const w="book "+(b.id||"?");
     if(!b.id||bids.has(b.id))bad(w+": missing or duplicate id");bids.add(b.id);
-    if(!["draft","reviewed"].includes(b.status))bad(w+": bad status");
+    if(!["draft","reviewed","ai-reviewed"].includes(b.status))bad(w+": bad status");
     if(!BOOK_PREMISES.includes(b.premise))bad(w+": unknown premise");
     if(!FAMILIES.includes(b.family))bad(w+": unknown family");
     (b.traditions||[]).forEach(x=>{if(!TRADITION_TAGS.includes(x))bad(w+": unknown tradition "+x)});
-    Object.keys(b.argues||{}).forEach(d=>{if(!MATCH_DIMS.includes(d))bad(w+": unknown dimension "+d);else if(b.status==="reviewed"){const m=cellProblem(b.argues[d],b.sources);if(m)bad(w+"/"+d+": "+m)}})});
+    Object.keys(b.argues||{}).forEach(d=>{if(!MATCH_DIMS.includes(d))bad(w+": unknown dimension "+d);else if(b.status==="reviewed"||b.status==="ai-reviewed"){const m=cellProblem(b.argues[d],b.sources);if(m)bad(w+"/"+d+": "+m)}})});
   return e}
