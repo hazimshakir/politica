@@ -24,7 +24,7 @@ function cellProblem(cell,sources){
   return null}
 function publishedPhases(t){
   if(!t||!["reviewed","ai-reviewed"].includes(t.status)||!t.reviewedOn)return[];
-  return(t.phases||[]).map(p=>{const dims={};MATCH_DIMS.forEach(d=>{if(p.dims&&p.dims[d]&&!cellProblem(p.dims[d],t.sources))dims[d]=p.dims[d]});return{id:p.id,label:p.label,years:p.years,dims}}).filter(p=>Object.keys(p.dims).length)}
+  return(t.phases||[]).map(p=>{const dims={};MATCH_DIMS.forEach(d=>{const cell=p.dims&&p.dims[d],aiCell=cell&&cell.assessment&&cell.assessment.method==="AI-assisted";if(cell&&!(t.status==="reviewed"&&aiCell)&&!cellProblem(cell,t.sources))dims[d]=cell});return{id:p.id,label:p.label,years:p.years,dims}}).filter(p=>Object.keys(p.dims).length)}
 function publishedBooks(books){
   return(books||[]).filter(b=>b&&["reviewed","ai-reviewed"].includes(b.status)&&b.reviewedOn&&b.premise).map(b=>{const argues={};MATCH_DIMS.forEach(d=>{if(b.argues&&b.argues[d]&&!cellProblem(b.argues[d],b.sources))argues[d]=b.argues[d]});return Object.assign({},b,{argues})}).filter(b=>b.type==="survey"||Object.keys(b.argues).length)}
 /* Near zero is described as mixed or less pronounced; it is never read as support for both positions. */
