@@ -1,8 +1,12 @@
 # POLITICA
 
-[![Tests](https://github.com/hazimshakir/politica/actions/workflows/tests.yml/badge.svg)](https://github.com/hazimshakir/politica/actions/workflows/tests.yml)
+Explore your political beliefs across seven dimensions with POLITICA, a free, non-partisan self-reflection tool.
 
-**A free, non-partisan political self-reflection tool that explores your views across seven dimensions instead of reducing them to one left–right label.**
+**Run locally (proposed):** `git clone https://github.com/hazimshakir/politica.git && cd politica && python -m http.server 8000`
+
+<!-- Add a 5–10 second demo GIF here -->
+
+[![Tests](https://github.com/hazimshakir/politica/actions/workflows/tests.yml/badge.svg)](https://github.com/hazimshakir/politica/actions/workflows/tests.yml)
 
 [**Try the live assessment →**](https://politica-ynnr.onrender.com/assessment.html) · [Website](https://politica-ynnr.onrender.com/) · [Report a bug](https://github.com/hazimshakir/politica/issues/new?template=bug_report.yml)
 
