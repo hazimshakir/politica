@@ -70,7 +70,7 @@ function selectBooks(user,books,cfg){
   const focus=MATCH_DIMS.filter(d=>_num(user[d])).sort((a,b)=>Math.abs(user[b])-Math.abs(user[a])||MATCH_DIMS.indexOf(a)-MATCH_DIMS.indexOf(b)).slice(0,2);
   const ok=b=>!used.has(b.id)&&!authors.has(b.author)&&(fam[b.family]||0)<C.maxBooksPerFamily;
   const gap=(b,d)=>Math.abs(b.argues[d].score-user[d]),idc=(a,b)=>a.id<b.id?-1:a.id>b.id?1:0;
-  const take=(slot,b,dim)=>{picks.push({slot,dimension:dim,id:b.id,title:b.title,author:b.author,year:b.year,type:b.type,family:b.family,traditions:b.traditions,premise:b.premise,stance:Object.assign({},b.argues[dim]),sources:b.sources.filter(s=>b.argues[dim].sourceIds.includes(s.id))});used.add(b.id);authors.add(b.author);fam[b.family]=(fam[b.family]||0)+1};
+  const take=(slot,b,dim)=>{picks.push({slot,dimension:dim,id:b.id,title:b.title,author:b.author,year:b.year,type:b.type,family:b.family,traditions:b.traditions,premise:b.premise,stance:dim?Object.assign({},b.argues[dim]):null,sources:b.sources.filter(s=>b.argues[dim].sourceIds.includes(s.id))});used.add(b.id);authors.add(b.author);fam[b.family]=(fam[b.family]||0)+1};
   const eng=[];
   focus.forEach(d=>{const b=pub.filter(x=>x.argues[d]&&ok(x)&&!eng.some(e=>e.premise===x.premise)).sort((a,c)=>gap(a,d)-gap(c,d)||idc(a,c))[0];
     if(b){eng.push(b);take("engages your view",b,d)}else notes.push("No sufficiently reviewed book engages your view on: "+d+".")});
@@ -79,7 +79,7 @@ function selectBooks(user,books,cfg){
     .sort((a,c)=>dia(c)-dia(a)||gap(a,d)-gap(c,d)||idc(a,c))[0];
     if(b)take("different tradition and premise",b,d);else notes.push("No sufficiently reviewed book offers a different tradition and premise on: "+d+".")});
   const sv=pub.filter(x=>x.type==="survey"&&ok(x)).sort(idc)[0];
-  if(sv)take("broad survey",sv,Object.keys(sv.argues)[0]);else notes.push("No sufficiently reviewed survey is available.");
+  if(sv)take("broad survey",sv,null);else notes.push("No sufficiently reviewed survey is available.");
   if(picks.length<5)notes.push("Showing "+picks.length+" of the usual 5 books: fewer sufficiently reviewed books available. The evidence standard is not lowered.");
   return{focusDimensions:focus,picks,notes}}
 /* Targets only (never a reason to publish weak entries). */
