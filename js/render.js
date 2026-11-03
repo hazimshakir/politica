@@ -31,7 +31,17 @@ function recommendationsHtml(scores){
     const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
     const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Informative contrast",c])].filter(([,c])=>okT(c.thinkerId));
     const books=bm.picks.filter(p=>okB(p.id));
-    if(!cards.length&&!books.length)return none;
+    if(!cards.length&&!books.length){
+      const thinkerList=THINKERS.filter(t=>t&&t.status==="ai-reviewed").map(t=>{
+        const dims=(t.phases||[]).flatMap(p=>Object.keys(p.dims||{})).filter((d,i,a)=>a.indexOf(d)===i);
+        return '<div class="insight"><strong>'+recEsc(t.name)+'</strong><p>'+recEsc(t.lifespan)+' · '+recEsc(t.summary)+'</p><p><b>Available comparison areas:</b> '+labs(dims)+'.</p></div>';
+      }).join("");
+      const bookList=BOOKS.filter(b=>b&&b.status==="ai-reviewed").map(b=>{
+        const dims=Object.keys(b.argues||{});
+        return '<div class="insight"><strong>'+recEsc(b.title)+'</strong><p>'+recEsc(b.author)+', '+recEsc(b.year)+' · '+recEsc(b.premise||'')+'</p><p><b>Available areas:</b> '+labs(dims)+'.</p></div>';
+      }).join("");
+      return head+'<p class="sub">The current pilot dataset does not have enough comparable dimensions to generate a personalised match for this profile. You can still explore these AI-reviewed pilot entries. They are provisional interpretations; source locators and assessments require further verification. They are not rankings or political identity labels.</p><h4>Pilot thinkers</h4>'+thinkerList+'<h4>Pilot books</h4>'+bookList+'</div>';
+    }
     let h=head+'<p class="sub">AI-reviewed pilot recommendations. These are provisional interpretations based on cited works, not definitive scholarly assessments, political identity labels or rankings. Source locators may require further verification. Each dimension is compared separately.</p>';
     if(cards.length){
       h+='<h4>Thinkers</h4>'+cards.map(([slot,c])=>'<div class="insight"><strong>'+recEsc(c.name)+'</strong> <span class="chip">'+slot+'</span><p>'+recEsc(c.lifespan)+' \u00b7 Period compared: '+recEsc(c.phase.label)+(c.phase.years?' ('+recEsc(c.phase.years)+')':'')+(c.otherPhases?'. Other documented periods exist; the closest is shown.':'')+'</p><p><b>Where you overlap:</b> '+labs(c.overlaps)+'.<br><b>Partly different:</b> '+labs(c.partlyDifferent)+'.<br><b>Where you differ:</b> '+labs(c.differences)+'.<br><b>Not comparable:</b> '+labs(c.notComparable)+'.</p>'+c.rows.map(r=>'<p><b>'+recEsc(lab(r.dim))+'</b> \u2014 '+recEsc(r.relation)+'. You: '+recEsc(r.user?r.user.text:"no score")+(r.thinker?'. Them: '+recEsc(r.thinker.orientation.text)+'. Documented: '+recEsc(r.thinker.documented)+' Interpretive confidence: '+recEsc(r.thinker.conf)+'. Sources: '+src(r.thinker.sources)+'.':'. '+recEsc(r.note||""))+'</p>').join("")+'</div>').join("");
