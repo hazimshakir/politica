@@ -1,0 +1,17 @@
+/* POLITICA shared components — semantic hooks for consistent page styling. */
+.container{width:min(100% - 48px,var(--content));margin-inline:auto}
+.prose{max-width:var(--measure)}
+.eyebrow,.kicker,.tag{font-family:var(--sans);font-size:.72rem;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+.surface{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+.surface-muted{background:var(--surface-muted);border:1px solid var(--line);border-radius:var(--radius)}
+.rule{height:1px;border:0;background:var(--line);margin:0}
+.btn{border-radius:999px;padding:12px 20px;font-weight:700;letter-spacing:.01em}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--navy);color:#fff}
+.btn-ghost{background:transparent;border:1px solid var(--line-strong);color:var(--ink)}
+.btn-ghost:hover{background:var(--surface-muted);color:var(--ink)}
+a{color:var(--teal);text-underline-offset:3px}
+a:hover{color:var(--navy)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+::selection{background:var(--mint);color:var(--ink)}
+@media(max-width:640px){.container{width:min(100% - 34px,var(--content))}}
