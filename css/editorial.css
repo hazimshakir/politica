@@ -62,3 +62,26 @@ a.dim-cta:hover b,a.dim-cta:focus-visible b{color:#fff}
 .landing .footer-links a{color:#d1dbd3}
 @media(max-width:640px){.hero{padding:76px 0 84px}.hero h1{font-size:clamp(3rem,15vw,5rem)}}
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;animation:none}}
+
+
+/* Contrast guard: overrides legacy animated word spans and inherited button/meta colours. */
+body.landing .hero h1,
+body.landing .hero h1 .w{
+  color:var(--ink)!important;
+  -webkit-text-fill-color:var(--ink)!important;
+}
+body.landing .hero h1 em,
+body.landing .hero h1 em .w{
+  color:var(--teal)!important;
+  -webkit-text-fill-color:var(--teal)!important;
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+}
+body.landing .meta,
+body.landing .meta span{color:var(--ink-soft)!important}
+body.landing .meta b{color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important}
+body.landing .btn-ghost,
+body.landing a.btn-ghost{color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important}
+body.landing .btn-ghost:hover,
+body.landing a.btn-ghost:hover{color:var(--ink)!important}
