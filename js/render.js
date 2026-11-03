@@ -25,7 +25,7 @@ function recommendationsHtml(scores){
     if(errs.length){console.error("POLITICA recommendations hidden: data check failed",errs);return none}
     const lab=k=>{const p=polarities.find(x=>x.key===k);return p?p.label:k};
     const labs=a=>a.length?a.map(lab).map(recEsc).join(", "):"none among the comparable dimensions";
-    const src=a=>(a||[]).map(s=>recEsc(s.citation)+(s.locator?" ("+recEsc(s.locator)+")":"")).join("; ");
+    const src=a=>(a||[]).map(s=>(s.url?'<a href="'+recEsc(s.url)+'" target="_blank" rel="noopener noreferrer">'+recEsc(s.citation)+'</a>':recEsc(s.citation))+(s.locator?" ("+recEsc(s.locator)+")":"")).join("; ");
     const okT=id=>{const t=THINKERS.find(x=>x.id===id);return t&&["reviewed","ai-reviewed"].includes(t.status)};
     const okB=id=>{const b=BOOKS.find(x=>x.id===id);return b&&["reviewed","ai-reviewed"].includes(b.status)};
     const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
