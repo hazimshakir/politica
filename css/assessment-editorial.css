@@ -308,3 +308,13 @@
  .assess .dimension-detail summary{display:none}
  .assess .dimension-detail p{display:block;color:#444}
 }
+
+@media screen{
+ .assess .book-cover-column{width:112px;min-width:0}
+ .assess .cover-rights-note{display:block;margin-top:6px;font-size:8px;line-height:1.35;color:var(--muted)}
+ .assess .cover-rights-note:before{content:"ⓘ ";color:var(--teal)}
+}
+@media(max-width:520px){
+ .assess .book-cover-column{width:88px}
+ .assess .cover-rights-note{font-size:7px}
+}
