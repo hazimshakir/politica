@@ -16,9 +16,9 @@ body.landing{
 .hero-copy{max-width:850px}
 .globe-wrap,.fx-particles,.hero-glow,.shapes{display:none!important}
 .hero .eyebrow,.kicker{color:var(--teal)}
-.hero h1{color:var(--ink);font-size:clamp(3.2rem,8vw,7.2rem);line-height:.98;max-width:850px;letter-spacing:-.055em;margin:22px 0 28px}
-.hero h1 em{color:var(--teal)}
-.js .hero h1 .w,.js .hero h1 em .w{opacity:1;transform:none;filter:none;animation:none;background:none;color:inherit}
+.hero h1,.hero h1 .w{color:var(--ink)!important;font-size:clamp(3.2rem,8vw,7.2rem);line-height:.98;max-width:850px;letter-spacing:-.055em;margin:22px 0 28px}
+.hero h1 em,.hero h1 em .w{color:var(--teal)!important;background:none!important;-webkit-text-fill-color:var(--teal)!important}
+.js .hero h1 .w,.js .hero h1 em .w{opacity:1!important;transform:none!important;filter:none!important;animation:none!important;background:none!important;-webkit-text-fill-color:currentColor!important}
 .hero .lede{color:var(--ink-soft);font-size:clamp(1.1rem,2vw,1.35rem);max-width:620px}
 .cta-row{margin-top:38px}
 .landing .btn-primary{background:var(--teal);color:white;box-shadow:none}
@@ -26,7 +26,7 @@ body.landing{
 .landing .btn-ghost{border-color:var(--line-strong);color:var(--ink)}
 .landing .btn-ghost:hover{background:var(--surface-muted)}
 .meta span{background:transparent;border-color:var(--line);color:var(--muted)}
-.meta b{color:var(--ink)}
+.meta,.meta span,.meta b{color:var(--ink-soft)!important}.meta b{color:var(--ink)!important;font-weight:700}
 .resume{background:var(--surface);border-color:var(--line);color:var(--ink-soft)}
 .resume .btn{color:var(--ink)}
 .section{padding:clamp(76px,9vw,116px) 0}
