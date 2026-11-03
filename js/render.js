@@ -82,7 +82,8 @@ function hydrateBookCovers(){
    if(response.ok){
     const data=await response.json(),docs=data.docs||[];
     const exact=exactTitle(docs);
-    const selected=exact&&authorMatches(exact.author_name)?exact:exact;
+    const selected=(docs||[]).find(d=>norm(d.title)===norm(title)&&authorMatches(d.author_name)&&d.cover_i)
+      ||(exact&&exact.cover_i?exact:null);
     let cover=selected&&selected.cover_i;
     if(!cover&&selected&&selected.editions&&selected.editions.docs){
       const edition=selected.editions.docs.find(e=>e.cover_i&&authorMatches(e.author_name||selected.author_name))||selected.editions.docs.find(e=>e.cover_i);
@@ -96,8 +97,7 @@ function hydrateBookCovers(){
     if(google.ok){
      const data=await google.json(),items=data.items||[];
      const match=items.find(x=>norm(x.volumeInfo&&x.volumeInfo.title)===norm(title)&&authorMatches(x.volumeInfo&&x.volumeInfo.authors)&&x.volumeInfo.imageLinks);
-     const fallback=match||items.find(x=>authorMatches(x.volumeInfo&&x.volumeInfo.authors)&&x.volumeInfo.imageLinks);
-     const links=fallback&&fallback.volumeInfo&&fallback.volumeInfo.imageLinks;
+     const links=match&&match.volumeInfo&&match.volumeInfo.imageLinks;
      if(links){
       imageUrl=(links.extraLarge||links.large||links.medium||links.thumbnail||links.smallThumbnail||"").replace(/^http:/,"https:");
       credit="Cover via Google Books · © respective publisher / rights holder";
