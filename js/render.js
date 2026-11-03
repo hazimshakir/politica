@@ -57,7 +57,7 @@ function recommendationsHtml(scores){
     const sourceList=src(p.sources);
     const year=p.year==null?"Date uncertain":p.year;
     const query=encodeURIComponent(p.title+" "+p.author);
-    return '<article class="book-rec-card"><a class="book-cover-link" href="https://openlibrary.org/search?q='+query+'" target="_blank" rel="noopener noreferrer" aria-label="Find '+recEsc(p.title)+' on Open Library"><div class="book-cover-placeholder" data-book-title="'+recEsc(p.title)+'" data-book-author="'+recEsc(p.author)+'"><span class="cover-mark">P</span><span class="cover-title">'+recEsc(p.title)+'</span><span class="cover-author">'+recEsc(p.author)+'</span></div></a><div class="book-rec-info"><span class="rec-badge">'+recEsc(p.slot)+'</span><h3>'+recEsc(p.title)+'</h3><p class="book-byline">'+recEsc(p.author)+' · '+recEsc(year)+'</p><ul class="rec-bullets"><li><b>Why it appears:</b> '+recEsc(why)+'</li><li><b>Explore:</b> '+recEsc(focus)+'</li><li><b>Traditions:</b> '+recEsc(traditions||"Not assigned")+'</li></ul><details class="rec-details"><summary>Notes &amp; sources</summary><p>'+recEsc(p.stance?(p.stance.documented||"Read the cited passages to examine the argument."):"A broad survey, not assigned a single ideological position.")+'</p><ul class="rec-sources"><li>'+sourceList+'</li></ul></details></div></article>';
+    return '<article class="book-rec-card"><div class="book-cover-column"><a class="book-cover-link" href="https://openlibrary.org/search?q='+query+'" target="_blank" rel="noopener noreferrer" aria-label="Find '+recEsc(p.title)+' on Open Library"><div class="book-cover-placeholder" data-book-title="'+recEsc(p.title)+'" data-book-author="'+recEsc(p.author)+'"><span class="cover-mark">P</span><span class="cover-title">'+recEsc(p.title)+'</span><span class="cover-author">'+recEsc(p.author)+'</span></div></a><span class="cover-rights-note">Cover via Open Library · © respective publisher / rights holder</span></div><div class="book-rec-info"><span class="rec-badge">'+recEsc(p.slot)+'</span><h3>'+recEsc(p.title)+'</h3><p class="book-byline">'+recEsc(p.author)+' · '+recEsc(year)+'</p><ul class="rec-bullets"><li><b>Why it appears:</b> '+recEsc(why)+'</li><li><b>Explore:</b> '+recEsc(focus)+'</li><li><b>Traditions:</b> '+recEsc(traditions||"Not assigned")+'</li></ul><details class="rec-details"><summary>Notes &amp; sources</summary><p>'+recEsc(p.stance?(p.stance.documented||"Read the cited passages to examine the argument."):"A broad survey, not assigned a single ideological position.")+'</p><ul class="rec-sources"><li>'+sourceList+'</li></ul></details></div></article>';
    }).join("")+'</div><p class="rec-credit">Book-cover images are provided by <a href="https://openlibrary.org/" target="_blank" rel="noopener noreferrer">Open Library</a> when an edition image is available. Select a cover to find the title.</p>';
   }else h+='<p class="rec-empty">No book recommendations are available for this profile yet.</p>';
   h+='<p class="rec-disclaimer">These are AI-reviewed pilot comparisons, not independently validated scholarly assessments. Historical figures may have changed their views over time; the selected period is shown where available. Similarity is assessed dimension by dimension, not as an overall score or political identity.</p></section>';
@@ -69,16 +69,24 @@ function hydrateBookCovers(){
  covers.forEach(async el=>{
   const title=el.dataset.bookTitle,author=el.dataset.bookAuthor;
   try{
-   const url="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=8&fields=key,cover_i,title,author_name";
-   const response=await fetch(url,{headers:{Accept:"application/json"}});
-   if(!response.ok)return;
-   const data=await response.json(),docs=data.docs||[];
    const norm=v=>String(v||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
-   const exact=docs.find(d=>norm(d.title)===norm(title)&&(d.author_name||[]).some(a=>norm(a)===norm(author)));
-   const chosen=exact||docs.find(d=>d.cover_i);
-   const cover=chosen&&chosen.cover_i;
-   if(!cover)return;
-   const img=document.createElement("img");img.className="book-cover-image";img.loading="lazy";img.alt="Cover of "+title;img.src="https://covers.openlibrary.org/b/id/"+cover+"-M.jpg";
+   const verifiedEditions={
+    "a theory of justice":"OL23242293M",
+    "on liberty":"OL5237899M"
+   };
+   let coverUrl=verifiedEditions[norm(title)]?"https://covers.openlibrary.org/b/olid/"+verifiedEditions[norm(title)]+"-M.jpg?default=false":null;
+   if(!coverUrl){
+    const url="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=8&fields=key,cover_i,title,author_name";
+    const response=await fetch(url,{headers:{Accept:"application/json"}});
+    if(!response.ok)return;
+    const data=await response.json(),docs=data.docs||[];
+    const exact=docs.find(d=>norm(d.title)===norm(title)&&(d.author_name||[]).some(a=>norm(a)===norm(author)));
+    const chosen=exact||docs.find(d=>d.cover_i);
+    const cover=chosen&&chosen.cover_i;
+    if(!cover)return;
+    coverUrl="https://covers.openlibrary.org/b/id/"+cover+"-M.jpg";
+   }
+   const img=document.createElement("img");img.className="book-cover-image";img.loading="lazy";img.alt="Cover of "+title;img.src=coverUrl;
    img.onerror=()=>img.remove();
    el.prepend(img);el.classList.add("has-cover");
    const credit=document.createElement("span");credit.className="cover-rights-note";credit.textContent="Cover source: Open Library · © respective rights holder";el.after(credit);
