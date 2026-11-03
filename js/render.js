@@ -17,7 +17,7 @@ function renderQuiz(current,answers){
 /* Thinker and book panel. Shows AI-assessed pilot entries with a clear provisional-status disclosure. */
 function recEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function recommendationsHtml(scores){
- const head='<section class="recommendations-section" aria-labelledby="recommendations-title"><div class="recommendations-head"><div><span class="rec-kicker">Further reading</span><h2 id="recommendations-title">People &amp; books to explore</h2><p>Short comparisons to help you explore ideas — not endorsements.</p></div></div>';
+ const head='<section class="recommendations-section" aria-labelledby="recommendations-title"><div class="recommendations-head"><div><span class="rec-kicker">Further reading</span><h2 id="recommendations-title">People &amp; books to explore</h2><p>Short comparisons to help you explore ideas — not endorsements.</p><a class="rec-library-link" href="thinkers-library.html">Browse the full thinkers &amp; library collection&nbsp; →</a></div></div>';
  const none=head+'<p class="rec-empty">Personalised matches are not available for this profile yet. The pilot entries remain provisional and require further verification.</p></section>';
  try{
   if(typeof matchThinkers!=="function"||typeof selectBooks!=="function"||typeof validateData!=="function")return none;
