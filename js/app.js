@@ -1,14 +1,17 @@
 /* POLITICA app.js — assessment page: state and user actions. Needs scoring.js, storage.js and render.js loaded first. */
-let answers={},current=0,reviewMode=false;
+let answers={},current=0,reviewMode=false,dir=0;
 function persist(){saveProgress(answers,current)}
 function render(){renderQuiz(current,answers)}
 function focusQuestion(){const f=document.getElementById("questionSet");if(f)f.focus({preventScroll:true})}
-function show(){render();focusQuestion();persist()}
+function clearEnter(){const c=document.getElementById("quizCard");if(c)c.classList.remove("enter-l","enter-r","enter-f")}
+function enterAnim(){const c=document.getElementById("quizCard");if(!c)return;clearEnter();if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){dir=0;return}void c.offsetWidth;c.classList.add(dir<0?"enter-l":dir>0?"enter-r":"enter-f");dir=0}
+function show(){render();enterAnim();focusQuestion();persist()}
 function jumpSection(i){const n=sectionStart(i);const nx=all.findIndex((q,j)=>j>=n&&answers[j]===undefined);current=nx<0?n:nx;show()}
-function choose(v){answers[current]=v;render();const c=document.querySelector("#quizCard input:checked");if(c)c.focus({preventScroll:true});persist()}
-function previous(){if(current>0){current--;show()}}
+function choose(v){answers[current]=v;clearEnter();render();const c=document.querySelector("#quizCard input:checked");if(c)c.focus({preventScroll:true});persist()}
+function previous(){if(current>0){dir=-1;current--;show()}}
 function next(){
   if(answers[current]===undefined)return;
+  dir=1;
   if(reviewMode){
     const m=firstUnanswered(answers);
     if(m===-1){reviewMode=false;showResults()}else{current=m;show()}

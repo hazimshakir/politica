@@ -101,3 +101,78 @@ legend.qtext{padding:0;display:block;width:100%}
 @media(max-width:520px){
   .wrap{padding:0 17px}
 }
+
+/* ===== Phase 3: dark premium theme for the assessment page (screen only, so the printed report is unchanged) ===== */
+@media screen{
+body.assess{background:#0a1220;color:#e8eef7}
+body.assess:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(900px 600px at 85% -10%,#13294a 0%,rgba(10,18,32,0) 60%),radial-gradient(700px 500px at -5% 105%,rgba(8,127,120,.16) 0%,rgba(10,18,32,0) 65%)}
+.assess .topbar{position:sticky;top:0;z-index:30;background:rgba(10,18,32,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}
+.assess .assessment{padding-top:34px;padding-bottom:64px}
+.assess .side{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.1)}
+.assess .side h3{color:#fff}
+.assess .progress-track{background:rgba(255,255,255,.1)}
+.assess .progress-fill{background:linear-gradient(90deg,#7fd6c8,#e8b75a);box-shadow:0 0 14px rgba(127,214,200,.5);transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.assess .progress-copy{color:#a9bad0}
+.assess .step{color:#a9bad0;transition:background .25s,color .25s}
+.assess .step:hover{background:rgba(255,255,255,.05);color:#fff}
+.assess .step .dot{border-color:rgba(255,255,255,.25);color:#c7d3e3;transition:background .3s,border-color .3s}
+.assess .step.active{background:rgba(127,214,200,.12);color:#fff}
+.assess .step.active .dot,.assess .step.done .dot{background:#7fd6c8;border-color:#7fd6c8;color:#0a1220}
+.assess .step.done{color:#e8eef7}
+.pips{margin-left:auto;display:flex;gap:3px}
+.pips i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .35s,transform .35s}
+.pips i.on{background:#7fd6c8;transform:scale(1.15)}
+.assess .privacy{border-top-color:rgba(255,255,255,.1);color:#93a6bd}
+.assess .linkbtn{color:#7fd6c8}
+.assess .quiz-card{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border-color:rgba(255,255,255,.12);box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+.assess .tag{color:#7fd6c8}
+.assess .counter{color:#a9bad0}
+.assess .quiz-card h2{font-family:var(--serif);font-weight:500;color:#fff;letter-spacing:-.02em}
+.assess .hint{color:#a9bad0}
+.assess .scenario{background:rgba(127,214,200,.07);border-left-color:#7fd6c8;color:#c3d1e1}
+.assess .qtext{font-family:var(--serif);font-weight:500;color:#fff;font-size:clamp(21px,2.3vw,27px);line-height:1.35}
+.assess .option{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.14);color:#e8eef7}
+.assess .option:hover{border-color:rgba(127,214,200,.6);background:rgba(127,214,200,.07)}
+.assess .option.selected{border-color:#7fd6c8;background:rgba(127,214,200,.14);box-shadow:inset 0 0 0 1px #7fd6c8}
+.assess .radio{border-color:rgba(255,255,255,.4)}
+.assess .selected .radio{border-color:#7fd6c8}
+.assess .selected .radio:after{background:#7fd6c8}
+.assess .navrow{border-top-color:rgba(255,255,255,.1)}
+.assess .btn-light{background:transparent;color:#e8eef7;border:1px solid rgba(255,255,255,.25)}
+.assess .btn-light:hover:not(:disabled){background:rgba(255,255,255,.07)}
+.assess .btn-dark{background:#7fd6c8;color:#0a1220}
+.assess .btn-dark:hover:not(:disabled){background:#a1e7dc}
+.assess .result-hero{border:1px solid rgba(255,255,255,.1);background:linear-gradient(160deg,#122540,#0c1830)}
+.assess .profile-pill{background:rgba(127,214,200,.14);color:#9fe3d7}
+.assess .panel{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-color:rgba(255,255,255,.1);color:#e8eef7}
+.assess .panel h3{color:#fff}
+.assess .sub{color:#a9bad0}
+.assess .rowtop{color:#e8eef7}
+.assess .rowtop span:last-child{color:#7fd6c8}
+.assess .bar{background:rgba(255,255,255,.1)}
+.assess .scale-labels{color:#9fb0c4}
+.assess .insight{border-top-color:rgba(255,255,255,.1)}
+.assess .insight strong{color:#fff}
+.assess .insight p{color:#b9c6d8}
+.assess .chip{background:rgba(127,214,200,.12);color:#9fe3d7}
+.assess .caveat{background:rgba(232,183,90,.08);border-color:rgba(232,183,90,.3);color:#e9d3a5}
+.assess .footer{border-top:1px solid rgba(255,255,255,.08);background:#070d18}
+/* moving between questions: only the card's contents slide in, never the frame; choosing an answer does not animate */
+.quiz-card.enter-r>*{animation:qInR .45s cubic-bezier(.2,.7,.2,1) both}
+.quiz-card.enter-l>*{animation:qInL .45s cubic-bezier(.2,.7,.2,1) both}
+.quiz-card.enter-f>*{animation:qInF .45s cubic-bezier(.2,.7,.2,1) both}
+.quiz-card[class*="enter-"]>:nth-child(2){animation-delay:35ms}
+.quiz-card[class*="enter-"]>:nth-child(3){animation-delay:70ms}
+.quiz-card[class*="enter-"]>:nth-child(4){animation-delay:105ms}
+.quiz-card[class*="enter-"]>:nth-child(5){animation-delay:140ms}
+.quiz-card[class*="enter-"]>:nth-child(6){animation-delay:175ms}
+@keyframes qInR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes qInL{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@keyframes qInF{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+@media(prefers-reduced-motion:reduce){
+  .quiz-card>*{animation:none!important}
+  .assess .progress-fill{transition:none}
+  .pips i{transition:none}
+}
+

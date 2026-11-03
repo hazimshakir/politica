@@ -93,6 +93,8 @@
   gc.addEventListener("keydown",function(e){if(e.key==="ArrowLeft"){lon0-=.15;if(reduce)draw(0)}if(e.key==="ArrowRight"){lon0+=.15;if(reduce)draw(0)}});
   // --- lifecycle
   window.addEventListener("resize",function(){resize();if(!running)draw(0),drawParticles()});
+  window.addEventListener("politica:pause",function(){visible=false;stop()});
+  window.addEventListener("politica:resume",function(){visible=true;start()});
   document.addEventListener("visibilitychange",function(){document.hidden?stop():start()});
   if("IntersectionObserver" in window&&hero){new IntersectionObserver(function(es){visible=es[0].isIntersecting;visible?start():stop()},{threshold:0}).observe(hero)}
   resize();draw(0);drawParticles();start();

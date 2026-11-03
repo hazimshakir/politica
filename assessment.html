@@ -5,11 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101b2d">
 <title>Assessment — POLITICA</title>
+<meta name="theme-color" content="#0a1220">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>try{if(sessionStorage.getItem("politica.tx")==="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("arrive");sessionStorage.removeItem("politica.tx")}catch(e){}</script>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/assessment.css">
 </head>
-<body>
+<body class="assess">
+<div class="tx arrival" aria-hidden="true"><div class="tx-center"><svg class="tx-emblem" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" pathLength="1"/><ellipse cx="100" cy="100" rx="36" ry="90" pathLength="1"/><ellipse cx="100" cy="100" rx="68" ry="90" pathLength="1"/><path d="M10 100h180M22 60h156M22 140h156" pathLength="1"/></svg><div class="tx-word">POLI<span>T</span>ICA</div><div class="tx-sub">Understand your political thinking</div></div></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="topbar"><div class="wrap topinner"><a class="brand" href="index.html" aria-label="POLITICA home">POLI<span>T</span>ICA</a><a class="topnote" href="index.html">← Back to home</a></div></header>
 <main id="main">
@@ -26,5 +29,6 @@
 <script src="js/storage.js"></script>
 <script src="js/render.js"></script>
 <script src="js/app.js"></script>
+<script src="js/arrive.js"></script>
 </body>
 </html>

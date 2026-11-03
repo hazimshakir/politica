@@ -5,7 +5,7 @@ function renderSteps(current,answers){
     const start=sectionStart(i);
     const n=s.questions.filter((q,j)=>answers[start+j]!==undefined).length;
     const done=n===s.questions.length,active=i===all[current].section;
-    return `<button class="step ${active?'active':''} ${done?'done':''}" onclick="jumpSection(${i})" aria-label="Section ${i+1}: ${s.short}, ${n} of ${s.questions.length} answered"${active?' aria-current="step"':''}><span class="dot" aria-hidden="true">${i+1}</span>${s.short}</button>`}).join("")}
+    return `<button class="step ${active?'active':''} ${done?'done':''}" onclick="jumpSection(${i})" aria-label="Section ${i+1}: ${s.short}, ${n} of ${s.questions.length} answered"${active?' aria-current="step"':''}><span class="dot" aria-hidden="true">${i+1}</span>${s.short}<span class="pips" aria-hidden="true">${s.questions.map((q,j)=>`<i${answers[start+j]!==undefined?' class="on"':''}></i>`).join("")}</span></button>`}).join("")}
 function renderQuiz(current,answers){
   let q=all[current],s=sections[q.section],answered=Object.keys(answers).length;
   document.getElementById("progressFill").style.width=(answered/all.length*100)+"%";
