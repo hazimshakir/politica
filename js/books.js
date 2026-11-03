@@ -1,7 +1,7 @@
-/* POLITICA books.js — source-located pilot book dataset.
+/* POLITICA books.js — source-located, AI-reviewed provisional book dataset.
    Candidate means are transcribed from two AI-assisted analytical passes supplied on 3 Nov 2026.
    AI assessment is preliminary, not independent human review or proof that every citation locator is correct.
-   Interpretations and source references require final verification before publication; entries remain draft.
+   Interpretations and source references remain provisional and require further verification before publication.
 */
 const BOOK_PREMISES=["individual-rights","limits-of-knowledge","communal-duty","welfare-consequences","historical-materialism","religious-law","civilisational-continuity","self-rule","equal-dignity","fair-terms-of-cooperation","state-order"];
 const BOOKS=[
