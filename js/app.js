@@ -39,6 +39,36 @@ function copySummary(){
     "A voluntary, non-validated self-reflection tool. Individual answers are not included.",note].join("\n");
   const done=()=>toast("Summary copied (no individual answers included).");
   navigator.clipboard.writeText(text).then(done).catch(()=>{let t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();done()})}
+function downloadShareCard(){
+  const sc=window.lastScores;
+  if(!sc){toast("Complete the assessment first.");return}
+  if(!confirm("This card displays political assessment results and may reveal personal political views. Download it only if you are comfortable sharing that information."))return;
+  const canvas=document.createElement("canvas");canvas.width=1200;canvas.height=630;
+  const ctx=canvas.getContext("2d");
+  const bg=ctx.createLinearGradient(0,0,1200,630);bg.addColorStop(0,"#122540");bg.addColorStop(1,"#081321");ctx.fillStyle=bg;ctx.fillRect(0,0,1200,630);
+  ctx.strokeStyle="rgba(255,255,255,.12)";ctx.lineWidth=2;ctx.strokeRect(35,35,1130,560);
+  ctx.fillStyle="#e8b75a";ctx.font="700 18px Arial";ctx.fillText("POLITICA / POLITICAL SELF-REFLECTION",75,85);
+  ctx.fillStyle="#ffffff";ctx.font="48px Georgia";ctx.fillText("My political profile",75,155);
+  ctx.fillStyle="#9fe3d7";ctx.font="bold 27px Arial";ctx.fillText(headline(sc),75,205);
+  const left=650,top=245,size=390,half=size/2;
+  ctx.fillStyle="rgba(139,52,56,.55)";ctx.fillRect(left,top,half,half);
+  ctx.fillStyle="rgba(165,106,39,.45)";ctx.fillRect(left+half,top,half,half);
+  ctx.fillStyle="rgba(8,127,120,.42)";ctx.fillRect(left,top+half,half,half);
+  ctx.fillStyle="rgba(36,92,160,.48)";ctx.fillRect(left+half,top+half,half,half);
+  ctx.strokeStyle="rgba(255,255,255,.55)";ctx.setLineDash([7,7]);ctx.beginPath();ctx.moveTo(left+half,top);ctx.lineTo(left+half,top+size);ctx.moveTo(left,top+half);ctx.lineTo(left+size,top+half);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle="#f3e7d0";ctx.font="bold 15px Arial";ctx.textAlign="center";
+  ctx.fillText("LEFT + EXECUTIVE",left+half/2,top+55);ctx.fillText("RIGHT + EXECUTIVE",left+half+half/2,top+55);
+  ctx.fillText("LEFT + PLURALIST",left+half/2,top+size-35);ctx.fillText("RIGHT + PLURALIST",left+half+half/2,top+size-35);
+  const authority=Math.round((sc.democracy+sc.liberty)/2);
+  const px=left+(sc.economic+100)/200*size,py=top+(100-authority)/200*size;
+  ctx.beginPath();ctx.arc(px,py,12,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();ctx.lineWidth=5;ctx.strokeStyle="#8fe4d8";ctx.stroke();
+  ctx.textAlign="left";ctx.fillStyle="#dce6f2";ctx.font="16px Arial";
+  ctx.fillText("Economic: "+sc.economic+" | Authority / restraint: "+authority,75,285);
+  polarities.forEach(function(p,i){const yy=340+i*30,v=sc[p.key];ctx.fillStyle="#a9bad0";ctx.font="13px Arial";ctx.fillText(p.label,75,yy);ctx.fillStyle="rgba(255,255,255,.14)";ctx.fillRect(290,yy-11,245,7);ctx.fillStyle="#7fd6c8";ctx.fillRect(290,yy-11,245*(v+100)/200,7);ctx.fillStyle="#fff";ctx.fillText((v>0?"+":"")+v,550,yy)});
+  ctx.fillStyle="#9fb0c4";ctx.font="13px Arial";ctx.fillText("Illustrative, non-validated result · Not a party or voting recommendation",75,575);
+  const link=document.createElement("a");link.download="politica-share-card.png";link.href=canvas.toDataURL("image/png");link.click();
+  toast("Share card downloaded. Check it before sharing.");
+}
 function startOver(){
   if(Object.keys(answers).length&&!confirm("Clear your saved answers and start again?"))return;
   answers={};current=0;reviewMode=false;finished=false;
