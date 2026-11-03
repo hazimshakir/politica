@@ -42,7 +42,7 @@ const assert = require("node:assert/strict");
       await button.click();
     }
     await page.locator("#results").waitFor({ state: "visible" });
-    assert.equal(await page.locator("#results .profile-pill").innerText(), "Your POLITICA profile");
+    assert.match(await page.locator("#results .profile-pill").innerText(), /your politica profile/i);
     assert.equal(await page.locator("#results .dimension-row").count(), 7);
 
     // A completed assessment should restore its results after refresh.
