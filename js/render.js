@@ -74,7 +74,7 @@ function hydrateBookCovers(){
  document.querySelectorAll(".book-cover-placeholder[data-book-id]").forEach(el=>{
   const pos=positions[el.dataset.bookId];
   if(!pos)return;
-  el.style.backgroundImage="url('assets/book-covers.webp')";
+  el.style.backgroundImage="url('/assets/book-covers.svg')";
   el.style.backgroundSize="400% 400%";
   el.style.backgroundPosition=(pos[0]*100/3)+"% "+(pos[1]*100/3)+"%";
   el.classList.add("has-cover");
