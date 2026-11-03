@@ -54,18 +54,32 @@ function recommendationsHtml(scores){
     return h+'</div>';
   }catch(e){console.error("POLITICA recommendations error",e);return none}}
 /* Milestone 4: two-axis compass and cross-dimensional reflection. */
+function politicalTendencyHtml(scores){
+ const tags=[],e=scores.economic,s=scores.social,c=scores.culture,d=scores.democracy,l=scores.liberty,g=scores.global;
+ if(e<=-30&&s<=-20)tags.push(['Left-leaning','Economic and social answers both lean toward public provision, collective support or reducing inequality.']);
+ else if(e>=30&&s>=20)tags.push(['Right-leaning','Economic and social answers both lean toward market allocation, individual responsibility or merit.']);
+ else if((e<=-30&&s>=20)||(e>=30&&s<=-20))tags.push(['Economically / socially mixed','Your economic and social preferences point in different directions; one left–right label would hide that distinction.']);
+ else if(Math.abs(e)<20&&Math.abs(s)<20)tags.push(['Centrist on economic / social axes','Your economic and social scores are relatively near the middle.']);
+ if(e<=-65&&s<=-45)tags.push(['Socialist-leaning themes','Strong support for public provision and collective equality appears in these dimensions; this alone does not establish a complete socialist ideology.']);
+ if(d<=-25&&l<=-25)tags.push(['Liberal-democratic / civil-libertarian themes','Your answers emphasise democratic checks, dissent, accountability and limits on state power.']);
+ if(d>=30&&l>=25)tags.push(['Executive-authority leaning','Your answers give comparatively greater weight to government capacity and state action. This does not mean support for dictatorship or abolition of democracy.']);
+ if(c>=30)tags.push(['Culturally conservative / continuity-oriented','Your cultural score places greater weight on tradition and gradual change.']); else if(c<=-30)tags.push(['Socially progressive / change-oriented','Your cultural score is more open to social change and evolving norms.']);
+ if(g<=-30)tags.push(['Internationalist themes','Your answers favour international cooperation and shared rules.']); else if(g>=30)tags.push(['National-priority themes','Your answers give greater weight to national priorities and sovereignty.']);
+ if(!tags.length)tags.push(['Mixed / pragmatic combination','Your scores do not cross the thresholds for the tendencies listed here. This is a descriptive fallback, not a personality label.']);
+ return '<section class="tendency-panel"><h3>Political tendencies suggested by your scores</h3><p class="sub">Qualified descriptions of selected dimensions, not a single identity or party recommendation.</p>'+tags.map(t=>'<div class="tendency-item"><span class="chip">'+recEsc(t[0])+'</span><p>'+recEsc(t[1])+'</p></div>').join('')+'<p class="tendency-caveat">Terms such as left, right, liberal and conservative have different meanings across countries. They are broad shorthand for the dimensions stated here. This questionnaire cannot classify anyone as an autocrat or establish a full ideology.</p></section>';
+}
 function compassHtml(scores){
   const xScore=scores.economic;
   const authority=Math.round((scores.democracy+scores.liberty)/2);
   const x=280+xScore*2, y=240-authority*2;
   const fmt=n=>(n>0?"+":"")+n;
-  const position=xScore<=-20?"Public-provision leaning":xScore>=20?"Market-oriented leaning":"Economically mixed";
-  const vertical=authority>=20?"More state-authority leaning":authority<=-20?"More liberty / institutional-restraint leaning":"Mixed authority and restraint";
+  const position=xScore<=-20?"Left of centre · public-provision leaning":xScore>=20?"Right of centre · market-oriented":"Near the economic centre";
+  const vertical=authority>=20?"Executive-authority leaning":authority<=-20?"Pluralist / liberty-oriented":"Mixed authority and restraint";
   return `<section class="compass-panel" aria-labelledby="compass-title">
     <div class="compass-heading"><span class="compass-kicker">Your results at a glance</span><h2 id="compass-title">Your political compass</h2>
-    <p>Two broad axes show where your answers sit. The marker is calculated from your economic score and the average of your democracy and liberty scores.</p></div>
+    <p>The horizontal axis shows economic left–right tendencies. The vertical axis contrasts executive authority with pluralist checks and civil-liberty protections.</p></div>
     <div class="compass-layout">
-      <div class="compass-y compass-y-top">MORE STATE AUTHORITY<br><span>Executive capacity · state intervention</span></div>
+      <div class="compass-y compass-y-top">EXECUTIVE AUTHORITY / STATE-CENTRED GOVERNANCE<br><span>Greater emphasis on government capacity and state action — not a label of autocracy.</span></div>
       <div class="compass-chart-wrap">
         <svg class="compass-svg" viewBox="0 0 560 500" role="img" aria-labelledby="compass-svg-title compass-svg-desc">
           <title id="compass-svg-title">POLITICA two-axis political compass</title>
@@ -80,20 +94,20 @@ function compassHtml(scores){
           <rect x="80" y="40" width="400" height="400" rx="5" fill="none" stroke="rgba(255,255,255,.48)" stroke-width="1.5"/>
           <path d="M280 40V440 M80 240H480" stroke="rgba(255,255,255,.7)" stroke-width="1.4" stroke-dasharray="5 5"/>
           <g fill="#f3e7d0" font-family="Georgia,serif" font-size="13" letter-spacing="2" text-anchor="middle">
-            <text x="180" y="135">PUBLIC PROVISION</text><text x="380" y="135">MARKET-LED</text>
-            <text x="180" y="345">PUBLIC PROVISION</text><text x="380" y="345">MARKET-LED</text>
+            <text x="180" y="135">LEFT + EXECUTIVE</text><text x="380" y="135">RIGHT + EXECUTIVE</text>
+            <text x="180" y="345">LEFT + PLURALIST</text><text x="380" y="345">RIGHT + PLURALIST</text>
           </g>
           <circle cx="${x}" cy="${y}" r="27" fill="#d9f5f2" fill-opacity=".09"/>
           <circle cx="${x}" cy="${y}" r="15" fill="#d9f5f2" fill-opacity=".2"/>
           <circle cx="${x}" cy="${y}" r="7" fill="#fff" stroke="#8fe4d8" stroke-width="3"/>
           <circle cx="${x}" cy="${y}" r="3" fill="#0a1220"/>
         </svg>
-        <div class="compass-axis-x"><span>← PUBLIC PROVISION</span><span>MARKET-LED →</span></div>
+        <div class="compass-axis-x"><span>← LEFT · PUBLIC PROVISION &amp; REDISTRIBUTION</span><span>MARKET-LED · RIGHT →</span></div>
       </div>
-      <div class="compass-y compass-y-bottom">MORE INDIVIDUAL LIBERTY &amp; INSTITUTIONAL RESTRAINT<br><span>Limits on state power · civil-liberty safeguards</span></div>
+      <div class="compass-y compass-y-bottom">PLURALIST DEMOCRACY / CIVIL LIBERTIES<br><span>Checks on executive power · dissent · limits on state power</span></div>
     </div>
     <div class="compass-readout"><span><b>Economic:</b> ${position} (${fmt(xScore)})</span><span><b>Authority / restraint:</b> ${vertical} (${fmt(authority)})</span></div>
-    <p class="compass-note">This is an illustrative map, not a standard or scientifically validated political-compass test. The vertical coordinate averages two separate dimensions—democratic checks and state power/civil liberty—so it can simplify differences between them. Read the seven individual scores below for the fuller picture.</p>
+    <p class="compass-note">This is an illustrative map, not a validated political-compass test. The vertical coordinate averages democratic pluralism and state-power/liberty scores; these are related but distinct ideas. The upper end does not establish autocracy, and the lower end does not by itself establish a complete democratic ideology. Consult all seven dimension scores below.</p>
   </section>`;
 }
 function crossPressuresHtml(scores){
