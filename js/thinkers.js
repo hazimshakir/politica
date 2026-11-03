@@ -79,5 +79,46 @@ const THINKERS=[
   democracy:nullCell("Interpretation contested; excluded."),
   liberty:nullCell("Interpretation contested; excluded."),
   global:draftCell(-90,"high","Workers' internationalism.",["manifesto"]),
-  values:nullCell("Marx’s critique of distributive justice and his account of communist distribution do not map cleanly onto the questionnaire’s starting-points-versus-merit axis.")}}]}
+  values:nullCell("Marx’s critique of distributive justice and his account of communist distribution do not map cleanly onto the questionnaire’s starting-points-versus-merit axis.")}}]},
+{id:"phule",name:"Jyotirao Phule",lifespan:"1827–1890",family:"indic",region:"South Asia",traditions:["social-justice-anti-caste","feminist"],roles:["reformer","thinker"],
+ summary:"Indian social reformer whose writing and educational work challenged caste hierarchy and the exclusion of women and oppressed communities from education.",
+ status:"ai-reviewed",reviewedOn:"2026-11-04",
+ sources:[
+  {id:"phule-gulamgiri",type:"primary",citation:"Jyotirao Phule, Gulamgiri (Slavery), 1873; translated by G. P. Deshpande in Selected Writings of Jotirao Phule (LeftWord, 2002)",locator:"Read the dialogue as a polemical critique of Brahmanical social hierarchy and the historical legitimation of caste. Translation and edition wording should be checked before quoting.",verified:false},
+  {id:"phule-shetkaryacha",type:"primary",citation:"Jyotirao Phule, Shetkaryacha Asud (Cultivator's Whipcord), 1881",locator:"Sections on agrarian exploitation, revenue administration, education and the condition of cultivators; interpretations should remain tied to the specific edition.",verified:false}
+ ],
+ phases:[{id:"documented",label:"Anti-caste and educational reform writings",years:"1873–1881",dims:{
+  economic:draftCell(-35,"low","Phule criticised the exploitation of cultivators and the social structures that sustained rural inequality; these writings do not amount to a complete modern economic programme.",["phule-shetkaryacha"]),
+  social:draftCell(-85,"high","Gulamgiri attacks caste hierarchy and inherited social domination, while Phule's educational work sought wider access for women and oppressed communities.",["phule-gulamgiri"]),
+  culture:draftCell(-80,"medium","His polemic challenged religious and customary authority used to justify caste hierarchy; this is a critique of specific structures, not a rejection of every inherited practice.",["phule-gulamgiri"]),
+  values:draftCell(-70,"medium","His reform arguments emphasise equal human dignity and the claims of people subordinated by inherited status.",["phule-gulamgiri"])
+ }}]},
+{id:"periyar",name:"E. V. Ramasamy (Periyar)",lifespan:"1879–1973",family:"indic",region:"South Asia",traditions:["social-justice-anti-caste","feminist"],roles:["reformer","thinker"],
+ summary:"Tamil social reformer associated with the Self-Respect Movement, rationalist critique and opposition to caste hierarchy and patriarchy.",
+ status:"ai-reviewed",reviewedOn:"2026-11-04",
+ sources:[
+  {id:"periyar-collected",type:"primary",citation:"E. V. Ramasamy (Periyar), selected speeches and writings in The Collected Works of Periyar E. V. Ramasamy, compiled by K. Veeramani (The Periyar Self-Respect Propaganda Institution)",locator:"Use dated speeches and essays on caste, self-respect, women's rights, religion and social reform. This is a collected corpus; any future score should cite the exact dated text and edition rather than treating the collection as one continuous argument.",verified:false},
+  {id:"periyar-women",type:"primary",citation:"Periyar, Why Women Should Be Emancipated? and related essays on women's liberation, collected in English translations of his writings",locator:"Consult the specific essay and translation for arguments about marriage, property, education and women's autonomy; translation and publication details vary between collections.",verified:false}
+ ],
+ phases:[{id:"documented",label:"Self-Respect and rationalist reform",years:"1920s–1970s",dims:{
+  social:draftCell(-85,"medium","Periyar's movement challenged caste hierarchy and advocated women's emancipation; the exact scope varied across speeches and periods.",["periyar-collected","periyar-women"]),
+  culture:draftCell(-90,"high","His rationalist critique directly challenged inherited religious and caste authority where it sustained social hierarchy.",["periyar-collected"]),
+  democracy:draftCell(-25,"low","His political activity included mass mobilisation and social reform, but the collected writings do not justify a single stable score on modern institutional-democracy preferences.",["periyar-collected"]),
+  liberty:draftCell(-25,"low","Arguments for self-respect and women's autonomy support limits on social coercion, but his broader political positions require period-specific assessment.",["periyar-women"])
+ }}]},
+{id:"nehru",name:"Jawaharlal Nehru",lifespan:"1889–1964",family:"indic",region:"South Asia",traditions:["social-democratic","secular-nationalist"],roles:["leader","thinker"],
+ summary:"India's first prime minister; a central figure in the independence movement who wrote on secularism, parliamentary democracy, planning and international non-alignment.",
+ status:"ai-reviewed",reviewedOn:"2026-11-04",
+ sources:[
+  {id:"nehru-discovery",type:"primary",citation:"Jawaharlal Nehru, The Discovery of India (1946)",locator:"Use the chapters on India's historical development, cultural pluralism and the freedom movement; the work is a wide-ranging interpretation, not a precise policy manifesto.",verified:false},
+  {id:"nehru-tryst",type:"primary",citation:"Jawaharlal Nehru, 'A Tryst with Destiny', Constituent Assembly speech, 14 August 1947",locator:"Official Constituent Assembly address on independence, democratic responsibility and the ending of poverty, ignorance, disease and inequality.",verified:false},
+  {id:"nehru-foreign",type:"primary",citation:"Jawaharlal Nehru, selected parliamentary speeches on foreign policy and non-alignment",locator:"Read dated speeches in their Cold War context; do not infer a timeless position from a single statement.",verified:false}
+ ],
+ phases:[{id:"early-prime-minister",label:"Early independence and institution-building",years:"1947–1964",dims:{
+  economic:draftCell(-55,"medium","Nehru's governments used public-sector investment and national planning alongside a mixed economy in which private enterprise continued.",["nehru-discovery"]),
+  social:draftCell(-45,"low","His public programme emphasised reducing poverty and expanding opportunity, but this broad orientation does not establish a complete position on every welfare or redistribution question.",["nehru-tryst"]),
+  democracy:draftCell(-55,"medium","Nehru publicly defended parliamentary institutions and constitutional government in the early republic; practice and policy should be assessed separately from stated principles.",["nehru-tryst"]),
+  global:draftCell(-55,"medium","Non-alignment sought independent foreign-policy judgement and cooperation beyond Cold War blocs; it should not be equated with neutrality on every international issue.",["nehru-foreign"])
+ }}]}
+
 ];
