@@ -51,10 +51,3 @@
 .library-cover-fallback small{font:700 8px var(--sans);letter-spacing:.2em;color:#d7b77d}
 .thinker-card-copy,.book-card-copy{min-width:0}
 @media(max-width:480px){.thinker-card-layout,.book-card-layout{grid-template-columns:88px minmax(0,1fr);gap:12px}.thinker-visual img{width:88px;height:118px}.thinker-visual.image-unavailable{width:88px;height:118px}.manuscript-visual .library-cover-thumb{width:88px;height:118px}.library-cover-thumb{max-width:88px}.library-card{padding:17px}}
-
-/* Hero photograph placed in the open right-hand area. */
-.library-page .library-hero .wrap{min-height:330px;padding-right:min(43%,520px)}
-.library-hero-photo{position:absolute;right:24px;top:50%;transform:translateY(-50%);width:min(39%,470px);height:300px;overflow:hidden;border-radius:12px;border:1px solid var(--line);box-shadow:0 12px 32px rgba(32,43,42,.14);background:var(--surface-muted)}
-.library-hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
-.library-hero-photo>a{position:absolute;right:9px;bottom:8px;padding:4px 7px;border-radius:4px;background:rgba(20,30,28,.72);color:#fff;font-size:9px;text-decoration:none}
-@media(max-width:700px){.library-page .library-hero .wrap{min-height:0;padding-right:24px}.library-hero-photo{position:relative;right:auto;top:auto;transform:none;width:100%;height:210px;margin:28px 0 0}.library-page .library-hero{padding-bottom:30px}}
