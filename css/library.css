@@ -51,3 +51,12 @@
 .library-cover-fallback small{font:700 8px var(--sans);letter-spacing:.2em;color:#d7b77d}
 .thinker-card-copy,.book-card-copy{min-width:0}
 @media(max-width:480px){.thinker-card-layout,.book-card-layout{grid-template-columns:88px minmax(0,1fr);gap:12px}.thinker-visual img{width:88px;height:118px}.thinker-visual.image-unavailable{width:88px;height:118px}.manuscript-visual .library-cover-thumb{width:88px;height:118px}.library-cover-thumb{max-width:88px}.library-card{padding:17px}}
+
+/* Phase 9 — archival portraits and catalogue-sourced book jackets. */
+.thinker-placeholder{width:112px;height:142px;border:1px solid var(--line);border-radius:7px;background:var(--surface-muted);display:grid;place-content:center;text-align:center;padding:8px;color:var(--muted)}
+.thinker-placeholder span{font:800 9px var(--sans);letter-spacing:.18em;color:var(--teal)}
+.thinker-placeholder b{font:500 12px/1.4 var(--serif);margin-top:7px}
+.thinker-visual>a{display:block;margin-top:6px;font-size:9px;line-height:1.4;color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+.book-cover-link{display:block;width:112px;height:142px}
+.book-cover-img{display:block;width:112px;height:142px;object-fit:cover;object-position:center;border-radius:4px;border:1px solid rgba(32,43,42,.14);box-shadow:3px 5px 12px rgba(32,43,42,.15);background:var(--paper-strong)}
+@media(max-width:480px){.thinker-placeholder{width:88px;height:118px}.book-cover-link,.book-cover-img{width:88px;height:118px}}
