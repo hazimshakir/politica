@@ -6,6 +6,7 @@ function validateQuestionData(){
   const keys={};
   DIMENSIONS.forEach(d=>{
     ["key","title","short","desc","label","left","right"].forEach(f=>{if(!d[f])bad(`dimension "${d.key||"?"}" is missing "${f}"`)});
+    if(!d.explain||!d.explain.lower||!d.explain.higher||!d.explain.centre)bad(`dimension "${d.key}" needs explain.lower, explain.higher and explain.centre`);
     if(keys[d.key])bad(`duplicate dimension key "${d.key}"`);keys[d.key]=0});
   const ids={};
   QUESTIONS.forEach((q,n)=>{
@@ -20,7 +21,7 @@ validateQuestionData();
 /* Questions are grouped by dimension (dimension order, then written order) so sections stay contiguous. */
 const sections=DIMENSIONS.map(d=>({title:d.title,short:d.short,desc:d.desc,questions:QUESTIONS.filter(q=>q.dimension===d.key)}));
 const all=[]; sections.forEach((s,si)=>s.questions.forEach((q,qi)=>all.push({id:q.id,section:si,index:qi,text:q.text,kind:q.kind,scenario:q.scenario,dir:q.direction})));
-const polarities=DIMENSIONS.map((d,i)=>({section:i,key:d.key,label:d.label,left:d.left,right:d.right}));
+const polarities=DIMENSIONS.map((d,i)=>({section:i,key:d.key,label:d.label,left:d.left,right:d.right,explain:d.explain}));
 
 /* ---------- Scoring and text summaries (no page/DOM code in this file) ---------- */
 function sectionStart(i){return sections.slice(0,i).reduce((n,s)=>n+s.questions.length,0)}
