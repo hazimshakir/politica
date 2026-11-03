@@ -17,42 +17,68 @@ function renderQuiz(current,answers){
 /* Thinker and book panel. Shows AI-assessed pilot entries with a clear provisional-status disclosure. */
 function recEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function recommendationsHtml(scores){
-  const head='<div class="panel"><h3>Thinkers and books to explore</h3>';
-  const none=head+'<p class="sub">Recommendations are not available yet. The pilot book entries have been reviewed by AI. These assessments are provisional: interpretations and source references still require final verification before publication. No entries are currently eligible to display. Your results above are not affected.</p></div>';
+ const head='<section class="recommendations-section" aria-labelledby="recommendations-title"><div class="recommendations-head"><div><span class="rec-kicker">Further reading</span><h2 id="recommendations-title">People &amp; books to explore</h2><p>Short comparisons to help you explore ideas — not endorsements.</p></div></div>';
+ const none=head+'<p class="rec-empty">Personalised matches are not available for this profile yet. The pilot entries remain provisional and require further verification.</p></section>';
+ try{
+  if(typeof matchThinkers!=="function"||typeof selectBooks!=="function"||typeof validateData!=="function")return none;
+  const errs=validateData(THINKERS,BOOKS);
+  if(errs.length){console.error("POLITICA recommendations hidden: data check failed",errs);return none}
+  const lab=k=>{const p=polarities.find(x=>x.key===k);return p?p.label:k};
+  const labs=a=>a&&a.length?a.map(lab).map(recEsc).join(" · "):"—";
+  const src=a=>(a||[]).map(s=>(s.url?'<a href="'+recEsc(s.url)+'" target="_blank" rel="noopener noreferrer">'+recEsc(s.citation)+'</a>':recEsc(s.citation))+(s.locator?" — "+recEsc(s.locator):"")).join("</li><li>");
+  const okT=id=>{const t=THINKERS.find(x=>x.id===id);return t&&["reviewed","ai-reviewed"].includes(t.status)};
+  const okB=id=>{const b=BOOKS.find(x=>x.id===id);return b&&["reviewed","ai-reviewed"].includes(b.status)};
+  const portrait={
+   gandhi:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_Gandhi.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Portrait_Gandhi.jpg"},
+   ambedkar:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dr._Bhimrao_Ambedkar.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Dr._Bhimrao_Ambedkar.jpg"},
+   hayek:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich_Hayek_portrait.jpg",credit:"Wikimedia Commons · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Friedrich_Hayek_portrait.jpg"},
+   marx:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Karl_Marx.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Karl_Marx.jpg"}
+  };
+  const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
+  const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Useful contrast",c])].filter(([,c])=>okT(c.thinkerId));
+  const books=bm.picks.filter(p=>okB(p.id));
+  let h=head;
+  if(cards.length){
+   h+='<div class="rec-section-label">Thinkers</div><div class="thinker-rec-grid">'+cards.map(([slot,c])=>{
+    const person=THINKERS.find(t=>t.id===c.thinkerId),photo=portrait[c.thinkerId];
+    const image=photo?'<img class="thinker-photo" src="'+photo.url+'" alt="Portrait of '+recEsc(c.name)+'" loading="lazy" onerror="this.closest(\'.thinker-photo-wrap\').classList.add(\'no-photo\');this.remove()">' : '';
+    const close=labs(c.overlaps),different=labs(c.differences),partial=labs(c.partlyDifferent);
+    const evidence=c.rows.map(r=>'<li><b>'+recEsc(lab(r.dim))+'</b> · '+recEsc(r.relation)+'. '+(r.thinker? 'Them: '+recEsc(r.thinker.orientation.text)+'. '+recEsc(r.thinker.documented)+' Confidence: '+recEsc(r.thinker.conf)+'. Sources: '+src(r.thinker.sources)+'.':recEsc(r.note||"No comparable evidence."))+'</li>').join("");
+    const credits=photo?'<a class="image-credit" href="'+photo.source+'" target="_blank" rel="noopener noreferrer">'+photo.credit+'</a>':'<span class="image-credit">No verified historical portrait available</span>';
+    return '<article class="thinker-rec-card"><div class="thinker-rec-top"><div class="thinker-photo-wrap '+(photo?'':'no-photo')+'">'+image+(!photo?'<span aria-hidden="true">'+recEsc(c.name.split(/\s+/).map(x=>x[0]).slice(0,2).join(""))+'</span>':'')+'</div><div class="thinker-rec-title"><span class="rec-badge">'+recEsc(slot)+'</span><h3>'+recEsc(c.name)+'</h3><p>'+recEsc(c.lifespan)+' · '+recEsc(c.phase.label)+(c.phase.years?' · '+recEsc(c.phase.years):'')+'</p>'+credits+'</div></div><ul class="rec-bullets"><li><b>Overlap:</b> '+close+'</li><li><b>Different:</b> '+(partial!=="—"?"Partly: "+partial+" · ":"")+different+'</li><li><b>Not comparable:</b> '+labs(c.notComparable)+'</li></ul><details class="rec-details"><summary>View comparison &amp; sources</summary><ul class="rec-evidence">'+evidence+'</ul></details></article>';
+   }).join("")+'</div>';
+  }else h+='<p class="rec-empty">No thinker match is available for this profile yet.</p>';
+  if(books.length){
+   h+='<div class="rec-section-label books-label">Books</div><div class="book-rec-grid">'+books.map(p=>{
+    const why=p.stance?'Useful comparison: '+lab(p.dimension)+'.':'Broad introductory survey.';
+    const focus=p.premise||"Explore the arguments and context.";
+    const traditions=(p.traditions||[]).map(x=>x.replace(/-/g," ")).join(" · ");
+    const sourceList=src(p.sources);
+    const year=p.year==null?"Date uncertain":p.year;
+    const query=encodeURIComponent(p.title+" "+p.author);
+    return '<article class="book-rec-card"><a class="book-cover-link" href="https://openlibrary.org/search?q='+query+'" target="_blank" rel="noopener noreferrer" aria-label="Find '+recEsc(p.title)+' on Open Library"><div class="book-cover-placeholder" data-book-title="'+recEsc(p.title)+'" data-book-author="'+recEsc(p.author)+'"><span class="cover-mark">P</span><span class="cover-title">'+recEsc(p.title)+'</span><span class="cover-author">'+recEsc(p.author)+'</span></div></a><div class="book-rec-info"><span class="rec-badge">'+recEsc(p.slot)+'</span><h3>'+recEsc(p.title)+'</h3><p class="book-byline">'+recEsc(p.author)+' · '+recEsc(year)+'</p><ul class="rec-bullets"><li><b>Why it appears:</b> '+recEsc(why)+'</li><li><b>Explore:</b> '+recEsc(focus)+'</li><li><b>Traditions:</b> '+recEsc(traditions||"Not assigned")+'</li></ul><details class="rec-details"><summary>Notes &amp; sources</summary><p>'+recEsc(p.stance?(p.stance.documented||"Read the cited passages to examine the argument."):"A broad survey, not assigned a single ideological position.")+'</p><ul class="rec-sources"><li>'+sourceList+'</li></ul></details></div></article>';
+   }).join("")+'</div><p class="rec-credit">Book-cover images are provided by <a href="https://openlibrary.org/" target="_blank" rel="noopener noreferrer">Open Library</a> when an edition image is available. Select a cover to find the title.</p>';
+  }else h+='<p class="rec-empty">No book recommendations are available for this profile yet.</p>';
+  h+='<p class="rec-disclaimer">These are AI-reviewed pilot comparisons, not independently validated scholarly assessments. Historical figures may have changed their views over time; the selected period is shown where available. Similarity is assessed dimension by dimension, not as an overall score or political identity.</p></section>';
+  return h;
+ }catch(e){console.error("POLITICA recommendations error",e);return none}
+}
+function hydrateBookCovers(){
+ const covers=document.querySelectorAll(".book-cover-placeholder[data-book-title]");
+ covers.forEach(async el=>{
+  const title=el.dataset.bookTitle,author=el.dataset.bookAuthor;
   try{
-    if(typeof matchThinkers!=="function"||typeof selectBooks!=="function"||typeof validateData!=="function")return none;
-    const errs=validateData(THINKERS,BOOKS);
-    if(errs.length){console.error("POLITICA recommendations hidden: data check failed",errs);return none}
-    const lab=k=>{const p=polarities.find(x=>x.key===k);return p?p.label:k};
-    const labs=a=>a.length?a.map(lab).map(recEsc).join(", "):"none among the comparable dimensions";
-    const src=a=>(a||[]).map(s=>(s.url?'<a href="'+recEsc(s.url)+'" target="_blank" rel="noopener noreferrer">'+recEsc(s.citation)+'</a>':recEsc(s.citation))+(s.locator?" ("+recEsc(s.locator)+")":"")).join("; ");
-    const okT=id=>{const t=THINKERS.find(x=>x.id===id);return t&&["reviewed","ai-reviewed"].includes(t.status)};
-    const okB=id=>{const b=BOOKS.find(x=>x.id===id);return b&&["reviewed","ai-reviewed"].includes(b.status)};
-    const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
-    const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Informative contrast",c])].filter(([,c])=>okT(c.thinkerId));
-    const books=bm.picks.filter(p=>okB(p.id));
-    if(!cards.length&&!books.length){
-      const thinkerList=THINKERS.filter(t=>t&&t.status==="ai-reviewed").map(t=>{
-        const dims=(t.phases||[]).flatMap(p=>Object.keys(p.dims||{})).filter((d,i,a)=>a.indexOf(d)===i);
-        return '<div class="insight"><strong>'+recEsc(t.name)+'</strong><p>'+recEsc(t.lifespan)+' · '+recEsc(t.summary)+'</p><p><b>Available comparison areas:</b> '+labs(dims)+'.</p></div>';
-      }).join("");
-      const bookList=BOOKS.filter(b=>b&&b.status==="ai-reviewed").map(b=>{
-        const dims=Object.keys(b.argues||{});
-        return '<div class="insight"><strong>'+recEsc(b.title)+'</strong><p>'+recEsc(b.author)+', '+recEsc(b.year==null?'date uncertain':b.year)+' · '+(b.type==='survey'?'Broad introductory survey':recEsc(b.premise||''))+'</p><p><b>Available areas:</b> '+(b.type==='survey'?'Not assigned a single ideological position':labs(dims))+'.</p><p>Sources: '+src(b.sources)+'.</p></div>';
-      }).join("");
-      return head+'<p class="sub">The current pilot dataset does not have enough comparable dimensions to generate a personalised match for this profile. You can still explore these AI-reviewed pilot entries. They are provisional interpretations; source locators and assessments require further verification. They are not rankings or political identity labels.</p><h4>Pilot thinkers</h4>'+thinkerList+'<h4>Pilot books</h4>'+bookList+'</div>';
-    }
-    let h=head+'<p class="sub">AI-reviewed pilot recommendations. These are provisional interpretations based on cited works, not definitive scholarly assessments, political identity labels or rankings. Source locators may require further verification. Each dimension is compared separately.</p>';
-    if(cards.length){
-      h+='<h4>Thinkers</h4>'+cards.map(([slot,c])=>'<div class="insight"><strong>'+recEsc(c.name)+'</strong> <span class="chip">'+slot+'</span><p>'+recEsc(c.lifespan)+' \u00b7 Period compared: '+recEsc(c.phase.label)+(c.phase.years?' ('+recEsc(c.phase.years)+')':'')+(c.otherPhases?'. Other documented periods exist; the closest is shown.':'')+'</p><p><b>Comparison at a glance:</b> '+c.overlaps.length+' close dimension(s), '+c.partlyDifferent.length+' partly different, '+c.differences.length+' clearly different, '+c.notComparable.length+' not comparable. Descriptive comparison only, not endorsement or an overall similarity score.</p><p><b>Where you overlap:</b> '+labs(c.overlaps)+'.<br><b>Partly different:</b> '+labs(c.partlyDifferent)+'.<br><b>Where you differ:</b> '+labs(c.differences)+'.<br><b>Not comparable:</b> '+labs(c.notComparable)+'.</p>'+c.rows.map(r=>'<p><b>'+recEsc(lab(r.dim))+'</b> \u2014 '+recEsc(r.relation)+'. You: '+recEsc(r.user?r.user.text:"no score")+(r.thinker?'. Them: '+recEsc(r.thinker.orientation.text)+'. Documented: '+recEsc(r.thinker.documented)+' Interpretive confidence: '+recEsc(r.thinker.conf)+'. Sources: '+src(r.thinker.sources)+'.':'. '+recEsc(r.note||""))+'</p>').join("")+'</div>').join("");
-    }else h+='<p class="sub">No AI-reviewed thinkers are comparable with your results yet.</p>';
-    if(tm.notes.length&&cards.length)h+='<p class="sub">'+tm.notes.map(recEsc).join(" ")+'</p>';
-    if(books.length){
-      h+='<h4>Books</h4>'+books.map(p=>'<div class="insight"><strong>'+recEsc(p.title)+'</strong> <span class="chip">'+recEsc(p.slot)+'</span><p>'+recEsc(p.author)+', '+recEsc(p.year==null?'date uncertain':p.year)+' \u00b7 Tradition: '+p.traditions.map(recEsc).join(", ")+' \u00b7 Focus: '+recEsc(p.premise)+'</p><p><b>Why it appears:</b> '+(p.stance?'It offers a useful comparison on <b>'+recEsc(lab(p.dimension))+'</b>. Its argument has a '+recEsc(orientation(p.dimension,p.stance.score).text)+'; this does not mean you agree with every argument in the book.':'It provides a broad introductory survey across political ideologies. It is included for context, not because it has one ideological score.')+'</p><p><b>What to look for:</b> '+(p.stance?recEsc(p.stance.documented||"Read the cited passages to examine the argument and its historical context."):'Use it to compare traditions and concepts across the political spectrum.')+' Sources: '+src(p.sources)+'.</p></div>').join("");
-    }else h+='<p class="sub">No AI-reviewed books are available for your results yet.</p>';
-    if(bm.notes.length&&books.length)h+='<p class="sub">'+bm.notes.map(recEsc).join(" ")+'</p>';
-    return h+'</div>';
-  }catch(e){console.error("POLITICA recommendations error",e);return none}}
+   const url="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=1&fields=cover_i,title,author_name";
+   const response=await fetch(url,{headers:{Accept:"application/json"}});
+   if(!response.ok)return;
+   const data=await response.json(),cover=data.docs&&data.docs[0]&&data.docs[0].cover_i;
+   if(!cover)return;
+   const img=document.createElement("img");img.className="book-cover-image";img.loading="lazy";img.alt="Cover of "+title;img.src="https://covers.openlibrary.org/b/id/"+cover+"-M.jpg";
+   img.onerror=()=>img.remove();
+   el.prepend(img);el.classList.add("has-cover");
+  }catch(e){/* Keep the typographic cover fallback when Open Library is unavailable. */}
+ });
+}
 /* Milestone 4: two-axis compass and cross-dimensional reflection. */
 function politicalTendencyHtml(scores){
  const e=scores.economic,s=scores.social,c=scores.culture,d=scores.democracy,l=scores.liberty,g=scores.global,v=scores.values;
