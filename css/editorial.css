@@ -1,7 +1,9 @@
 /* Light-first editorial homepage layer. Keeps the existing content and behaviour intact. */
 body.landing{
-  --bg:var(--paper);--bg2:var(--paper-strong);--soft:var(--ink-soft);
-  --mint:var(--teal);
+  /* Override the legacy dark palette declared in landing.css. */
+  --bg:var(--paper);--bg2:var(--paper-strong);
+  --ink:#202b2a;--soft:#44514d;--line:#ddd7ca;--gold:#b7833e;
+  --mint:#176c61;
   background:var(--paper);color:var(--ink);
 }
 .landing .topbar{background:rgba(245,241,232,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
