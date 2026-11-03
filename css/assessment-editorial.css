@@ -203,3 +203,77 @@
  .assess .primary-tendency{background:#f4f4f0!important;border:1px solid #bbb;border-left:4px solid #176c61;break-inside:avoid}
  .assess .primary-tendency h4,.assess .primary-tendency p{color:#111}
 }
+
+/* Minimal editorial recommendation gallery: portraits, book jackets and concise evidence. */
+@media screen{
+ .assess .recommendations-section{
+   margin:22px 0;padding:clamp(22px,4vw,34px);
+   border:1px solid var(--line);border-radius:var(--radius-lg);
+   background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)
+ }
+ .assess .recommendations-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}
+ .assess .rec-kicker{display:block;color:var(--teal);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+ .assess .recommendations-head h2{font:500 clamp(26px,3.5vw,36px)/1.1 var(--serif);letter-spacing:-.025em;color:var(--ink);margin:0 0 7px}
+ .assess .recommendations-head p{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
+ .assess .rec-section-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;color:var(--muted);padding-bottom:9px;border-bottom:1px solid var(--line);margin:20px 0 14px}
+ .assess .thinker-rec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .assess .thinker-rec-card,.assess .book-rec-card{min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:#fffefa;overflow:hidden}
+ .assess .thinker-rec-card{padding:17px}
+ .assess .thinker-rec-top{display:flex;align-items:center;gap:14px;margin-bottom:13px}
+ .assess .thinker-photo-wrap{width:82px;height:96px;flex:0 0 82px;border-radius:7px;overflow:hidden;background:var(--paper-strong);display:grid;place-items:center}
+ .assess .thinker-photo{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block}
+ .assess .thinker-photo-wrap.no-photo{background:linear-gradient(145deg,#e7e0d3,#f5f1e8);color:var(--teal);font:500 28px var(--serif)}
+ .assess .thinker-rec-title{min-width:0}
+ .assess .thinker-rec-title h3,.assess .book-rec-info h3{font:600 19px/1.2 var(--serif);letter-spacing:-.015em;color:var(--ink);margin:7px 0 5px}
+ .assess .thinker-rec-title p,.assess .book-byline{font-size:11px;line-height:1.45;color:var(--muted);margin:0 0 5px}
+ .assess .image-credit{font-size:9px;line-height:1.35;color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+ .assess .rec-badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-size:9px;font-weight:800;letter-spacing:.025em}
+ .assess .rec-bullets{list-style:none;padding:0;margin:0}
+ .assess .rec-bullets li{position:relative;padding:6px 0 6px 13px;border-top:1px solid #eee9df;color:var(--ink-soft);font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+ .assess .rec-bullets li:before{content:"";position:absolute;left:1px;top:12px;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+ .assess .rec-bullets b{color:var(--ink);font-weight:700}
+ .assess .rec-details{margin-top:10px;border-top:1px solid var(--line);padding-top:9px}
+ .assess .rec-details summary{cursor:pointer;color:var(--teal);font-size:10px;font-weight:750;list-style:none}
+ .assess .rec-details summary::-webkit-details-marker{display:none}
+ .assess .rec-details summary:after{content:"＋";float:right}
+ .assess .rec-details[open] summary:after{content:"−"}
+ .assess .rec-evidence,.assess .rec-sources{padding-left:17px;margin:10px 0 0}
+ .assess .rec-evidence li,.assess .rec-sources li,.assess .rec-details p{font-size:10px;line-height:1.65;color:var(--muted);margin:0 0 8px;overflow-wrap:anywhere}
+ .assess .rec-evidence b{color:var(--ink)}
+ .assess .rec-details a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+ .assess .book-rec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .assess .book-rec-card{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;padding:15px;align-items:start}
+ .assess .book-cover-link{display:block;width:112px}
+ .assess .book-cover-placeholder{position:relative;aspect-ratio:2/3;width:100%;padding:12px 9px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(155deg,#243b34,#13251f);color:#f8f2e7;box-shadow:3px 5px 12px rgba(32,43,42,.18);border:1px solid rgba(32,43,42,.12)}
+ .assess .book-cover-placeholder:before{content:"";position:absolute;inset:7px;border:1px solid rgba(240,226,194,.42);pointer-events:none}
+ .assess .cover-mark{font:italic 18px var(--serif);color:#d7b77d}
+ .assess .cover-title{font:500 13px/1.12 var(--serif);position:relative;overflow-wrap:anywhere}
+ .assess .cover-author{font-size:8px;line-height:1.3;position:relative;color:#e5ddce}
+ .assess .book-cover-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+ .assess .book-rec-info{min-width:0}
+ .assess .book-rec-info h3{font-size:18px;margin:7px 0 4px}
+ .assess .book-rec-info .rec-bullets li{font-size:10px;padding-top:5px;padding-bottom:5px}
+ .assess .rec-credit,.assess .rec-disclaimer,.assess .rec-empty{font-size:10px;line-height:1.6;color:var(--muted);margin:12px 0 0}
+ .assess .rec-credit a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+ .assess .rec-disclaimer{border-top:1px solid var(--line);padding-top:12px;margin-top:20px}
+}
+@media(max-width:760px){
+ .assess .thinker-rec-grid,.assess .book-rec-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+ .assess .recommendations-section{padding:18px 13px;border-radius:15px}
+ .assess .thinker-rec-card{padding:13px}
+ .assess .book-rec-card{grid-template-columns:88px minmax(0,1fr);gap:12px;padding:12px}
+ .assess .book-cover-link{width:88px}
+ .assess .thinker-photo-wrap{width:70px;height:84px;flex-basis:70px}
+ .assess .thinker-rec-title h3{font-size:17px}
+ .assess .book-rec-info h3{font-size:16px}
+}
+@media print{
+ .assess .recommendations-section{background:#fff!important;color:#111;border:1px solid #bbb;box-shadow:none}
+ .assess .thinker-rec-card,.assess .book-rec-card{break-inside:avoid;background:#fff}
+ .assess .rec-disclaimer,.assess .rec-bullets li,.assess .rec-details p,.assess .rec-evidence li{color:#444}
+ .assess .rec-details{display:block}
+ .assess .rec-details summary{display:none}
+ .assess .book-cover-image{print-color-adjust:exact}
+}
