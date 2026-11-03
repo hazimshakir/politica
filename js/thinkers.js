@@ -1,7 +1,6 @@
 /* POLITICA thinkers.js — pilot thinker dataset (DATA ONLY; not loaded by any page yet).
-   Every entry below is status:"draft": scores are unverified placeholders and are NEVER shown to users.
-   An entry is published only when status is "reviewed" AND each scored cell passes matching.js (cellProblem):
-   verified sources with locators, a written rationale, two independent reviews that differ by no more than 25 points.
+   AI-reviewed entries are provisional interpretations; source-locator verification and score validation are separate tasks.
+   AI-reviewed pilot entries may be displayed with a provisional disclaimer. A verified source locator does not mean the interpretation or score has been independently validated.
    Scores use the same -100..+100 axes as the assessment (negative = left label, positive = right label in questions.js).
    A near-zero score means "mixed or less pronounced", not "supports both". score:null = not scored (anachronistic, thin or contested).
    Where views changed significantly, add one phase per period instead of one lifelong score. Never invent positions, quotes or references. */
@@ -14,7 +13,7 @@ const THINKERS=[
  summary:"Indian independence leader and writer on non-violent resistance and self-rule.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"hind-swaraj",type:"primary",citation:"M. K. Gandhi, Hind Swaraj (Gujarati original, 1909); English rendering, Indian Home Rule (1922 fifth edition)",locator:"Chs. IV (What is Swaraj?), VI (Civilization), XIII (True Civilization), XIV (How India Can Become Free), XVII (Passive Resistance), XIX (Machinery); Gandhi's 1919 foreword and 1922 Reply to Critics qualify how the 1908 text should be read.",verified:true},{id:"constructive",type:"primary",citation:"M. K. Gandhi, Constructive Programme: Its Meaning and Place (1941)",locator:"Sections on removal of untouchability, khadi, village industries, economic equality and trusteeship; section headings should be checked against the chosen Navajivan edition before adding page numbers.",verified:false}],
  phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1909\u20131948",dims:{
-  economic:draftCell(-30,"medium","Decentralised village economy; wealth held in 'trusteeship'.",["constructive"]),
+  economic:draftCell(-15,"low","Gandhi advocated village industries, decentralised production and trusteeship, but these do not map neatly onto the modern public-provision versus market-allocation axis.",["constructive"]),
   social:draftCell(-55,"medium","Welfare of all, with priority to the poorest.",["constructive"]),
   culture:draftCell(10,"low","Reformer on untouchability, traditionalist on other matters.",["hind-swaraj"]),
   democracy:draftCell(-50,"medium","Non-violent dissent and civil disobedience.",["hind-swaraj"]),
@@ -29,7 +28,7 @@ const THINKERS=[
   social:draftCell(-70,"high","Called for abolishing caste hierarchy.",["aoc"]),
   culture:draftCell(-80,"high","Critique of caste orthodoxy.",["aoc"]),
   democracy:draftCell(-55,"high","Constitutional safeguards and minority protections.",["ca-speech"]),
-  liberty:draftCell(-30,"medium","Fundamental rights enforced by a strong state.",["ca-speech"]),
+  liberty:draftCell(25,"medium","Ambedkar defended enforceable fundamental rights while also proposing an active state to protect citizens from social and economic domination; this is a qualified, not maximal, state-action position.",["states-minorities","ca-speech"]),
   global:nullCell("Insufficient fit with this dimension."),
   values:draftCell(-75,"high","Remedying inherited disadvantage.",["aoc"])}}]},
 {id:"hayek",name:"Friedrich A. Hayek",lifespan:"1899\u20131992",family:"western",region:"Europe",traditions:["classical-liberal"],roles:["thinker"],
@@ -60,9 +59,9 @@ const THINKERS=[
  phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1848\u20131875",dims:{
   economic:draftCell(-95,"high","Collective ownership of the means of production.",["manifesto"]),
   social:draftCell(-80,"high","Class-based critique of inequality.",["manifesto"]),
-  culture:draftCell(-60,"medium","Critique of religion and inherited social relations.",["manifesto"]),
+  culture:nullCell("The Manifesto critiques inherited class relations, but that alone does not establish a sufficiently direct position on POLITICA’s tradition-versus-social-change axis."),
   democracy:nullCell("Interpretation contested; excluded."),
   liberty:nullCell("Interpretation contested; excluded."),
   global:draftCell(-90,"high","Workers' internationalism.",["manifesto"]),
-  values:draftCell(-80,"medium","Distribution according to need.",["gotha"])}}]}
+  values:nullCell("Marx’s critique of distributive justice and his account of communist distribution do not map cleanly onto the questionnaire’s starting-points-versus-merit axis.")}}]}
 ];
