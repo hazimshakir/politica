@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://politica-ynnr.onrender.com/sitemap.xml
