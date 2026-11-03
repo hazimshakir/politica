@@ -88,7 +88,7 @@ const assert = require("node:assert/strict");
 
     for (const html of [...Object.values(classifications), ...Object.values(boundaryProfiles)]) {
       // Check only actual displayed classification labels, not the explanatory disclaimer.
-      assert.doesNotMatch(html, /<(?:h4|span class="chip")>[^<]*\\b(communist|fascist|far-right extremist)\\b/i,
+      assert.doesNotMatch(html, /<(?:h4|span class="chip")>[^<]*(communist|fascist|far-right extremist)/i,
         "the questionnaire must not assign unsupported extreme ideology labels");
       assert.match(html, /Important limits/);
     }
