@@ -22,6 +22,9 @@ const portraits={
  ambedkar:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dr%20B%20R%20Ambedkar%20as%20Barrister%20in%201922.jpg",credit:"Wikimedia Commons · see file page",source:"https://commons.wikimedia.org/wiki/Category:Portraits_of_B._R._Ambedkar",alt:"Portrait photograph of B. R. Ambedkar",kind:"photograph"},
  hayek:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich%20Hayek%20portrait.jpg",credit:"Wikimedia Commons · see file page",source:"https://commons.wikimedia.org/wiki/File:Friedrich_Hayek_portrait.jpg",alt:"Portrait of Friedrich A. Hayek",kind:"photograph"},
  marx:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Karl%20Marx%20Portrait.jpg",credit:"Wikimedia Commons · see file page",source:"https://commons.wikimedia.org/wiki/File:Karl_Marx_Portrait.jpg",alt:"Portrait of Karl Marx",kind:"photograph"},
+ phule:commons("Mahatma Jotirao Phule.jpg","Archival portrait of Jyotirao Phule","portrait"),
+ periyar:commons("Periyar during Self respect movement.JPG","Archival photograph of E. V. Ramasamy (Periyar)"),
+ nehru:commons("Shri Jawaharlal Nehru.jpg","Official portrait of Jawaharlal Nehru"),
  "mn-roy":commons("Mn roy2.jpg","Portrait photograph of M. N. Roy"),
  "ram-manohar-lohia":commons("Lohia-full.jpg","Portrait photograph of Ram Manohar Lohia"),
  "deendayal-upadhyaya":commons("Deendayal Upadhyaya 2018 stamp of India (cropped).jpg","Postage-stamp portrait of Deendayal Upadhyaya","stamp portrait"),
@@ -39,7 +42,7 @@ const portraits={
  "john-rawls":commons("John Rawls (1971 photo portrait).jpg","Portrait photograph of John Rawls"),
  "karl-popper":commons("Karl Popper.jpg","Portrait photograph of Karl Popper"),
  "hannah-arendt":commons("Hannah Arendt 1933.jpg","Portrait photograph of Hannah Arendt"),
- "ibn-khaldun":commons("Ibn Khaldun.jpg","Later artistic depiction of Ibn Khaldun","historical illustration"),
+ "ibn-khaldun":commons("Ibn Khaldūn, Sayr mulhimah min al-Sharq wa-al-Gharb.png","Imagined artistic depiction of Ibn Khaldun; no contemporary portrait survives","historical illustration"),
  "al-farabi":commons("Abu Nasr al-Farabi (head).png","Modern artistic depiction of Al-Farabi","historical illustration"),
  "abul-ala-maududi":commons("Sayyed Abul A'la Maududi.svg","Illustrated portrait of Abul A'la Maududi","illustration")
 };
