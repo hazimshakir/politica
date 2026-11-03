@@ -3,7 +3,7 @@
 "use strict";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const familyNames={indic:"South Asian traditions",sinic:"East Asian traditions",islamic:"Islamic intellectual traditions",african:"African traditions","latin-american":"Latin American traditions",caribbean:"Caribbean traditions","southeast-asian":"Southeast Asian traditions",indigenous:"Indigenous traditions",western:"Western traditions"};
+const familyNames={indic:"South Asian traditions",sinic:"East Asian traditions",islamic:"Islamic intellectual traditions","west-asian":"West Asian traditions",african:"African traditions","latin-american":"Latin American traditions",caribbean:"Caribbean traditions","southeast-asian":"Southeast Asian traditions",indigenous:"Indigenous traditions",western:"Western traditions"};
 const traditionName=s=>String(s||"").replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase());
 const dimName=k=>(typeof DIMENSIONS!=="undefined"&&DIMENSIONS.find(d=>d.key===k)?.label)||k;
 const allThinkers=THINKERS.map(x=>({...x,kind:"thinker"}));
