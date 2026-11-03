@@ -277,3 +277,34 @@
  .assess .rec-details summary{display:none}
  .assess .book-cover-image{print-color-adjust:exact}
 }
+
+
+/* Refinement: calmer badge typography and a compact dimensions panel. */
+@media screen{
+ .assess .rec-badge,
+ .assess .chip{
+   font-family:var(--sans);
+   font-size:10px;
+   font-weight:600;
+   letter-spacing:0;
+   line-height:1.35;
+   text-transform:none;
+ }
+ .assess .rec-badge{padding:4px 9px;border-radius:5px}
+ .assess .chip{padding:4px 8px;border-radius:5px}
+ .assess .dimensions-panel .dimensions-intro{margin:4px 0 12px;font-size:12px}
+ .assess .dimensions-panel .dimension-row{padding:11px 0 8px}
+ .assess .dimensions-panel .rowtop{font-size:13px}
+ .assess .dimensions-panel .bar{height:8px;margin-top:8px}
+ .assess .dimensions-panel .scale-labels{font-size:10px;margin-top:5px}
+ .assess .dimension-detail{margin-top:7px}
+ .assess .dimension-detail summary{cursor:pointer;color:var(--teal);font-size:10px;font-weight:600;list-style:none}
+ .assess .dimension-detail summary::-webkit-details-marker{display:none}
+ .assess .dimension-detail summary:after{content:"＋";float:right}
+ .assess .dimension-detail[open] summary:after{content:"−"}
+ .assess .dimension-detail p{font-size:11px;line-height:1.55;color:var(--muted);margin:7px 0 0}
+}
+@media print{
+ .assess .dimension-detail summary{display:none}
+ .assess .dimension-detail p{display:block;color:#444}
+}
