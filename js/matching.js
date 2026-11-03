@@ -78,7 +78,7 @@ function selectBooks(user,books,cfg){
   focus.forEach(d=>{const b=pub.filter(x=>x.argues[d]&&ok(x)&&gap(x,d)>C.close&&!eng.some(e=>e.premise===x.premise||e.traditions.some(t=>x.traditions.includes(t))))
     .sort((a,c)=>dia(c)-dia(a)||gap(a,d)-gap(c,d)||idc(a,c))[0];
     if(b)take("different tradition and premise",b,d);else notes.push("No sufficiently reviewed book offers a different tradition and premise on: "+d+".")});
-  const sv=pub.filter(x=>x.type==="survey"&&ok(x)).sort(idc)[0];
+  const sv=pub.filter(x=>x.type==="survey"&&!used.has(x.id)&&!authors.has(x.author)).sort(idc)[0];
   if(sv)take("broad survey",sv,null);else notes.push("No sufficiently reviewed survey is available.");
   if(picks.length<5)notes.push("Showing "+picks.length+" of the usual 5 books: fewer sufficiently reviewed books available. The evidence standard is not lowered.");
   return{focusDimensions:focus,picks,notes}}
