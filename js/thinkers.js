@@ -5,7 +5,7 @@
    A near-zero score means "mixed or less pronounced", not "supports both". score:null = not scored (anachronistic, thin or contested).
    Where views changed significantly, add one phase per period instead of one lifelong score. Never invent positions, quotes or references. */
 const FAMILIES=["indic","sinic","islamic","african","latin-american","caribbean","southeast-asian","indigenous","western"];
-const TRADITION_TAGS=["liberal","classical-liberal","liberal-egalitarian","conservative","socialist-marxist","social-democratic","libertarian","republican","anarchist","nationalist","communitarian-religious","gandhian","social-justice-anti-caste","realist","confucian","islamic","anti-colonial","feminist","ecological"];
+const TRADITION_TAGS=["liberal","classical-liberal","liberal-egalitarian","conservative","socialist-marxist","social-democratic","libertarian","republican","anarchist","nationalist","communitarian-religious","gandhian","social-justice-anti-caste","realist","confucian","islamic","anti-colonial","feminist","ecological","rationalist","secular-nationalist"];
 const draftCell=(score,conf,documented,sourceIds)=>({score,conf,documented,sourceIds,rationale:"AI interpretation: "+documented+" This is a provisional mapping to POLITICA’s broad dimension, not a claim that the historical figure used this modern framework.",reviews:[],assessment:{method:"AI-assisted",assessedOn:"2026-11-03"}});
 const nullCell=note=>({score:null,note});
 const THINKERS=[
@@ -91,7 +91,10 @@ const THINKERS=[
   economic:draftCell(-35,"low","Phule criticised the exploitation of cultivators and the social structures that sustained rural inequality; these writings do not amount to a complete modern economic programme.",["phule-shetkaryacha"]),
   social:draftCell(-85,"high","Gulamgiri attacks caste hierarchy and inherited social domination, while Phule's educational work sought wider access for women and oppressed communities.",["phule-gulamgiri"]),
   culture:draftCell(-80,"medium","His polemic challenged religious and customary authority used to justify caste hierarchy; this is a critique of specific structures, not a rejection of every inherited practice.",["phule-gulamgiri"]),
-  values:draftCell(-70,"medium","His reform arguments emphasise equal human dignity and the claims of people subordinated by inherited status.",["phule-gulamgiri"])
+  values:draftCell(-70,"medium","His reform arguments emphasise equal human dignity and the claims of people subordinated by inherited status.",["phule-gulamgiri"]),
+  democracy:nullCell("These texts do not provide a sufficiently direct basis for scoring modern institutional democracy."),
+  liberty:nullCell("The selected texts do not support a stable general score on the modern state-versus-liberty axis."),
+  global:nullCell("The selected texts do not provide a sufficiently direct basis for this contemporary dimension.")
  }}]},
 {id:"periyar",name:"E. V. Ramasamy (Periyar)",lifespan:"1879–1973",family:"indic",region:"South Asia",traditions:["social-justice-anti-caste","feminist"],roles:["reformer","thinker"],
  summary:"Tamil social reformer associated with the Self-Respect Movement, rationalist critique and opposition to caste hierarchy and patriarchy.",
@@ -104,7 +107,10 @@ const THINKERS=[
   social:draftCell(-85,"medium","Periyar's movement challenged caste hierarchy and advocated women's emancipation; the exact scope varied across speeches and periods.",["periyar-collected","periyar-women"]),
   culture:draftCell(-90,"high","His rationalist critique directly challenged inherited religious and caste authority where it sustained social hierarchy.",["periyar-collected"]),
   democracy:draftCell(-25,"low","His political activity included mass mobilisation and social reform, but the collected writings do not justify a single stable score on modern institutional-democracy preferences.",["periyar-collected"]),
-  liberty:draftCell(-25,"low","Arguments for self-respect and women's autonomy support limits on social coercion, but his broader political positions require period-specific assessment.",["periyar-women"])
+  liberty:draftCell(-25,"low","Arguments for self-respect and women's autonomy support limits on social coercion, but his broader political positions require period-specific assessment.",["periyar-women"]),
+  economic:nullCell("The selected writings do not establish a sufficiently specific modern economic programme."),
+  global:nullCell("The selected writings do not establish a sufficiently specific position on contemporary international cooperation."),
+  values:nullCell("A modern merit-versus-circumstance score would oversimplify the selected writings.")
  }}]},
 {id:"nehru",name:"Jawaharlal Nehru",lifespan:"1889–1964",family:"indic",region:"South Asia",traditions:["social-democratic","secular-nationalist"],roles:["leader","thinker"],
  summary:"India's first prime minister; a central figure in the independence movement who wrote on secularism, parliamentary democracy, planning and international non-alignment.",
@@ -118,7 +124,10 @@ const THINKERS=[
   economic:draftCell(-55,"medium","Nehru's governments used public-sector investment and national planning alongside a mixed economy in which private enterprise continued.",["nehru-discovery"]),
   social:draftCell(-45,"low","His public programme emphasised reducing poverty and expanding opportunity, but this broad orientation does not establish a complete position on every welfare or redistribution question.",["nehru-tryst"]),
   democracy:draftCell(-55,"medium","Nehru publicly defended parliamentary institutions and constitutional government in the early republic; practice and policy should be assessed separately from stated principles.",["nehru-tryst"]),
-  global:draftCell(-55,"medium","Non-alignment sought independent foreign-policy judgement and cooperation beyond Cold War blocs; it should not be equated with neutrality on every international issue.",["nehru-foreign"])
+  global:draftCell(-55,"medium","Non-alignment sought independent foreign-policy judgement and cooperation beyond Cold War blocs; it should not be equated with neutrality on every international issue.",["nehru-foreign"]),
+  culture:nullCell("The book is historically broad; a single score on tradition versus change would flatten its plural and evolving account."),
+  liberty:nullCell("The selected sources do not establish a sufficiently precise overall score on this modern axis."),
+  values:nullCell("The selected sources do not map cleanly onto this assessment dimension.")
  }}]}
 
 ];
