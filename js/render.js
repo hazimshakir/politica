@@ -14,7 +14,7 @@ function renderQuiz(current,answers){
   renderSteps(current,answers);
   let opts=scale.map(([label,val])=>`<label class="option ${answers[current]===val?'selected':''}"><input type="radio" name="answer" value="${val}"${answers[current]===val?' checked':''} onchange="choose(${val})"><span class="radio" aria-hidden="true"></span><span>${label}</span></label>`).join("");
   document.getElementById("quizCard").innerHTML=`<div class="quiz-head"><span class="tag">${String(q.section+1).padStart(2,'0')} / ${s.title}</span><span class="counter">QUESTION ${current+1} OF ${all.length}</span></div><h2>${s.title}</h2><p class="hint">${s.desc}</p>${q.scenario?`<div class="scenario" id="scenarioText">${q.scenario}</div>`:''}<fieldset class="fs" id="questionSet" tabindex="-1"${q.scenario?' aria-describedby="scenarioText"':''}><legend class="qtext"><span class="sr-only">Question ${current+1} of ${all.length}. </span>${q.text}</legend><div class="options">${opts}</div></fieldset><div class="navrow"><button class="btn btn-light" onclick="previous()" ${current===0?'disabled':''}>← Back</button><button class="btn btn-dark" onclick="next()" ${answers[current]===undefined?'disabled':''}>${current===all.length-1?'View my profile':'Continue →'}</button></div>`}
-/* Thinker and book panel. Uses only matching.js output (reviewed entries with verified sources). Fails closed: any error, invalid data or missing script shows the "not available yet" message. */
+/* Thinker and book panel. Shows AI-assessed pilot entries with a clear provisional-status disclosure. */
 function recEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function recommendationsHtml(scores){
   const head='<div class="panel"><h3>Thinkers and books to explore</h3>';
@@ -26,20 +26,20 @@ function recommendationsHtml(scores){
     const lab=k=>{const p=polarities.find(x=>x.key===k);return p?p.label:k};
     const labs=a=>a.length?a.map(lab).map(recEsc).join(", "):"none among the comparable dimensions";
     const src=a=>(a||[]).map(s=>recEsc(s.citation)+(s.locator?" ("+recEsc(s.locator)+")":"")).join("; ");
-    const okT=id=>{const t=THINKERS.find(x=>x.id===id);return t&&t.status==="reviewed"};
-    const okB=id=>{const b=BOOKS.find(x=>x.id===id);return b&&b.status==="reviewed"};
+    const okT=id=>{const t=THINKERS.find(x=>x.id===id);return t&&["reviewed","ai-reviewed"].includes(t.status)};
+    const okB=id=>{const b=BOOKS.find(x=>x.id===id);return b&&["reviewed","ai-reviewed"].includes(b.status)};
     const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
     const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Informative contrast",c])].filter(([,c])=>okT(c.thinkerId));
     const books=bm.picks.filter(p=>okB(p.id));
     if(!cards.length&&!books.length)return none;
-    let h=head+'<p class="sub">A pilot set of reviewed entries. These are exploratory comparisons based on interpretive scoring, not classifications and not a ranking. Each dimension is compared separately, and similarity on one dimension says nothing about the others.</p>';
+    let h=head+'<p class="sub">AI-reviewed pilot recommendations. These are provisional interpretations based on cited works, not definitive scholarly assessments, political identity labels or rankings. Source locators may require further verification. Each dimension is compared separately.</p>';
     if(cards.length){
       h+='<h4>Thinkers</h4>'+cards.map(([slot,c])=>'<div class="insight"><strong>'+recEsc(c.name)+'</strong> <span class="chip">'+slot+'</span><p>'+recEsc(c.lifespan)+' \u00b7 Period compared: '+recEsc(c.phase.label)+(c.phase.years?' ('+recEsc(c.phase.years)+')':'')+(c.otherPhases?'. Other documented periods exist; the closest is shown.':'')+'</p><p><b>Where you overlap:</b> '+labs(c.overlaps)+'.<br><b>Partly different:</b> '+labs(c.partlyDifferent)+'.<br><b>Where you differ:</b> '+labs(c.differences)+'.<br><b>Not comparable:</b> '+labs(c.notComparable)+'.</p>'+c.rows.map(r=>'<p><b>'+recEsc(lab(r.dim))+'</b> \u2014 '+recEsc(r.relation)+'. You: '+recEsc(r.user?r.user.text:"no score")+(r.thinker?'. Them: '+recEsc(r.thinker.orientation.text)+'. Documented: '+recEsc(r.thinker.documented)+' Interpretive confidence: '+recEsc(r.thinker.conf)+'. Sources: '+src(r.thinker.sources)+'.':'. '+recEsc(r.note||""))+'</p>').join("")+'</div>').join("");
-    }else h+='<p class="sub">No reviewed thinkers are comparable with your results yet.</p>';
+    }else h+='<p class="sub">No AI-reviewed thinkers are comparable with your results yet.</p>';
     if(tm.notes.length&&cards.length)h+='<p class="sub">'+tm.notes.map(recEsc).join(" ")+'</p>';
     if(books.length){
       h+='<h4>Books</h4>'+books.map(p=>'<div class="insight"><strong>'+recEsc(p.title)+'</strong> <span class="chip">'+recEsc(p.slot)+'</span><p>'+recEsc(p.author)+', '+recEsc(p.year)+' \u00b7 Tradition: '+p.traditions.map(recEsc).join(", ")+' \u00b7 Grounded in: '+recEsc(p.premise)+'</p><p>On <b>'+recEsc(lab(p.dimension))+'</b> the book argues: '+recEsc(orientation(p.dimension,p.stance.score).text)+'. '+recEsc(p.stance.documented||"")+' Sources: '+src(p.sources)+'.</p></div>').join("");
-    }else h+='<p class="sub">No reviewed books are available for your results yet.</p>';
+    }else h+='<p class="sub">No AI-reviewed books are available for your results yet.</p>';
     if(bm.notes.length&&books.length)h+='<p class="sub">'+bm.notes.map(recEsc).join(" ")+'</p>';
     return h+'</div>';
   }catch(e){console.error("POLITICA recommendations error",e);return none}}
