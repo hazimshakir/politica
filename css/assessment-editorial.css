@@ -318,3 +318,15 @@
  .assess .book-cover-column{width:88px}
  .assess .cover-rights-note{font-size:7px}
 }
+
+/* User-supplied original book jackets: use the matching tile from the 4×4 cover atlas. */
+@media screen{
+ .assess .book-cover-placeholder.has-cover{
+  padding:0;border:1px solid rgba(32,43,42,.12);
+  background-repeat:no-repeat;background-color:#f7f4ed;
+  box-shadow:3px 5px 12px rgba(32,43,42,.18);
+ }
+ .assess .book-cover-placeholder.has-cover:before{display:none}
+ .assess .book-cover-placeholder.has-cover [hidden]{display:none!important}
+ .assess .cover-rights-note{max-width:112px}
+}
