@@ -7,11 +7,11 @@
    Where views changed significantly, add one phase per period instead of one lifelong score. Never invent positions, quotes or references. */
 const FAMILIES=["indic","sinic","islamic","african","latin-american","southeast-asian","indigenous","western"];
 const TRADITION_TAGS=["liberal","classical-liberal","liberal-egalitarian","conservative","socialist-marxist","social-democratic","libertarian","republican","anarchist","nationalist","communitarian-religious","gandhian","social-justice-anti-caste","realist","confucian","islamic","anti-colonial","feminist","ecological"];
-const draftCell=(score,conf,documented,sourceIds)=>({score,conf,documented,sourceIds,rationale:"DRAFT: interpretive rationale to be written by reviewers.",reviews:[]});
+const draftCell=(score,conf,documented,sourceIds)=>({score,conf,documented,sourceIds,rationale:"AI interpretation: "+documented+" This is a provisional mapping to POLITICA’s broad dimension, not a claim that the historical figure used this modern framework.",reviews:[],assessment:{method:"AI-assisted",assessedOn:"2026-11-03"}});
 const nullCell=note=>({score:null,note});
 const THINKERS=[
 {id:"gandhi",name:"Mohandas K. Gandhi",lifespan:"1869\u20131948",family:"indic",region:"South Asia",traditions:["gandhian","anti-colonial"],roles:["leader","thinker"],
- summary:"Indian independence leader and writer on non-violent resistance and self-rule.",status:"draft",reviewedOn:null,
+ summary:"Indian independence leader and writer on non-violent resistance and self-rule.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"hind-swaraj",type:"primary",citation:"M. K. Gandhi, Hind Swaraj (1909)",locator:null,verified:false},{id:"constructive",type:"primary",citation:"M. K. Gandhi, Constructive Programme (1941)",locator:null,verified:false}],
  phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1909\u20131948",dims:{
   economic:draftCell(-30,"medium","Decentralised village economy; wealth held in 'trusteeship'.",["constructive"]),
@@ -22,7 +22,7 @@ const THINKERS=[
   global:draftCell(0,"low","Anti-colonial self-rule alongside universalist non-violence.",["hind-swaraj"]),
   values:draftCell(-50,"medium","Upliftment of the weakest.",["constructive"])}}]},
 {id:"ambedkar",name:"B. R. Ambedkar",lifespan:"1891\u20131956",family:"indic",region:"South Asia",traditions:["social-justice-anti-caste"],roles:["leader","thinker"],
- summary:"Indian jurist and social reformer; chaired the drafting committee of India's Constitution.",status:"draft",reviewedOn:null,
+ summary:"Indian jurist and social reformer; chaired the drafting committee of India's Constitution.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"aoc",type:"primary",citation:"B. R. Ambedkar, Annihilation of Caste (1936)",locator:null,verified:false},{id:"states-minorities",type:"primary",citation:"B. R. Ambedkar, States and Minorities (1947)",locator:null,verified:false},{id:"ca-speech",type:"primary",citation:"Constituent Assembly of India, B. R. Ambedkar's closing speech (25 November 1949)",locator:null,verified:false}],
  phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1936\u20131956",dims:{
   economic:draftCell(-50,"medium","Proposed state ownership of key industries.",["states-minorities"]),
@@ -33,7 +33,7 @@ const THINKERS=[
   global:nullCell("Insufficient fit with this dimension."),
   values:draftCell(-75,"high","Remedying inherited disadvantage.",["aoc"])}}]},
 {id:"hayek",name:"Friedrich A. Hayek",lifespan:"1899\u20131992",family:"western",region:"Europe",traditions:["classical-liberal"],roles:["thinker"],
- summary:"Austrian-British economist and political philosopher.",status:"draft",reviewedOn:null,
+ summary:"Austrian-British economist and political philosopher.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"rts",type:"primary",citation:"F. A. Hayek, The Road to Serfdom (1944)",locator:null,verified:false},{id:"col",type:"primary",citation:"F. A. Hayek, The Constitution of Liberty (1960)",locator:null,verified:false},{id:"llv2",type:"primary",citation:"F. A. Hayek, Law, Legislation and Liberty, vol. 2 (1976)",locator:null,verified:false}],
  phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1944\u20131976",dims:{
   economic:draftCell(90,"high","Competition and prices preferred to central planning.",["rts"]),
@@ -44,7 +44,7 @@ const THINKERS=[
   global:draftCell(-30,"low","Supported international federation ideas.",["rts"]),
   values:draftCell(75,"high","Rejected 'social justice' as a goal of a market order.",["llv2"])}}]},
 {id:"kautilya",name:"Kautilya (attributed author of the Arthashastra)",lifespan:"authorship and dating debated",family:"indic",region:"South Asia",traditions:["realist"],roles:["thinker"],
- summary:"Name attached to the Arthashastra, an ancient Indian treatise on statecraft.",status:"draft",reviewedOn:null,
+ summary:"Name attached to the Arthashastra, an ancient Indian treatise on statecraft.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"arthashastra",type:"primary",citation:"Arthashastra (translation and edition to be chosen by reviewers)",locator:null,verified:false}],
  phases:[{id:"whole",label:"Arthashastra as a text",years:"dating debated",dims:{
   economic:draftCell(-40,"medium","State-run enterprises and regulated trade.",["arthashastra"]),
@@ -55,7 +55,7 @@ const THINKERS=[
   global:draftCell(70,"high","Rivalry among states (mandala theory).",["arthashastra"]),
   values:nullCell("Insufficient evidence.")}}]},
 {id:"marx",name:"Karl Marx",lifespan:"1818\u20131883",family:"western",region:"Europe",traditions:["socialist-marxist"],roles:["thinker"],
- summary:"German philosopher, economist and political theorist.",status:"draft",reviewedOn:null,
+ summary:"German philosopher, economist and political theorist.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"manifesto",type:"primary",citation:"K. Marx and F. Engels, The Communist Manifesto (1848)",locator:null,verified:false},{id:"gotha",type:"primary",citation:"K. Marx, Critique of the Gotha Programme (written 1875)",locator:null,verified:false}],
  phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1848\u20131875",dims:{
   economic:draftCell(-95,"high","Collective ownership of the means of production.",["manifesto"]),
