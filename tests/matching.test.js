@@ -17,11 +17,12 @@ const B=T("B","indic",{economic:[90,H],social:[60,M],culture:[25,L],democracy:[-
 const Cc=T("C","indic",{economic:[-95,H],social:[-80,H],culture:[-60,M],democracy:null,liberty:null,global:[-90,H],values:[-80,M]});
 // 1. draft data never appears; pilot data structurally valid
 ok(X.validateData(X.THINKERS,X.BOOKS).length===0,"pilot data valid: "+X.validateData(X.THINKERS,X.BOOKS).join("; "));
-ok(X.THINKERS.every(t=>t.status==="draft")&&X.BOOKS.every(b=>b.status==="draft"),"all pilot entries draft");
+ok(X.BOOKS.length>=12&&X.BOOKS.every(b=>b.status==="ai-reviewed"),"expanded book pilot is explicitly AI-reviewed");
 let r=X.matchThinkers(user,X.THINKERS);ok(Array.isArray(r.overlap)&&Array.isArray(r.contrast)&&typeof r.eligibleCount==="number","provisional thinker matching remains callable");
-ok(X.selectBooks(user,X.BOOKS).picks.length===0,"draft books never selected");
+const initialBooks=X.selectBooks(user,X.BOOKS);ok(initialBooks.picks.some(p=>p.slot==="broad survey"&&p.stance===null),"neutral survey included without ideological score");
+ok(initialBooks.picks.length<=5&&new Set(initialBooks.picks.map(p=>p.author)).size===initialBooks.picks.length,"recommendations cap at five with unique authors");
 const forced=X.THINKERS.map(t=>Object.assign({},t,{status:"reviewed",reviewedOn:"2026-01-01"}));
-ok(X.matchThinkers(user,forced).eligibleCount===0,"status alone cannot publish (cells unverified)");
+ok(X.matchThinkers(user,forced).eligibleCount===0,"status alone cannot publish AI-reviewed thinker cells as independently reviewed");
 // 2. worked example
 const A2=Object.assign({},A,{id:"A2"}),A3=Object.assign({},A,{id:"A3"});
 const rr=X.matchThinkers(user,[A,A2,A3,B,Cc]),r3=X.matchThinkers(user,[A,B,Cc]);
