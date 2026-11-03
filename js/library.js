@@ -36,7 +36,7 @@ const portraits={
  "k-karunakaran":commons("K. Karunakaran in 1999.jpg","Portrait photograph of K. Karunakaran"),
  "indira-gandhi":commons("Indira Gandhi official portrait.png","Official portrait of Indira Gandhi"),
  "ak-gopalan":commons("AK Gopalan 1990 stamp of India.jpg","Commemorative postage-stamp portrait of A. K. Gopalan","stamp portrait"),
- "john-locke":commons("John Locke in 1697, by Sir Godfrey Kneller.jpg","Painted portrait of John Locke","painting"),
+ "john-locke":commons("John Locke.jpg","Painted portrait of John Locke by Godfrey Kneller, 1697","painting"),
  "jean-jacques-rousseau":commons("Jean-Jacques Rousseau (1712-1778) par François Guérin (05A).jpg","Painted portrait of Jean-Jacques Rousseau","painting"),
  "edmund-burke":commons("Edmund Burke by Sir Joshua Reynolds.jpg","Painted portrait of Edmund Burke","painting"),
  "john-rawls":commons("John Rawls (1971 photo portrait).jpg","Portrait photograph of John Rawls"),
@@ -71,8 +71,8 @@ async function fetchOpenLibraryCover(b){
    const c=coverCache.get(b.id),a=document.createElement("a"),img=document.createElement("img");
    a.href=c.source||"https://openlibrary.org";a.target="_blank";a.rel="noopener noreferrer";a.className="book-cover-link";a.setAttribute("aria-label","Open Library record for "+b.title);
    img.className="book-cover-img";img.src=c.url;img.alt=c.alt;img.loading="lazy";
-   img.onerror=()=>{a.remove()};
-   a.append(img);node.prepend(a);
+   img.onerror=()=>{node.innerHTML=coverThumb(b.id,b.title)};
+   a.append(img);node.replaceChildren(a);
   }
  }
 }
