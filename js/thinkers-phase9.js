@@ -37,5 +37,5 @@ make("al-farabi","Al-Farabi","c. 870–950","islamic","West and Central Asia",["
 make("abul-ala-maududi","Abul A'la Maududi","1903–1979","islamic","South Asia",["islamic","communitarian-religious"],["writer","political-organiser"],"South Asian Islamic thinker and founder of Jamaat-e-Islami whose writings developed an account of Islam as a comprehensive framework for personal, social and political life, including debates over sovereignty, law and the state.","Abul A'la Maududi, Islamic Law and Constitution; The Islamic Way of Life","Read translations with attention to publication date and context. Distinguish Maududi's own formulations from later movements and interpretations that invoke his work.","")
 ];
 window.PHASE9_THINKERS=additions;
-window.THINKERS.push(...additions);
+THINKERS.push(...additions);
 })();
