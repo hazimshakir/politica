@@ -219,3 +219,14 @@ body.assess:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:n
  .compass-svg{filter:none}
  .compass-panel,.insight{break-inside:avoid}
 }
+
+/* Score-based tendency labels and clarified compass ends */
+.tendency-panel{margin:18px 0 20px;padding:22px 24px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:linear-gradient(150deg,rgba(255,255,255,.055),rgba(255,255,255,.018));color:#e8eef7}
+.tendency-panel h3{margin:0 0 7px;color:#fff;font-size:17px}
+.tendency-panel>.sub{margin-bottom:12px;color:#a9bad0}
+.tendency-item{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-top:1px solid rgba(255,255,255,.09)}
+.tendency-item .chip{flex-shrink:0;margin:0}
+.tendency-item p{margin:3px 0 0;color:#c1cede;font-size:12px;line-height:1.55}
+.tendency-caveat{margin:12px 0 0;padding-top:11px;border-top:1px solid rgba(255,255,255,.09);color:#9fb0c4;font-size:11px;line-height:1.6}
+@media(max-width:520px){.tendency-panel{padding:17px 14px}.tendency-item{display:block}.tendency-item p{margin-top:7px}.compass-axis-x{font-size:8px;letter-spacing:0}}
+@media print{.tendency-panel{background:#fff!important;color:#111;border:1px solid #bbb;break-inside:avoid}.tendency-panel h3{color:#111}.tendency-item p,.tendency-caveat{color:#444}.tendency-panel .chip{background:#eee;color:#111}}
