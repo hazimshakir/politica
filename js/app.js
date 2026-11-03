@@ -29,16 +29,35 @@ function answerLabel(i){const s=scale.find(x=>x[1]===answers[i]);return s?s[0]:n
 function answerText(){return all.map((q,i)=>`${i+1}. [${sections[q.section].title}] ${q.text}\nAnswer: ${answerLabel(i)?answerLabel(i)+" ("+answers[i]+"/5)":"Not answered"}`).join("\n\n")}
 function copyPrompt(){if(!confirm("Privacy warning: your copied answers may reveal personal political views. Share them carefully. Copy anyway?"))return;let prompt=`Please provide a politically neutral, nuanced interpretation of my voluntary political self-assessment. Do not recommend parties, candidates or votes. Treat this as self-reflection, not a validated psychological test. Analyse each dimension separately, identify evidence from my answers, explain mixed or contradictory preferences without forcing a label, distinguish established ideologies carefully, and state what cannot be inferred. Do not infer my identity, religion, caste or voting preference.\n\nMY ANSWERS:\n${answerText()}\n\nPlease discuss economic philosophy, social equality, culture, democracy, government and civil liberties, national/global outlook, and personal values. End with a cautious summary and useful follow-up questions.`;navigator.clipboard.writeText(prompt).then(()=>toast("Copied. Open ChatGPT and paste your prompt." )).catch(()=>{let t=document.createElement("textarea");t.value=prompt;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();toast("Copied. Open ChatGPT and paste your prompt.")});}
 function downloadAnswers(){let data={product:"POLITICA",exportVersion:1,exportedAt:new Date().toISOString(),privacyWarning:"This file contains your individual answers and may reveal personal political views. Share it carefully, and only with people or tools you trust.",notice:"Voluntary self-assessment; not validated.",answers:all.map((q,i)=>({section:sections[q.section].title,question:q.text,answer:answerLabel(i),value:answers[i]})),scores:window.lastScores};let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="politica-assessment.json";a.click();URL.revokeObjectURL(a.href)}
+function politicalTendencyLines(sc){
+  const e=sc.economic,s=sc.social,c=sc.culture,d=sc.democracy,l=sc.liberty,g=sc.global,out=[];
+  if(e<=-30&&s<=-20)out.push("Left-leaning: economic and social answers both favour public provision, collective support or reducing inequality.");
+  else if(e>=30&&s>=20)out.push("Right-leaning: economic and social answers both favour market allocation, individual responsibility or merit.");
+  else if((e<=-30&&s>=20)||(e>=30&&s<=-20))out.push("Economically / socially mixed: economic and social preferences point in different directions.");
+  else if(Math.abs(e)<20&&Math.abs(s)<20)out.push("Centrist on economic / social axes: both scores are relatively near the middle.");
+  if(e<=-65&&s<=-45)out.push("Socialist-leaning themes: strong support for public provision and collective equality; this alone does not establish a complete socialist ideology.");
+  if(d<=-25&&l<=-25)out.push("Liberal-democratic / civil-libertarian themes: emphasis on democratic checks, dissent, accountability and limits on state power.");
+  if(d>=30&&l>=25)out.push("Executive-authority leaning: comparatively greater weight on government capacity and state action; this does not imply support for dictatorship.");
+  if(c>=30)out.push("Culturally conservative / continuity-oriented: greater weight on tradition and gradual change.");
+  else if(c<=-30)out.push("Socially progressive / change-oriented: greater openness to social change and evolving norms.");
+  if(g<=-30)out.push("Internationalist themes: preference for international cooperation and shared rules.");
+  else if(g>=30)out.push("National-priority themes: greater weight on national priorities and sovereignty.");
+  if(!out.length)out.push("Mixed / pragmatic combination: scores do not cross the thresholds for the tendencies listed.");
+  return out;
+}
 function copySummary(){
   const sc=window.lastScores;if(!sc)return;
   const note="Privacy note: this summary may reveal personal political views. Share it carefully.";
-  const text=["POLITICA \u2013 Summary of my answers ("+new Date().toLocaleDateString()+")","","Dimension scores (\u2212100 to +100):",
-    ...polarities.map(p=>`- ${p.label}: ${sc[p.key]} (${descriptor(p,sc[p.key])})`),"",
-    ...buildSummary(sc).map(x=>`${x.title}: ${x.text}`),"","Themes in your answers (exploratory, not identity labels):",
-    ...ideology(sc).map(t=>`- ${t.label}: ${t.why}`),"",
+  const authority=Math.round((sc.democracy+sc.liberty)/2);
+  const text=["POLITICA – Summary of my answers ("+new Date().toLocaleDateString()+")","","Political profile: "+headline(sc),"Compass position: economic "+sc.economic+" / authority-restraint "+authority,"","Political tendencies (qualified descriptions, not identity labels):",
+    ...politicalTendencyLines(sc).map(x=>"- "+x),"","Dimension scores (-100 to +100):",
+    ...polarities.map(p=>"- "+p.label+": "+sc[p.key]+" ("+descriptor(p,sc[p.key])+")"),"",
+    ...buildSummary(sc).map(x=>x.title+": "+x.text),"","Themes in your answers (exploratory, not identity labels):",
+    ...ideology(sc).map(t=>"- "+t.label+": "+t.why),"",
     "A voluntary, non-validated self-reflection tool. Individual answers are not included.",note].join("\n");
   const done=()=>toast("Summary copied (no individual answers included).");
-  navigator.clipboard.writeText(text).then(done).catch(()=>{let t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();done()})}
+  navigator.clipboard.writeText(text).then(done).catch(()=>{let t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();done()});
+}
 function downloadShareCard(){
   const sc=window.lastScores;
   if(!sc){toast("Complete the assessment first.");return}
