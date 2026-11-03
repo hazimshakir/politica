@@ -42,13 +42,13 @@ const assert = require("node:assert/strict");
       await button.click();
     }
     await page.locator("#results").waitFor({ state: "visible" });
-    assert.match(await page.locator("#results").innerText(), /Your POLITICA profile/);
+    assert.equal(await page.locator("#results .profile-pill").innerText(), "Your POLITICA profile");
     assert.equal(await page.locator("#results .dimension-row").count(), 7);
 
     // A completed assessment should restore its results after refresh.
     await page.reload();
     await page.locator("#results").waitFor({ state: "visible" });
-    assert.match(await page.locator("#results").innerText(), /Your POLITICA profile/);
+    assert.equal(await page.locator("#results .profile-pill").innerText(), "Your POLITICA profile");
 
     // Retaking should return to question one and clear the completed save.
     await page.getByRole("button", { name: /Retake assessment/ }).click();
