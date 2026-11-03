@@ -33,7 +33,7 @@ function recommendationsHtml(scores){
    ambedkar:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dr._Bhimrao_Ambedkar.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Dr._Bhimrao_Ambedkar.jpg"},
    hayek:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich_Hayek_portrait.jpg",credit:"Wikimedia Commons · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Friedrich_Hayek_portrait.jpg"},
    marx:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Karl_Marx.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Karl_Marx.jpg"},
-   kautilya:{url:"data:image/png;base64,BASE64",credit:"Image supplied by POLITICA user",source:null}
+   kautilya:{url:"assets/kautilya.webp",credit:"Portrait image supplied by the POLITICA project",source:null}
   };
   const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
   const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Useful contrast",c])].filter(([,c])=>okT(c.thinkerId));
