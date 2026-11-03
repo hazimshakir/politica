@@ -37,3 +37,17 @@
 @media(max-width:850px){.library-toolbar{grid-template-columns:1fr 1fr}.library-search{grid-column:1/-1}.library-filters{justify-self:start}}
 @media(max-width:620px){.library-page .library-nav{gap:12px}.library-page .library-nav a{font-size:10px}.library-content{padding:30px 16px 60px}.library-grid{grid-template-columns:1fr}.library-toolbar{grid-template-columns:1fr}.library-search{grid-column:auto}.library-filters{justify-self:stretch}.library-filter{flex:1}.library-page .ahero{padding:45px 0}.library-page .alede{font-size:16px}}
 @media(prefers-reduced-motion:reduce){.library-card{scroll-behavior:auto}}
+
+/* Image-led collection cards: archival thinker portraits and illustrated book jackets. */
+.thinker-card-layout,.book-card-layout{display:grid;grid-template-columns:112px minmax(0,1fr);gap:18px;align-items:start}
+.thinker-visual,.book-visual{min-width:0}
+.thinker-visual img{display:block;width:112px;height:142px;object-fit:cover;object-position:center 22%;border-radius:7px;background:var(--paper-strong);border:1px solid var(--line);box-shadow:2px 4px 10px rgba(32,43,42,.13)}
+.thinker-visual>a{display:block;margin-top:6px;font-size:9px;line-height:1.4;color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+.thinker-visual.image-unavailable{width:112px;height:142px;border:1px solid var(--line);border-radius:7px;background:var(--surface-muted);display:grid;place-items:center;color:var(--muted);font-size:10px;text-align:center;padding:8px}
+.manuscript-visual .library-cover-thumb{width:112px;height:142px}
+.manuscript-visual>span{display:block;font-size:8px;line-height:1.4;color:var(--muted);margin-top:6px}
+.library-cover-thumb{width:100%;max-width:112px;aspect-ratio:2/3;border-radius:4px;background-image:url("/assets/book-covers.svg");background-repeat:no-repeat;background-size:400% 400%;background-color:var(--paper-strong);border:1px solid rgba(32,43,42,.14);box-shadow:3px 5px 12px rgba(32,43,42,.15)}
+.library-cover-fallback{width:100%;max-width:112px;aspect-ratio:2/3;display:grid;place-content:center;text-align:center;border-radius:4px;background:var(--navy);color:#fff;font:500 14px var(--serif);box-shadow:3px 5px 12px rgba(32,43,42,.15)}
+.library-cover-fallback small{font:700 8px var(--sans);letter-spacing:.2em;color:#d7b77d}
+.thinker-card-copy,.book-card-copy{min-width:0}
+@media(max-width:480px){.thinker-card-layout,.book-card-layout{grid-template-columns:88px minmax(0,1fr);gap:12px}.thinker-visual img{width:88px;height:118px}.thinker-visual.image-unavailable{width:88px;height:118px}.manuscript-visual .library-cover-thumb{width:88px;height:118px}.library-cover-thumb{max-width:88px}.library-card{padding:17px}}
