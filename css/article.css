@@ -1,0 +1,22 @@
+/* POLITICA article.css — long-form guide pages. Uses base.css tokens only. */
+.ahero{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff;padding:64px 0 56px}
+.crumbs{font-size:13px;color:#b8c4d4;margin:0 0 22px}
+.crumbs a{color:#d5e0ee;text-decoration:underline;text-underline-offset:3px}
+.ahero h1{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5.2vw,52px);line-height:1.1;margin:0 0 18px;max-width:20ch}
+.alede{font-size:clamp(17px,2.2vw,20px);color:#c9d6e6;max-width:62ch;margin:0 0 28px}
+.alede a{color:#fff;text-underline-offset:3px}
+.acontent{max-width:760px;margin:0 auto;padding:56px 26px 24px}
+.acontent h2{font-family:var(--serif);font-size:clamp(26px,3.4vw,34px);line-height:1.2;margin:48px 0 14px}
+.acontent h2:first-child{margin-top:0}
+.acontent h3{font-size:20px;margin:0 0 6px}
+.acontent p{margin:0 0 16px;font-size:17px}
+.acontent a:not(.btn){color:var(--teal);font-weight:600;text-underline-offset:3px}
+.dimlist{display:grid;gap:16px;margin:24px 0 0;padding:0;list-style:none}
+.dimlist li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+.dimlist .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:750;margin-bottom:4px}
+.dimlist p{margin:0;font-size:16px}
+.note{border-left:4px solid var(--gold);background:var(--card);padding:14px 18px;border-radius:0 10px 10px 0;font-size:15px;color:var(--muted)}
+.acontent .acta{background:var(--navy);color:#fff;border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
+.acontent .acta h2{margin:0 0 10px;color:#fff}
+.acontent .acta p{color:#c9d6e6}
+@media(max-width:520px){.ahero{padding:44px 0 40px}.acontent{padding:40px 17px 16px}.acontent .acta{padding:24px 18px}}

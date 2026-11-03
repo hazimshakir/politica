@@ -57,4 +57,8 @@ html.tx-lock{overflow:hidden}
 html.arrive .arrival{display:grid}
 html.arrive.arrive-out .arrival{opacity:0;transition:opacity .55s ease;pointer-events:none}
 @media print{.tx,.arrival{display:none!important}}
-
+/* ===== Added: footer guide links and inline text links (SEO growth) ===== */
+.footer-links{display:flex;flex-wrap:wrap;gap:6px 20px;margin:0 0 16px;font-size:13px}
+.footer-links a{color:#c9d6e6;text-decoration:underline;text-underline-offset:3px}
+.footer-links a:hover{color:#fff}
+.textlink{color:var(--teal);font-weight:650;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
