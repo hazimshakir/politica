@@ -146,3 +146,40 @@
  .assess .result-hero h1{color:#111}
  .assess .result-hero p{color:#444}
 }
+
+/* Seven-dimensional radar profile — replaces the reductive two-axis quadrant. */
+@media screen{
+ .assess .radar-panel{
+   margin:0 0 20px;padding:clamp(20px,4vw,36px);
+   border:1px solid var(--line);border-radius:var(--radius-lg);
+   background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm);overflow:hidden
+ }
+ .assess .radar-heading{text-align:center;max-width:760px;margin:0 auto 12px}
+ .assess .radar-heading .compass-kicker{color:var(--teal)}
+ .assess .radar-heading h2{font:500 clamp(25px,4vw,38px)/1.15 var(--serif);color:var(--ink);margin:9px 0}
+ .assess .radar-heading p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 auto}
+ .assess .radar-chart-wrap{width:min(100%,760px);margin:0 auto}
+ .assess .radar-svg{display:block;width:100%;height:auto;overflow:visible}
+ .assess .radar-grid{fill:none;stroke:#dcd7cc;stroke-width:1.2}
+ .assess .radar-spoke{stroke:#d8d2c6;stroke-width:1.1}
+ .assess .radar-area{fill:rgba(23,108,97,.19);stroke:#176c61;stroke-width:3;stroke-linejoin:round}
+ .assess .radar-dot{fill:#fffdf8;stroke:#176c61;stroke-width:3}
+ .assess .radar-label{font:700 12px var(--sans);fill:#202b2a}
+ .assess .radar-value{font:700 11px var(--sans);fill:#176c61}
+ .assess .radar-scale{display:flex;justify-content:center;gap:9px 22px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin:0 auto 12px}
+ .assess .radar-scale span:nth-child(2){color:var(--teal);font-weight:750}
+ .assess .radar-panel .compass-note{max-width:760px;text-align:center;line-height:1.7}
+}
+@media(max-width:600px){
+ .assess .radar-panel{padding:18px 10px;border-radius:16px}
+ .assess .radar-label{font-size:11px}
+ .assess .radar-value{font-size:10px}
+ .assess .radar-scale{font-size:10px;gap:6px 12px}
+}
+@media print{
+ .assess .radar-panel{background:#fff!important;color:#111;border:1px solid #bbb;break-inside:avoid;box-shadow:none}
+ .assess .radar-heading h2{color:#111}
+ .assess .radar-heading p,.assess .radar-panel .compass-note{color:#444}
+ .assess .radar-label{fill:#222}
+ .assess .radar-value{fill:#176c61}
+}
