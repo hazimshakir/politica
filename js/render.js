@@ -32,7 +32,8 @@ function recommendationsHtml(scores){
    gandhi:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_Gandhi.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Portrait_Gandhi.jpg"},
    ambedkar:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dr._Bhimrao_Ambedkar.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Dr._Bhimrao_Ambedkar.jpg"},
    hayek:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich_Hayek_portrait.jpg",credit:"Wikimedia Commons · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Friedrich_Hayek_portrait.jpg"},
-   marx:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Karl_Marx.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Karl_Marx.jpg"}
+   marx:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Karl_Marx.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Karl_Marx.jpg"},
+   kautilya:{url:"data:image/png;base64,BASE64",credit:"Image supplied by POLITICA user",source:null}
   };
   const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
   const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Useful contrast",c])].filter(([,c])=>okT(c.thinkerId));
@@ -44,7 +45,7 @@ function recommendationsHtml(scores){
     const image=photo?'<img class="thinker-photo" src="'+photo.url+'" alt="Portrait of '+recEsc(c.name)+'" loading="lazy" onerror="this.closest(\'.thinker-photo-wrap\').classList.add(\'no-photo\');this.remove()">' : '';
     const close=labs(c.overlaps),different=labs(c.differences),partial=labs(c.partlyDifferent);
     const evidence=c.rows.map(r=>'<li><b>'+recEsc(lab(r.dim))+'</b> · '+recEsc(r.relation)+'. '+(r.thinker? 'Them: '+recEsc(r.thinker.orientation.text)+'. '+recEsc(r.thinker.documented)+' Confidence: '+recEsc(r.thinker.conf)+'. Sources: '+src(r.thinker.sources)+'.':recEsc(r.note||"No comparable evidence."))+'</li>').join("");
-    const credits=photo?'<a class="image-credit" href="'+photo.source+'" target="_blank" rel="noopener noreferrer">'+photo.credit+'</a>':'<span class="image-credit">No verified historical portrait available</span>';
+    const credits=photo?(photo.source?'<a class="image-credit" href="'+photo.source+'" target="_blank" rel="noopener noreferrer">'+photo.credit+'</a>':'<span class="image-credit">'+photo.credit+'</span>'):'<span class="image-credit">No verified historical portrait available</span>';
     return '<article class="thinker-rec-card"><div class="thinker-rec-top"><div class="thinker-photo-wrap '+(photo?'':'no-photo')+'">'+image+(!photo?'<span aria-hidden="true">'+recEsc(c.name.split(/\s+/).map(x=>x[0]).slice(0,2).join(""))+'</span>':'')+'</div><div class="thinker-rec-title"><span class="rec-badge">'+recEsc(slot)+'</span><h3>'+recEsc(c.name)+'</h3><p>'+recEsc(c.lifespan)+' · '+recEsc(c.phase.label)+(c.phase.years?' · '+recEsc(c.phase.years):'')+'</p>'+credits+'</div></div><ul class="rec-bullets"><li><b>Overlap:</b> '+close+'</li><li><b>Different:</b> '+(partial!=="—"?"Partly: "+partial+" · ":"")+different+'</li><li><b>Not comparable:</b> '+labs(c.notComparable)+'</li></ul><details class="rec-details"><summary>View comparison &amp; sources</summary><ul class="rec-evidence">'+evidence+'</ul></details></article>';
    }).join("")+'</div>';
   }else h+='<p class="rec-empty">No thinker match is available for this profile yet.</p>';
@@ -68,14 +69,19 @@ function hydrateBookCovers(){
  covers.forEach(async el=>{
   const title=el.dataset.bookTitle,author=el.dataset.bookAuthor;
   try{
-   const url="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=1&fields=cover_i,title,author_name";
+   const url="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=8&fields=key,cover_i,title,author_name";
    const response=await fetch(url,{headers:{Accept:"application/json"}});
    if(!response.ok)return;
-   const data=await response.json(),cover=data.docs&&data.docs[0]&&data.docs[0].cover_i;
+   const data=await response.json(),docs=data.docs||[];
+   const norm=v=>String(v||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+   const exact=docs.find(d=>norm(d.title)===norm(title)&&(d.author_name||[]).some(a=>norm(a)===norm(author)));
+   const chosen=exact||docs.find(d=>d.cover_i);
+   const cover=chosen&&chosen.cover_i;
    if(!cover)return;
    const img=document.createElement("img");img.className="book-cover-image";img.loading="lazy";img.alt="Cover of "+title;img.src="https://covers.openlibrary.org/b/id/"+cover+"-M.jpg";
    img.onerror=()=>img.remove();
    el.prepend(img);el.classList.add("has-cover");
+   const credit=document.createElement("span");credit.className="cover-rights-note";credit.textContent="Cover source: Open Library · © respective rights holder";el.after(credit);
   }catch(e){/* Keep the typographic cover fallback when Open Library is unavailable. */}
  });
 }
