@@ -68,29 +68,50 @@ function hydrateBookCovers(){
  const covers=document.querySelectorAll(".book-cover-placeholder[data-book-title]");
  covers.forEach(async el=>{
   const title=el.dataset.bookTitle,author=el.dataset.bookAuthor;
+  const norm=v=>String(v||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+  const authorTokens=norm(author).split(" ").filter(x=>x.length>2&&!["and","the","of","later","transmitters","textual","tradition"].includes(x));
+  const authorMatches=list=>(list||[]).some(n=>{
+   const tokens=norm(n).split(" ");
+   return authorTokens.some(t=>tokens.includes(t)||tokens.some(x=>x.startsWith(t)||t.startsWith(x)));
+  });
+  const exactTitle=docs=>(docs||[]).find(d=>norm(d.title)===norm(title));
   try{
-   const norm=v=>String(v||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
-   const verifiedEditions={
-    "a theory of justice":"OL23242293M",
-    "on liberty":"OL5237899M"
-   };
-   let coverUrl=verifiedEditions[norm(title)]?"https://covers.openlibrary.org/b/olid/"+verifiedEditions[norm(title)]+"-M.jpg?default=false":null;
-   if(!coverUrl){
-    const url="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=8&fields=key,cover_i,title,author_name";
-    const response=await fetch(url,{headers:{Accept:"application/json"}});
-    if(!response.ok)return;
+   let imageUrl="",credit="Cover via Open Library · © respective publisher / rights holder";
+   const searchUrl="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=20&fields=title,author_name,cover_i,editions";
+   const response=await fetch(searchUrl,{headers:{Accept:"application/json"}});
+   if(response.ok){
     const data=await response.json(),docs=data.docs||[];
-    const exact=docs.find(d=>norm(d.title)===norm(title)&&(d.author_name||[]).some(a=>norm(a)===norm(author)));
-    const chosen=exact||docs.find(d=>d.cover_i);
-    const cover=chosen&&chosen.cover_i;
-    if(!cover)return;
-    coverUrl="https://covers.openlibrary.org/b/id/"+cover+"-M.jpg";
+    const exact=exactTitle(docs);
+    const selected=exact&&authorMatches(exact.author_name)?exact:exact;
+    let cover=selected&&selected.cover_i;
+    if(!cover&&selected&&selected.editions&&selected.editions.docs){
+      const edition=selected.editions.docs.find(e=>e.cover_i&&authorMatches(e.author_name||selected.author_name))||selected.editions.docs.find(e=>e.cover_i);
+      cover=edition&&edition.cover_i;
+    }
+    if(cover)imageUrl="https://covers.openlibrary.org/b/id/"+cover+"-L.jpg?default=false";
    }
-   const img=document.createElement("img");img.className="book-cover-image";img.loading="lazy";img.alt="Cover of "+title;img.src=coverUrl;
-   img.onerror=()=>img.remove();
+   if(!imageUrl){
+    const googleUrl="https://www.googleapis.com/books/v1/volumes?q="+encodeURIComponent("intitle:"+title+" inauthor:"+author)+"&maxResults=20&printType=books";
+    const google=await fetch(googleUrl,{headers:{Accept:"application/json"}});
+    if(google.ok){
+     const data=await google.json(),items=data.items||[];
+     const match=items.find(x=>norm(x.volumeInfo&&x.volumeInfo.title)===norm(title)&&authorMatches(x.volumeInfo&&x.volumeInfo.authors)&&x.volumeInfo.imageLinks);
+     const fallback=match||items.find(x=>authorMatches(x.volumeInfo&&x.volumeInfo.authors)&&x.volumeInfo.imageLinks);
+     const links=fallback&&fallback.volumeInfo&&fallback.volumeInfo.imageLinks;
+     if(links){
+      imageUrl=(links.extraLarge||links.large||links.medium||links.thumbnail||links.smallThumbnail||"").replace(/^http:/,"https:");
+      credit="Cover via Google Books · © respective publisher / rights holder";
+     }
+    }
+   }
+   if(!imageUrl)return;
+   const img=document.createElement("img");
+   img.className="book-cover-image";img.loading="lazy";img.alt="Original published cover of "+title;img.src=imageUrl;
+   img.onerror=()=>{img.remove();el.classList.remove("has-cover")};
    el.prepend(img);el.classList.add("has-cover");
-   const credit=document.createElement("span");credit.className="cover-rights-note";credit.textContent="Cover source: Open Library · © respective rights holder";el.after(credit);
-  }catch(e){/* Keep the typographic cover fallback when Open Library is unavailable. */}
+   const creditEl=el.closest(".book-cover-column")?.querySelector(".cover-rights-note");
+   if(creditEl)creditEl.textContent=credit;
+  }catch(e){/* Keep the neutral title fallback rather than showing an unrelated cover. */}
  });
 }
 /* Milestone 4: two-axis compass and cross-dimensional reflection. */
