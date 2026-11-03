@@ -1,0 +1,56 @@
+/* Light editorial assessment theme. Overrides the earlier dark quiz skin without changing behaviour. */
+@media screen{
+ body.assess{background:var(--paper);color:var(--ink)}
+ body.assess:before{display:none}
+ .assess .topbar{background:rgba(245,241,232,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+ .assess .brand{color:var(--ink)}
+ .assess .topnote{color:var(--ink-soft)}
+ .assess .topnote:hover{color:var(--teal)}
+ .assess .side{background:var(--surface);border-color:var(--line);box-shadow:var(--shadow-sm)}
+ .assess .side h3{color:var(--ink)}
+ .assess .progress-track{background:var(--paper-strong)}
+ .assess .progress-fill{background:var(--teal);box-shadow:none}
+ .assess .progress-copy{color:var(--muted)}
+ .assess .step{color:var(--muted)}
+ .assess .step:hover{background:var(--surface-muted);color:var(--ink)}
+ .assess .step .dot{border-color:var(--line-strong);color:var(--muted)}
+ .assess .step.active{background:var(--teal-soft);color:var(--teal)}
+ .assess .step.active .dot,.assess .step.done .dot{background:var(--teal);border-color:var(--teal);color:#fff}
+ .assess .step.done{color:var(--ink-soft)}
+ .assess .privacy{border-top-color:var(--line);color:var(--muted)}
+ .assess .linkbtn{color:var(--teal)}
+ .assess .quiz-card{background:var(--surface);border-color:var(--line);box-shadow:var(--shadow);color:var(--ink)}
+ .assess .tag{color:var(--teal)}
+ .assess .counter{color:var(--muted)}
+ .assess .quiz-card h2{font-family:var(--serif);font-weight:500;color:var(--ink)}
+ .assess .hint{color:var(--muted)}
+ .assess .scenario{background:var(--teal-soft);border-left-color:var(--teal);color:var(--ink-soft)}
+ .assess .qtext{font-family:var(--serif);font-weight:500;color:var(--ink);font-size:clamp(21px,2.3vw,27px);line-height:1.35}
+ .assess .option{background:var(--surface);border-color:var(--line);color:var(--ink)}
+ .assess .option:hover{border-color:var(--teal);background:var(--teal-soft)}
+ .assess .option.selected{border-color:var(--teal);background:var(--teal-soft);box-shadow:inset 0 0 0 1px var(--teal)}
+ .assess .radio{border-color:var(--line-strong)}
+ .assess .selected .radio{border-color:var(--teal)}
+ .assess .selected .radio:after{background:var(--teal)}
+ .assess .navrow{border-top-color:var(--line)}
+ .assess .btn-light{background:var(--surface-muted);color:var(--ink);border:1px solid var(--line)}
+ .assess .btn-light:hover:not(:disabled){background:var(--paper-strong)}
+ .assess .btn-dark{background:var(--navy);color:#fff}
+ .assess .btn-dark:hover:not(:disabled){background:var(--teal)}
+ .assess .result-hero{border:1px solid var(--line);background:var(--navy);color:#fff}
+ .assess .profile-pill{background:var(--teal-soft);color:var(--teal)}
+ .assess .panel{background:var(--surface);border-color:var(--line);color:var(--ink)}
+ .assess .panel h3{color:var(--ink)}
+ .assess .sub{color:var(--muted)}
+ .assess .rowtop{color:var(--ink)}
+ .assess .rowtop span:last-child{color:var(--teal)}
+ .assess .bar{background:var(--paper-strong)}
+ .assess .scale-labels{color:var(--muted)}
+ .assess .insight{border-top-color:var(--line)}
+ .assess .insight strong{color:var(--ink)}
+ .assess .insight p{color:var(--ink-soft)}
+ .assess .chip{background:var(--teal-soft);color:var(--teal)}
+ .assess .caveat{background:var(--gold-soft);border-color:#e5d3b4;color:#6f542d}
+ .assess .footer{border-top:1px solid var(--line);background:var(--navy);color:#d1dbd3}
+ .assess .footer strong{color:#fff}
+}
