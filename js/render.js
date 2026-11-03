@@ -57,7 +57,7 @@ function recommendationsHtml(scores){
     const sourceList=src(p.sources);
     const year=p.year==null?"Date uncertain":p.year;
     const query=encodeURIComponent(p.title+" "+p.author);
-    return '<article class="book-rec-card"><div class="book-cover-column"><a class="book-cover-link" href="https://openlibrary.org/search?q='+query+'" target="_blank" rel="noopener noreferrer" aria-label="Find '+recEsc(p.title)+' on Open Library"><div class="book-cover-placeholder" data-book-title="'+recEsc(p.title)+'" data-book-author="'+recEsc(p.author)+'"><span class="cover-mark">P</span><span class="cover-title">'+recEsc(p.title)+'</span><span class="cover-author">'+recEsc(p.author)+'</span></div></a><span class="cover-rights-note">Cover via Open Library · © respective publisher / rights holder</span></div><div class="book-rec-info"><span class="rec-badge">'+recEsc(p.slot)+'</span><h3>'+recEsc(p.title)+'</h3><p class="book-byline">'+recEsc(p.author)+' · '+recEsc(year)+'</p><ul class="rec-bullets"><li><b>Why it appears:</b> '+recEsc(why)+'</li><li><b>Explore:</b> '+recEsc(focus)+'</li><li><b>Traditions:</b> '+recEsc(traditions||"Not assigned")+'</li></ul><details class="rec-details"><summary>Notes &amp; sources</summary><p>'+recEsc(p.stance?(p.stance.documented||"Read the cited passages to examine the argument."):"A broad survey, not assigned a single ideological position.")+'</p><ul class="rec-sources"><li>'+sourceList+'</li></ul></details></div></article>';
+    return '<article class="book-rec-card"><div class="book-cover-column"><a class="book-cover-link" href="https://openlibrary.org/search?q='+query+'" target="_blank" rel="noopener noreferrer" aria-label="Find '+recEsc(p.title)+' on Open Library"><div class="book-cover-placeholder" data-book-id="'+recEsc(p.id)+'" data-book-title="'+recEsc(p.title)+'" data-book-author="'+recEsc(p.author)+'"><span class="cover-mark">P</span><span class="cover-title">'+recEsc(p.title)+'</span><span class="cover-author">'+recEsc(p.author)+'</span></div></a><span class="cover-rights-note">Cover via Open Library · © respective publisher / rights holder</span></div><div class="book-rec-info"><span class="rec-badge">'+recEsc(p.slot)+'</span><h3>'+recEsc(p.title)+'</h3><p class="book-byline">'+recEsc(p.author)+' · '+recEsc(year)+'</p><ul class="rec-bullets"><li><b>Why it appears:</b> '+recEsc(why)+'</li><li><b>Explore:</b> '+recEsc(focus)+'</li><li><b>Traditions:</b> '+recEsc(traditions||"Not assigned")+'</li></ul><details class="rec-details"><summary>Notes &amp; sources</summary><p>'+recEsc(p.stance?(p.stance.documented||"Read the cited passages to examine the argument."):"A broad survey, not assigned a single ideological position.")+'</p><ul class="rec-sources"><li>'+sourceList+'</li></ul></details></div></article>';
    }).join("")+'</div><p class="rec-credit">Book-cover images are provided by <a href="https://openlibrary.org/" target="_blank" rel="noopener noreferrer">Open Library</a> when an edition image is available. Select a cover to find the title.</p>';
   }else h+='<p class="rec-empty">No book recommendations are available for this profile yet.</p>';
   h+='<p class="rec-disclaimer">These are AI-reviewed pilot comparisons, not independently validated scholarly assessments. Historical figures may have changed their views over time; the selected period is shown where available. Similarity is assessed dimension by dimension, not as an overall score or political identity.</p></section>';
@@ -65,53 +65,24 @@ function recommendationsHtml(scores){
  }catch(e){console.error("POLITICA recommendations error",e);return none}
 }
 function hydrateBookCovers(){
- const covers=document.querySelectorAll(".book-cover-placeholder[data-book-title]");
- covers.forEach(async el=>{
-  const title=el.dataset.bookTitle,author=el.dataset.bookAuthor;
-  const norm=v=>String(v||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
-  const authorTokens=norm(author).split(" ").filter(x=>x.length>2&&!["and","the","of","later","transmitters","textual","tradition"].includes(x));
-  const authorMatches=list=>(list||[]).some(n=>{
-   const tokens=norm(n).split(" ");
-   return authorTokens.some(t=>tokens.includes(t)||tokens.some(x=>x.startsWith(t)||t.startsWith(x)));
-  });
-  const exactTitle=docs=>(docs||[]).find(d=>norm(d.title)===norm(title));
-  try{
-   let imageUrl="",credit="Cover via Open Library · © respective publisher / rights holder";
-   const searchUrl="https://openlibrary.org/search.json?title="+encodeURIComponent(title)+"&author="+encodeURIComponent(author)+"&limit=20&fields=title,author_name,cover_i,editions";
-   const response=await fetch(searchUrl,{headers:{Accept:"application/json"}});
-   if(response.ok){
-    const data=await response.json(),docs=data.docs||[];
-    const exact=exactTitle(docs);
-    const selected=(docs||[]).find(d=>norm(d.title)===norm(title)&&authorMatches(d.author_name)&&d.cover_i)
-      ||(exact&&exact.cover_i?exact:null);
-    let cover=selected&&selected.cover_i;
-    if(!cover&&selected&&selected.editions&&selected.editions.docs){
-      const edition=selected.editions.docs.find(e=>e.cover_i&&authorMatches(e.author_name||selected.author_name))||selected.editions.docs.find(e=>e.cover_i);
-      cover=edition&&edition.cover_i;
-    }
-    if(cover)imageUrl="https://covers.openlibrary.org/b/id/"+cover+"-L.jpg?default=false";
-   }
-   if(!imageUrl){
-    const googleUrl="https://www.googleapis.com/books/v1/volumes?q="+encodeURIComponent("intitle:"+title+" inauthor:"+author)+"&maxResults=20&printType=books";
-    const google=await fetch(googleUrl,{headers:{Accept:"application/json"}});
-    if(google.ok){
-     const data=await google.json(),items=data.items||[];
-     const match=items.find(x=>norm(x.volumeInfo&&x.volumeInfo.title)===norm(title)&&authorMatches(x.volumeInfo&&x.volumeInfo.authors)&&x.volumeInfo.imageLinks);
-     const links=match&&match.volumeInfo&&match.volumeInfo.imageLinks;
-     if(links){
-      imageUrl=(links.extraLarge||links.large||links.medium||links.thumbnail||links.smallThumbnail||"").replace(/^http:/,"https:");
-      credit="Cover via Google Books · © respective publisher / rights holder";
-     }
-    }
-   }
-   if(!imageUrl)return;
-   const img=document.createElement("img");
-   img.className="book-cover-image";img.loading="lazy";img.alt="Original published cover of "+title;img.src=imageUrl;
-   img.onerror=()=>{img.remove();el.classList.remove("has-cover")};
-   el.prepend(img);el.classList.add("has-cover");
-   const creditEl=el.closest(".book-cover-column")?.querySelector(".cover-rights-note");
-   if(creditEl)creditEl.textContent=credit;
-  }catch(e){/* Keep the neutral title fallback rather than showing an unrelated cover. */}
+ const positions={
+  "hind-swaraj":[0,0],"annihilation-of-caste":[1,0],"road-to-serfdom":[2,0],"communist-manifesto":[3,0],
+  "reflections":[0,1],"theory-of-justice":[1,1],"arthashastra":[2,1],"analects":[3,1],
+  "on-liberty":[0,2],"the-federalist":[1,2],"political-ideologies":[2,2],"muqaddimah":[3,2],
+  "wretched-of-the-earth":[0,3],"seven-essays-peruvian-reality":[1,3]
+ };
+ document.querySelectorAll(".book-cover-placeholder[data-book-id]").forEach(el=>{
+  const pos=positions[el.dataset.bookId];
+  if(!pos)return;
+  el.style.backgroundImage="url('assets/book-covers.webp')";
+  el.style.backgroundSize="400% 400%";
+  el.style.backgroundPosition=(pos[0]*100/3)+"% "+(pos[1]*100/3)+"%";
+  el.classList.add("has-cover");
+  el.setAttribute("role","img");
+  el.setAttribute("aria-label","Original book cover: "+el.dataset.bookTitle+" by "+el.dataset.bookAuthor);
+  el.querySelectorAll(".cover-mark,.cover-title,.cover-author").forEach(node=>node.hidden=true);
+  const credit=el.closest(".book-cover-column")?.querySelector(".cover-rights-note");
+  if(credit)credit.textContent="Cover image supplied by POLITICA · © respective rights holders";
  });
 }
 /* Milestone 4: two-axis compass and cross-dimensional reflection. */
