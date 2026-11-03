@@ -1,8 +1,7 @@
 /* POLITICA books.js — source-located pilot book dataset.
-   Candidate means are transcribed from the two analytical-pass PDFs supplied on 3 Nov 2026.
-   IMPORTANT: status remains "draft". The passes are NOT represented as independent human reviews.
-   Sources below have been checked for edition metadata and the stated chapter/section locators.
-   The dataset is intentionally not publishable through matching.js until its independent-review gate is met.
+   Candidate means are transcribed from two AI-assisted analytical passes supplied on 3 Nov 2026.
+   AI assessment is preliminary, not independent human review or proof that every citation locator is correct.
+   Interpretations and source references require final verification before publication; entries remain draft.
 */
 const BOOK_PREMISES=["individual-rights","limits-of-knowledge","communal-duty","welfare-consequences","historical-materialism","religious-law","civilisational-continuity","self-rule","equal-dignity","fair-terms-of-cooperation","state-order"];
 const BOOKS=[
