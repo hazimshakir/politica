@@ -48,7 +48,7 @@ function recommendationsHtml(scores){
     }else h+='<p class="sub">No AI-reviewed thinkers are comparable with your results yet.</p>';
     if(tm.notes.length&&cards.length)h+='<p class="sub">'+tm.notes.map(recEsc).join(" ")+'</p>';
     if(books.length){
-      h+='<h4>Books</h4>'+books.map(p=>'<div class="insight"><strong>'+recEsc(p.title)+'</strong> <span class="chip">'+recEsc(p.slot)+'</span><p>'+recEsc(p.author)+', '+recEsc(p.year)+' \u00b7 Tradition: '+p.traditions.map(recEsc).join(", ")+' \u00b7 Grounded in: '+recEsc(p.premise)+'</p><p>'+(p.stance?'On <b>'+recEsc(lab(p.dimension))+'</b> the book argues: '+recEsc(orientation(p.dimension,p.stance.score).text)+'. '+recEsc(p.stance.documented||""):'A broad introductory survey of major political ideologies; it is not scored as if it represented one political position.')+' Sources: '+src(p.sources)+'.</p></div>').join("");
+      h+='<h4>Books</h4>'+books.map(p=>'<div class="insight"><strong>'+recEsc(p.title)+'</strong> <span class="chip">'+recEsc(p.slot)+'</span><p>'+recEsc(p.author)+', '+recEsc(p.year==null?'date uncertain':p.year)+' \u00b7 Tradition: '+p.traditions.map(recEsc).join(", ")+' \u00b7 Grounded in: '+recEsc(p.premise)+'</p><p>'+(p.stance?'On <b>'+recEsc(lab(p.dimension))+'</b> the book argues: '+recEsc(orientation(p.dimension,p.stance.score).text)+'. '+recEsc(p.stance.documented||""):'A broad introductory survey of major political ideologies; it is not scored as if it represented one political position.')+' Sources: '+src(p.sources)+'.</p></div>').join("");
     }else h+='<p class="sub">No AI-reviewed books are available for your results yet.</p>';
     if(bm.notes.length&&books.length)h+='<p class="sub">'+bm.notes.map(recEsc).join(" ")+'</p>';
     return h+'</div>';
