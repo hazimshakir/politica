@@ -1,0 +1,29 @@
+.ideology-page{background:var(--paper);color:var(--ink)}
+.ideology-page .topbar{background:rgba(245,241,232,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.ideology-page .brand{color:var(--ink)}
+.ideology-nav{display:flex;gap:22px;align-items:center}.ideology-nav a{font-size:12px;color:var(--ink-soft);text-decoration:none}.ideology-nav a:hover{color:var(--teal)}
+.ideology-page .ahero{background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line)}
+.ideology-kicker{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--teal);font-weight:800;margin:24px 0 12px}
+.ideology-content{max-width:1160px;margin:auto;padding:38px 24px 76px}
+.ideology-note{padding:18px 21px;background:var(--surface-muted);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:24px}
+.ideology-note strong{font:600 16px var(--sans);color:var(--ink)}.ideology-note p{font-size:13px;line-height:1.75;color:var(--ink-soft);margin:7px 0 0}
+.ideology-index{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 30px}
+.ideology-index a{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:11px;font-weight:700;color:var(--teal);text-decoration:none}
+.ideology-index a:hover,.ideology-index a:focus-visible{border-color:var(--teal);background:var(--teal-soft)}
+.ideology-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ideology-card{min-width:0;padding:25px 26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);scroll-margin-top:90px}
+.ideology-card h2{font:500 29px/1.15 var(--serif);letter-spacing:-.025em;color:var(--ink);margin:0 0 10px}
+.ideology-number{font-size:9px;letter-spacing:.15em;font-weight:800;color:var(--teal);margin:0 0 12px}
+.ideology-lede{font:500 15px/1.7 var(--sans);color:var(--ink-soft);margin:0 0 18px}
+.ideology-card h3{font:750 10px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin:19px 0 8px}
+.ideology-card ul{padding-left:19px;margin:0;color:var(--ink-soft)}
+.ideology-card li,.ideology-card>p:not(.ideology-number):not(.ideology-lede):not(.ideology-source){font-size:13px;line-height:1.75;margin:0 0 7px;color:var(--ink-soft)}
+.ideology-source{border-top:1px solid var(--line);padding-top:13px;margin:17px 0 0;font-size:11px;line-height:1.6;color:var(--muted)}
+.ideology-source a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.ideology-bottom{margin:35px 0 0;padding:30px;background:var(--navy);border-radius:var(--radius-lg);color:#fff}
+.ideology-bottom h2{font:500 30px/1.2 var(--serif);margin:0 0 10px;color:#fff}
+.ideology-bottom p{max-width:78ch;color:#d3dfd7;font-size:14px;line-height:1.8}
+.ideology-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.ideology-actions .btn-primary{background:#d7e7dd;color:#20332e}.ideology-actions .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+.ideology-page .footer{background:var(--navy);color:#d3dfd7}.ideology-page .footer strong{color:#fff}.ideology-page .footer a{color:#d7e7dd}
+@media(max-width:700px){.ideology-grid{grid-template-columns:1fr}.ideology-content{padding:28px 16px 58px}.ideology-card{padding:21px}.ideology-nav{gap:12px}.ideology-nav a{font-size:10px}.ideology-bottom{padding:23px 20px}}
+@media(prefers-reduced-motion:reduce){.ideology-index a{scroll-behavior:auto}}
