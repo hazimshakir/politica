@@ -66,8 +66,29 @@ const assert = require("node:assert/strict");
     assert.match(classifications.marketEconomicsSocialProtection, /market-oriented economics, stronger social protection/i);
     assert.match(classifications.liberalDemocratic, /Liberal-democratic \/ civil-libertarian themes/);
     assert.match(classifications.culturallyConservative, /Culturally conservative \/ gradualist themes/);
-    for (const html of Object.values(classifications)) {
-      assert.doesNotMatch(html, /\b(communist|fascist|far-right extremist)\b/i,
+
+    // Threshold boundaries: the inclusive cut-offs should be stable and predictable.
+    const boundaryProfiles = await page.evaluate(() => {
+      const profile = (economic, social) => politicalTendencyHtml({
+        economic, social, culture:0, democracy:0, liberty:0, global:0, values:0
+      });
+      return {
+        exactLeftCutoff: profile(-25,-20),
+        justInsideCentre: profile(-24,-19),
+        exactRightCutoff: profile(25,20),
+        crossPressureLeft: profile(-26,20),
+        crossPressureMarket: profile(26,-20)
+      };
+    });
+    assert.match(boundaryProfiles.exactLeftCutoff, /Centre-left tendency/);
+    assert.match(boundaryProfiles.justInsideCentre, /Centrist \/ mixed-economy tendency/);
+    assert.match(boundaryProfiles.exactRightCutoff, /Centre-right tendency/);
+    assert.match(boundaryProfiles.crossPressureLeft, /economically left, responsibility-oriented socially/i);
+    assert.match(boundaryProfiles.crossPressureMarket, /market-oriented economics, stronger social protection/i);
+
+    for (const html of [...Object.values(classifications), ...Object.values(boundaryProfiles)]) {
+      // Check only actual displayed classification labels, not the explanatory disclaimer.
+      assert.doesNotMatch(html, /<(?:h4|span class="chip")>[^<]*\\b(communist|fascist|far-right extremist)\\b/i,
         "the questionnaire must not assign unsupported extreme ideology labels");
       assert.match(html, /Important limits/);
     }
