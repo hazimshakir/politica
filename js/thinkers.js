@@ -12,14 +12,31 @@ const THINKERS=[
 {id:"gandhi",name:"Mohandas K. Gandhi",lifespan:"1869\u20131948",family:"indic",region:"South Asia",traditions:["gandhian","anti-colonial"],roles:["leader","thinker"],
  summary:"Indian independence leader and writer on non-violent resistance and self-rule.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"hind-swaraj",type:"primary",citation:"M. K. Gandhi, Hind Swaraj (Gujarati original, 1909); English rendering, Indian Home Rule (1922 fifth edition)",locator:"Chs. IV (What is Swaraj?), VI (Civilization), XIII (True Civilization), XIV (How India Can Become Free), XVII (Passive Resistance), XIX (Machinery); Gandhi's 1919 foreword and 1922 Reply to Critics qualify how the 1908 text should be read.",verified:true},{id:"constructive",type:"primary",citation:"M. K. Gandhi, Constructive Programme: Its Meaning and Place (1941)",locator:"Sections on removal of untouchability, khadi, village industries, economic equality and trusteeship; section headings should be checked against the chosen Navajivan edition before adding page numbers.",verified:false}],
- phases:[{id:"whole",label:"Documented work overall (phases to be decided by reviewers)",years:"1909\u20131948",dims:{
-  economic:draftCell(-15,"low","Gandhi advocated village industries, decentralised production and trusteeship, but these do not map neatly onto the modern public-provision versus market-allocation axis.",["constructive"]),
-  social:draftCell(-55,"medium","Welfare of all, with priority to the poorest.",["constructive"]),
-  culture:draftCell(10,"low","Reformer on untouchability, traditionalist on other matters.",["hind-swaraj"]),
-  democracy:draftCell(-50,"medium","Non-violent dissent and civil disobedience.",["hind-swaraj"]),
-  liberty:draftCell(-60,"medium","Deep scepticism of concentrated state power.",["hind-swaraj"]),
-  global:draftCell(0,"low","Anti-colonial self-rule alongside universalist non-violence.",["hind-swaraj"]),
-  values:draftCell(-50,"medium","Upliftment of the weakest.",["constructive"])}}]},
+ sources:[
+ {id:"hind-swaraj",type:"primary",citation:"M. K. Gandhi, Hind Swaraj (Gujarati original, 1909); English rendering, Indian Home Rule (1910)",locator:"Chs. IV, VI, XIII, XIV, XVII and XIX. The 1909 text is a polemical critique of modern civilisation, not a complete statement of Gandhi's later economic views.",verified:true},
+ {id:"constructive",type:"primary",citation:"M. K. Gandhi, Constructive Programme: Its Meaning and Place (1941)",locator:"Sections: Removal of Untouchability; Khadi; Other Village Industries; Economic Equality; Peasants; Labour. The 1941 text is a later programme and should not be read back into 1909.",verified:false},
+ {id:"varna",type:"primary",citation:"M. K. Gandhi, writings on varna and hereditary occupation, including Young India (27 October 1927) and Harijan (7 July 1946)",locator:"Contemporaneous statements affirming varna by birth/hereditary occupation while opposing untouchability and caste restrictions; verify against Collected Works issue pagination before scholarly publication.",verified:false},
+ {id:"machinery",type:"primary",citation:"M. K. Gandhi, statements on machinery (1919–1947), reproduced in Gandhi: Hind Swaraj and Other Writings, ed. Anthony J. Parel",locator:"Cambridge edition, pp. 162–168; includes 1919 acceptance of mills alongside handlooms and later arguments about technology's effects on village employment.",verified:true}
+ ],
+ phases:[
+ {id:"early",label:"Early critique of modern civilisation",years:"1909–1918",dims:{
+  economic:draftCell(-25,"low","Hind Swaraj strongly criticises industrial machinery and modern economic civilisation; this does not translate directly into a modern public-ownership score.",["hind-swaraj"]),
+  social:nullCell("The text does not provide a sufficient basis for scoring this modern equality-versus-individual-responsibility axis."),
+  culture:draftCell(65,"medium","The text defends civilisational and religious continuity while criticising selected social practices; this is not equivalent to opposition to all reform.",["hind-swaraj"]),
+  democracy:draftCell(-35,"low","Gandhi's insistence on non-violent resistance and self-rule suggests a check on coercive authority, but the text is not a developed account of modern constitutional democracy.",["hind-swaraj"]),
+  liberty:draftCell(-65,"medium","The text rejects concentrated modern state power and places moral self-restraint and self-rule at the centre.",["hind-swaraj"]),
+  global:draftCell(-10,"low","Anti-colonial self-rule coexists with universal moral claims; the text does not map cleanly onto contemporary sovereignty/cooperation choices.",["hind-swaraj"]),
+  values:nullCell("The text's ethical vocabulary does not map directly onto the questionnaire's starting-points-versus-merit axis.")}},
+ {id:"later",label:"Constructive programme and later writings",years:"1919–1948",dims:{
+  economic:draftCell(-20,"low","Village industries, economic equality and trusteeship favour decentralised livelihoods; Gandhi's later acceptance of some machinery makes a categorical anti-technology or anti-market score misleading.",["constructive","machinery"]),
+  social:draftCell(-25,"low","Gandhi campaigned against untouchability and for the uplift of the poorest, but continued to defend a form of varna based on birth/hereditary occupation. This tension prevents a stronger equality score.",["constructive","varna"]),
+  culture:draftCell(65,"medium","Gandhi opposed untouchability but continued to defend varna and hereditary occupation; reformist and traditionalist positions coexisted.",["constructive","varna"]),
+  democracy:draftCell(-35,"low","Non-violent mass action and decentralised self-rule suggest participatory checks, but his model is not identical to parliamentary pluralism.",["constructive"]),
+  liberty:draftCell(-55,"medium","Continued suspicion of concentrated state power and preference for self-governing communities.",["constructive"]),
+  global:draftCell(-15,"low","Universal non-violence and communal unity sit alongside national self-rule; contemporary global-policy mapping remains weak.",["constructive"]),
+  values:draftCell(-35,"low","Trusteeship and economic equality prioritise social obligations, while Gandhi also accepted unequal talents and earnings subject to moral responsibility.",["constructive"])
+ }}
+ ]}},
 {id:"ambedkar",name:"B. R. Ambedkar",lifespan:"1891\u20131956",family:"indic",region:"South Asia",traditions:["social-justice-anti-caste"],roles:["leader","thinker"],
  summary:"Indian jurist and social reformer; chaired the drafting committee of India's Constitution.",status:"ai-reviewed",reviewedOn:"2026-11-03",
  sources:[{id:"aoc",type:"primary",citation:"B. R. Ambedkar, Annihilation of Caste (1936), Columbia University classroom edition based on Writings and Speeches, vol. 1 (1979), pp. 25–96",locator:"Full address; especially discussion of caste as graded inequality, religious authority, endogamy and social reform. Columbia notes that square-bracketed section headings are editorial.",verified:true},{id:"states-minorities",type:"primary",citation:"B. R. Ambedkar, States and Minorities (1947), reproduced in Dr. Babasaheb Ambedkar: Writings and Speeches, vol. 1",locator:"Proposed Constitution: Article II, section I (Fundamental Rights); section II (Remedies against Invasion of Fundamental Rights), including State Socialism/Economic Democracy; section IV (Safeguards for Scheduled Castes).",verified:true},{id:"ca-speech",type:"primary",citation:"Constituent Assembly Debates, 25 November 1949, vol. XI, closing speech by B. R. Ambedkar",locator:"Closing speech: constitutional methods, social democracy, liberty-equality-fraternity, and risks of hero-worship and abandoning constitutional methods; official Lok Sabha Secretariat reprint.",verified:true}],
