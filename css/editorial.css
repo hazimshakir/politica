@@ -1,7 +1,7 @@
 /* Light-first editorial homepage layer. Keeps the existing content and behaviour intact. */
 body.landing{
-  --bg:var(--paper);--bg2:var(--paper-strong);--ink:var(--ink);--soft:var(--ink-soft);
-  --mint:var(--teal);--gold:var(--gold);--line:var(--line);
+  --bg:var(--paper);--bg2:var(--paper-strong);--soft:var(--ink-soft);
+  --mint:var(--teal);
   background:var(--paper);color:var(--ink);
 }
 .landing .topbar{background:rgba(245,241,232,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
@@ -40,8 +40,10 @@ body.landing{
 .dim .ico,.dim .num{color:var(--teal)}
 .dim h3{color:var(--ink)}
 .dim small{color:var(--muted)}
-a.dim-cta{background:var(--navy);border-color:var(--navy);color:#fff}
-.dim-cta b{color:#b9dfd2}
+a.dim-cta{background:var(--navy);border-color:var(--navy);color:#fff;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+a.dim-cta b{color:#b9dfd2}
+a.dim-cta:hover,a.dim-cta:focus-visible{background:#176c61;border-color:#176c61;color:#fff}
+a.dim-cta:hover b,a.dim-cta:focus-visible b{color:#fff}
 .ideas{border-color:var(--line)}
 .idea{border-color:var(--line)}
 .idea svg{color:var(--gold)}
