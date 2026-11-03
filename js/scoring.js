@@ -1,69 +1,26 @@
-/* POLITICA scoring.js — the questions, the scoring rules and the plain-language summaries.
-   Contains no page (DOM) code. Loaded first. */
-/* Each question is [text, kind, scenario, direction]. direction sets how agreeing moves the score on that section's axis:
-   -1 = toward the axis's left label, +1 = toward its right label, 0 = shown but not scored. */
-const sections = [
-{title:"Economic philosophy",short:"Economics",desc:"Markets, taxation, public services and economic opportunity.",questions:[
-["A government should guarantee access to healthcare and education, even if this requires higher taxes or public spending.","scenario","Imagine public hospitals and schools are underfunded. The government can raise revenue or leave more services to private providers.",-1],
-["Private enterprise and competition are generally the best engines of innovation and economic growth.","plain",null,1],
-["People with very high incomes should pay a larger share of their income in tax to fund public services.","plain",null,-1],
-["Workers need strong legal protections, even when those rules increase costs for employers.","plain",null,-1],
-["When an essential service is failing, public ownership or direct public provision should be considered.","plain",null,-1]
-]},
-{title:"Social philosophy",short:"Society",desc:"Individual autonomy, equal opportunity and shared responsibilities.",questions:[
-["Adults should be free to make personal choices as long as they do not violate other people's rights.","plain",null,-1],
-["Government should actively address disadvantages linked to caste, class, gender or family background.","plain",null,-1],
-["Public policy should focus more on equal opportunity than on making everyone's outcomes equal.","plain",null,1],
-["A society has obligations to people who cannot meet basic needs through no fault of their own.","plain",null,-1],
-["People should generally be responsible for the consequences of their own choices, with limited exceptions.","plain",null,1]
-]},
-{title:"Cultural philosophy",short:"Culture",desc:"Tradition, social change, identity and personal freedom.",questions:[
-["Longstanding cultural traditions deserve respect, but should not be immune from criticism.","plain",null,-1],
-["Social change should generally happen gradually, with care for community continuity.","plain",null,1],
-["Personal freedom should take priority when a tradition conflicts with an adult's fundamental rights.","scenario","A long-standing custom is challenged because some members of the community say it restricts their choices.",-1],
-["Schools should teach students to examine competing cultural and moral viewpoints rather than promote one worldview.","plain",null,-1],
-["A society can preserve cultural heritage while becoming more inclusive and changing its practices.","plain",null,-1]
-]},
-{title:"Democratic philosophy",short:"Democracy",desc:"Opposition, free expression, institutions and political accountability.",questions:[
-["Peaceful protest and criticism of the government should be protected, even when deeply unpopular.","plain",null,-1],
-["A party or movement I support should be criticised if it violates democratic principles.","plain",null,-1],
-["Independent courts, media and oversight institutions should be able to scrutinise elected governments.","plain",null,-1],
-["An elected government should usually be able to carry out its programme even when independent institutions disagree.","plain",null,1],
-["A political leader should never be treated as beyond criticism or accountability.","plain",null,-1]
-]},
-{title:"Government & individual liberty",short:"Governance",desc:"The appropriate reach of the state and limits on public power.",questions:[
-["Government regulation is necessary to prevent companies from exploiting consumers, workers or the environment.","plain",null,1],
-["The state should have limited powers to restrict speech, privacy or peaceful assembly.","plain",null,-1],
-["Public safety rules are justified when they are evidence-based, proportionate and open to review.","plain",null,1],
-["People and communities should be able to make many decisions without unnecessary government interference.","plain",null,-1],
-["In a crisis, emergency powers should have strict time limits and independent oversight.","scenario","A government announces temporary emergency powers after a serious threat. What safeguards should apply?",-1]
-]},
-{title:"National & global outlook",short:"World outlook",desc:"National identity, international cooperation, migration and borders.",questions:[
-["International cooperation is essential for addressing problems such as climate change, pandemics and conflict.","plain",null,-1],
-["A government should prioritise its citizens' interests when making major policy decisions.","plain",null,1],
-["Immigration policy should balance border management with humanitarian obligations and fair treatment.","plain",null,-1],
-["A strong sense of national identity can coexist with respect for other countries and cultures.","plain",null,-1],
-["International rules and institutions should influence national policy when countries have freely agreed to them.","plain",null,-1]
-]},
-{title:"Personal values",short:"Values",desc:"Fairness, merit, responsibility and how you judge political proposals.",questions:[
-["People should be rewarded for effort, skill and innovation, while recognising that opportunity is not equally distributed.","plain",null,1],
-["Reducing severe poverty is a more urgent priority than reducing every difference in wealth.","plain",null,-1],
-["When judging a policy, its real-world effects matter more than which political party proposes it.","plain",null,0],
-["Fairness sometimes requires treating people differently to account for unequal starting conditions.","plain",null,-1],
-["I am comfortable changing my political view when credible evidence challenges it.","plain",null,0]
-]}
-];
-const scale=[["Strongly disagree",1],["Disagree",2],["Neither / unsure",3],["Agree",4],["Strongly agree",5]];
-const all=[]; sections.forEach((s,si)=>s.questions.forEach((q,qi)=>all.push({section:si,index:qi,text:q[0],kind:q[1],scenario:q[2],dir:q[3]})));
-const polarities=[
-{section:0,key:"economic",label:"Economic orientation",left:"More public provision & redistribution",right:"More market-led allocation"},
-{section:1,key:"social",label:"Social equality & responsibility",left:"Collective support & equality",right:"Individual responsibility & opportunity"},
-{section:2,key:"culture",label:"Cultural outlook",left:"More open to social change",right:"More emphasis on continuity"},
-{section:3,key:"democracy",label:"Democratic pluralism",left:"Checks, dissent & accountability",right:"Greater executive latitude"},
-{section:4,key:"liberty",label:"State power & civil liberty",left:"More safeguards for liberty",right:"More scope for state intervention"},
-{section:5,key:"global",label:"Global outlook",left:"International cooperation",right:"National priority & sovereignty"},
-{section:6,key:"values",label:"Fairness & merit",left:"Correct unequal starting points",right:"Emphasise individual merit"}
-];
+/* POLITICA scoring.js — validates the question data (questions.js, loaded first) and builds the structures the pages use.
+   Contains no page (DOM) code. */
+function validateQuestionData(){
+  const bad=m=>{throw new Error("POLITICA question data error: "+m)};
+  if(!Array.isArray(scale)||!scale.length)bad("scale is empty");
+  const keys={};
+  DIMENSIONS.forEach(d=>{
+    ["key","title","short","desc","label","left","right"].forEach(f=>{if(!d[f])bad(`dimension "${d.key||"?"}" is missing "${f}"`)});
+    if(keys[d.key])bad(`duplicate dimension key "${d.key}"`);keys[d.key]=0});
+  const ids={};
+  QUESTIONS.forEach((q,n)=>{
+    const w=`question #${n+1} (${q.id||"no id"})`;
+    if(!q.id||ids[q.id])bad(`${w} has a missing or duplicate id`);ids[q.id]=1;
+    if(!(q.dimension in keys))bad(`${w} has unknown dimension "${q.dimension}"`);
+    if(![-1,0,1].includes(q.direction))bad(`${w} needs direction -1, 0 or 1`);
+    if(!q.text)bad(`${w} has no text`);
+    if(q.direction!==0)keys[q.dimension]++});
+  DIMENSIONS.forEach(d=>{if(!keys[d.key])bad(`dimension "${d.key}" has no scored question`)})}
+validateQuestionData();
+/* Questions are grouped by dimension (dimension order, then written order) so sections stay contiguous. */
+const sections=DIMENSIONS.map(d=>({title:d.title,short:d.short,desc:d.desc,questions:QUESTIONS.filter(q=>q.dimension===d.key)}));
+const all=[]; sections.forEach((s,si)=>s.questions.forEach((q,qi)=>all.push({id:q.id,section:si,index:qi,text:q.text,kind:q.kind,scenario:q.scenario,dir:q.direction})));
+const polarities=DIMENSIONS.map((d,i)=>({section:i,key:d.key,label:d.label,left:d.left,right:d.right}));
 
 /* ---------- Scoring and text summaries (no page/DOM code in this file) ---------- */
 function sectionStart(i){return sections.slice(0,i).reduce((n,s)=>n+s.questions.length,0)}

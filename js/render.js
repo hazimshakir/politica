@@ -9,7 +9,7 @@ function renderSteps(current,answers){
 function renderQuiz(current,answers){
   let q=all[current],s=sections[q.section],answered=Object.keys(answers).length;
   document.getElementById("progressFill").style.width=(answered/all.length*100)+"%";
-  const track=document.getElementById("progressTrack");track.setAttribute("aria-valuenow",answered);track.setAttribute("aria-valuetext",`${answered} of ${all.length} answered`);
+  const track=document.getElementById("progressTrack");track.setAttribute("aria-valuemax",all.length);track.setAttribute("aria-valuenow",answered);track.setAttribute("aria-valuetext",`${answered} of ${all.length} answered`);
   document.getElementById("progressCopy").textContent=`${answered} of ${all.length} answered`;
   renderSteps(current,answers);
   let opts=scale.map(([label,val])=>`<label class="option ${answers[current]===val?'selected':''}"><input type="radio" name="answer" value="${val}"${answers[current]===val?' checked':''} onchange="choose(${val})"><span class="radio" aria-hidden="true"></span><span>${label}</span></label>`).join("");
