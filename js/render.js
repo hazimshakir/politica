@@ -18,7 +18,7 @@ function renderQuiz(current,answers){
 function recEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function recommendationsHtml(scores){
   const head='<div class="panel"><h3>Thinkers and books to explore</h3>';
-  const none=head+'<p class="sub">Recommendations are not available yet. This section only shows thinkers and books whose positions and sources have been independently reviewed, and none have completed review so far. Your results above are not affected.</p></div>';
+  const none=head+'<p class="sub">Recommendations are not available yet. The pilot book entries have received AI-assisted assessment, but their interpretations and source references are still provisional and require final verification before publication. No entries are currently eligible to display. Your results above are not affected.</p></div>';
   try{
     if(typeof matchThinkers!=="function"||typeof selectBooks!=="function"||typeof validateData!=="function")return none;
     const errs=validateData(THINKERS,BOOKS);
