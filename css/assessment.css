@@ -207,3 +207,15 @@ body.assess:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:n
  .compass-y{color:#8a5a12}
  .compass-y-bottom{color:#087f78}
 }
+
+/* ===== Milestone 4: clearer comparisons and printable report ===== */
+.report-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 2px 12px;color:#9fb0c4;font-size:9px;letter-spacing:.16em;font-weight:800}
+.report-endnote{margin-top:22px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);color:#9fb0c4;font-size:10px;text-align:center;letter-spacing:.04em}
+@media print{
+ .report-meta{color:#444;border-bottom:1px solid #bbb;margin-bottom:12px}
+ .report-endnote{color:#444;border-top-color:#bbb}
+ .actions{display:none!important}
+ .results{padding-top:0}
+ .compass-svg{filter:none}
+ .compass-panel,.insight{break-inside:avoid}
+}
