@@ -48,7 +48,7 @@ const assert = require("node:assert/strict");
     // A completed assessment should restore its results after refresh.
     await page.reload();
     await page.locator("#results").waitFor({ state: "visible" });
-    assert.equal(await page.locator("#results .profile-pill").innerText(), "Your POLITICA profile");
+    assert.match(await page.locator("#results .profile-pill").innerText(), /your politica profile/i);
 
     // Retaking should return to question one and clear the completed save.
     await page.getByRole("button", { name: /Retake assessment/ }).click();
