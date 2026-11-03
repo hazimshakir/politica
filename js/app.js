@@ -50,7 +50,7 @@ function downloadShareCard(){
   ctx.fillStyle="#e8b75a";ctx.font="700 18px Arial";ctx.fillText("POLITICA / POLITICAL SELF-REFLECTION",75,85);
   ctx.fillStyle="#ffffff";ctx.font="48px Georgia";ctx.fillText("My political profile",75,155);
   ctx.fillStyle="#9fe3d7";ctx.font="bold 27px Arial";ctx.fillText(headline(sc),75,205);
-  const left=650,top=245,size=390,half=size/2;
+  const left=650,top=225,size=360,half=size/2;
   ctx.fillStyle="rgba(139,52,56,.55)";ctx.fillRect(left,top,half,half);
   ctx.fillStyle="rgba(165,106,39,.45)";ctx.fillRect(left+half,top,half,half);
   ctx.fillStyle="rgba(8,127,120,.42)";ctx.fillRect(left,top+half,half,half);
