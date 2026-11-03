@@ -2,11 +2,11 @@
    Stores only answer numbers and the current question, in this browser only. Needs scoring.js loaded first. */
 const STORE_KEY="politica.progress.v1",STORE_DAYS=30;
 /* Saved by question id (v2) so adding, removing or reordering questions cannot misplace answers. Older index-based saves (v1) are still read. */
-function saveProgress(answers,current){
+function saveProgress(answers,current,finished){
   try{
     const byId={};Object.keys(answers).forEach(k=>{if(all[k])byId[all[k].id]=answers[k]});
     if(!Object.keys(byId).length)localStorage.removeItem(STORE_KEY);
-    else localStorage.setItem(STORE_KEY,JSON.stringify({v:2,answers:byId,current:all[current]?all[current].id:null,savedAt:Date.now()}))
+    else localStorage.setItem(STORE_KEY,JSON.stringify({v:2,answers:byId,current:all[current]?all[current].id:null,finished:!!finished,savedAt:Date.now()}))
   }catch(e){}}
 function clearProgress(){try{localStorage.removeItem(STORE_KEY)}catch(e){}}
 function loadSaved(){
@@ -21,5 +21,5 @@ function loadSaved(){
     if(!Object.keys(clean).length){clearProgress();return null}
     const c=pos(d.current);
     const cur=Number.isInteger(c)&&c>=0&&c<all.length?c:Math.max(0,firstUnanswered(clean));
-    return {answers:clean,current:cur}
+    return {answers:clean,current:cur,finished:d.finished===true&&Object.keys(clean).length===all.length}
   }catch(e){return null}}

@@ -1,6 +1,6 @@
 /* POLITICA app.js — assessment page: state and user actions. Needs scoring.js, storage.js and render.js loaded first. */
-let answers={},current=0,reviewMode=false;
-function persist(){saveProgress(answers,current)}
+let answers={},current=0,reviewMode=false,finished=false;
+function persist(){saveProgress(answers,current,finished)}
 function render(){renderQuiz(current,answers)}
 function focusQuestion(){const f=document.getElementById("questionSet");if(f)f.focus({preventScroll:true})}
 function show(){render();focusQuestion();persist()}
@@ -19,7 +19,8 @@ function next(){
   reviewMode=true;current=missing;show();
   const left=all.length-Object.keys(answers).length;
   toast(`Please answer all questions first: ${left} left. Going to question ${missing+1}.`)}
-function showResults(){
+function showResults(restoring){
+  finished=true;if(!restoring)persist();
   document.getElementById("assessment").classList.add("hidden");
   const scores=calculateAll(answers);
   renderResults(scores);
@@ -30,13 +31,14 @@ function copyPrompt(){if(!confirm("Privacy warning: your copied answers may reve
 function downloadAnswers(){let data={product:"POLITICA",notice:"Voluntary self-assessment; not validated.",answers:all.map((q,i)=>({section:sections[q.section].title,question:q.text,answer:answerLabel(i),value:answers[i]})),scores:window.lastScores};let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="politica-assessment.json";a.click();URL.revokeObjectURL(a.href)}
 function startOver(){
   if(Object.keys(answers).length&&!confirm("Clear your saved answers and start again?"))return;
-  answers={};current=0;reviewMode=false;
+  answers={};current=0;reviewMode=false;finished=false;
   document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");
   show();toast("Saved answers cleared.")}
-function restart(){answers={};current=0;reviewMode=false;document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");show();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
+function restart(){answers={};current=0;reviewMode=false;finished=false;document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");show();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
 (function init(){
   const s=loadSaved();
   if(s){answers=s.answers;current=s.current}
   render();
+  if(s&&s.finished){showResults(true);toast("Your saved results were restored.");return}
   if(s)toast(`Saved progress restored: ${Object.keys(answers).length} of ${all.length} answered.`)
 })();

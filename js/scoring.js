@@ -34,14 +34,22 @@ function calculate(p,answers){
   if(!vals.length)return 0;
   return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*50)}
 function calculateAll(answers){const scores={};polarities.forEach(p=>scores[p.key]=calculate(p,answers));return scores}
-function ideology(scores){let e=scores.economic,c=scores.culture,d=scores.democracy,l=scores.liberty,g=scores.global;
-let tags=[];
-if(e<=-20)tags.push("Social-democratic themes");else if(e>=20)tags.push("Market-liberal themes");else tags.push("Mixed-economy themes");
-if(c<=-20)tags.push("Socially progressive themes");else if(c>=20)tags.push("Culturally traditionalist themes");
-if(d<=-15)tags.push("Pluralist-democratic themes");
-if(l<=-15)tags.push("Civil-libertarian themes");
-if(g<=-20)tags.push("Internationalist themes");else if(g>=20)tags.push("National-priority themes");
-return tags}
+/* Thresholds for the "Themes in your answers" list. A theme appears when that dimension's score (-100 to +100) reaches the value. */
+const THEME_THRESHOLDS={economic:20,culture:20,global:20,democracy:15,liberty:15};
+function ideology(scores){
+  const fmt=n=>n<0?"\u2212"+(-n):String(n);
+  const out=[];
+  const add=(key,v,leftTag,rightTag,midTag)=>{
+    const t=THEME_THRESHOLDS[key],name=polarities.find(p=>p.key===key).label,s=`${name} score ${fmt(v)}`;
+    if(v<=-t)out.push({label:leftTag,why:`${s} (shown at \u2212${t} or lower).`});
+    else if(v>=t)out.push({label:rightTag,why:`${s} (shown at +${t} or higher).`});
+    else if(midTag)out.push({label:midTag,why:`${s} (between \u2212${t-1} and +${t-1}).`})};
+  add("economic",scores.economic,"Social-democratic themes","Market-liberal themes","Mixed-economy themes");
+  add("culture",scores.culture,"Socially progressive themes","Culturally traditionalist themes");
+  add("democracy",scores.democracy,"Pluralist-democratic themes","Executive-capacity themes");
+  add("liberty",scores.liberty,"Civil-libertarian themes","State-capacity themes");
+  add("global",scores.global,"Internationalist themes","National-priority themes");
+  return out}
 function descriptor(p,v){let abs=Math.abs(v);if(abs<15)return"Mixed / balanced";let strength=abs<35?"Some tendency":abs<60?"Clear tendency":"Strong tendency";return strength+" · "+(v<0?p.left:p.right)}
 function headline(scores){const e=scores.economic,cult=scores.culture;return e<-20?(cult<-15?"Pluralist centre-left themes":"Centre-left economic themes"):e>20?"Market-oriented themes":"Mixed / cross-pressured political outlook"}
 function buildSummary(scores){
