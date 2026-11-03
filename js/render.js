@@ -69,46 +69,29 @@ function politicalTendencyHtml(scores){
  return '<section class="tendency-panel"><h3>Political tendencies suggested by your scores</h3><p class="sub">Qualified descriptions of selected dimensions, not a single identity or party recommendation.</p>'+tags.map(t=>'<div class="tendency-item"><span class="chip">'+recEsc(t[0])+'</span><p>'+recEsc(t[1])+'</p></div>').join('')+'<p class="tendency-caveat">Terms such as left, right, liberal and conservative have different meanings across countries. They are broad shorthand for the dimensions stated here. This questionnaire cannot classify anyone as an autocrat or establish a full ideology.</p></section>';
 }
 function compassHtml(scores){
-  const xScore=scores.economic;
-  const authority=Math.round((scores.democracy+scores.liberty)/2);
-  const x=280+xScore*2, y=240-authority*2;
+  const cx=350,cy=285,r=178,labelR=245;
   const fmt=n=>(n>0?"+":"")+n;
-  const position=xScore<=-20?"Left of centre · public-provision leaning":xScore>=20?"Right of centre · market-oriented":"Near the economic centre";
-  const vertical=authority>=20?"Executive-authority leaning":authority<=-20?"Pluralist / liberty-oriented":"Mixed authority and restraint";
-  return `<section class="compass-panel" aria-labelledby="compass-title">
-    <div class="compass-heading"><span class="compass-kicker">Your results at a glance</span><h2 id="compass-title">Your political compass</h2>
-    <p>The horizontal axis shows economic left–right tendencies. The vertical axis contrasts executive authority with pluralist checks and civil-liberty protections.</p></div>
-    <div class="compass-layout">
-      <div class="compass-y compass-y-top">EXECUTIVE AUTHORITY / STATE-CENTRED GOVERNANCE<br><span>Greater emphasis on government capacity and state action — not a label of autocracy.</span></div>
-      <div class="compass-chart-wrap">
-        <svg class="compass-svg" viewBox="0 0 560 500" role="img" aria-labelledby="compass-svg-title compass-svg-desc">
-          <title id="compass-svg-title">POLITICA two-axis political compass</title>
-          <desc id="compass-svg-desc">Your marker is at economic score ${fmt(xScore)} and authority-restraint score ${fmt(authority)}. The horizontal axis runs from public provision to market-led allocation. The vertical axis runs from individual liberty and institutional restraint to state authority.</desc>
-          <rect x="80" y="40" width="200" height="200" fill="#8b3438" fill-opacity=".48"/>
-          <rect x="280" y="40" width="200" height="200" fill="#a56a27" fill-opacity=".38"/>
-          <rect x="80" y="240" width="200" height="200" fill="#087f78" fill-opacity=".34"/>
-          <rect x="280" y="240" width="200" height="200" fill="#245ca0" fill-opacity=".38"/>
-          <g stroke="rgba(255,255,255,.13)" stroke-width="1">
-            <path d="M130 40V440 M180 40V440 M230 40V440 M330 40V440 M380 40V440 M430 40V440 M80 90H480 M80 140H480 M80 190H480 M80 290H480 M80 340H480 M80 390H480"/>
-          </g>
-          <rect x="80" y="40" width="400" height="400" rx="5" fill="none" stroke="rgba(255,255,255,.48)" stroke-width="1.5"/>
-          <path d="M280 40V440 M80 240H480" stroke="rgba(255,255,255,.7)" stroke-width="1.4" stroke-dasharray="5 5"/>
-          <g fill="#f3e7d0" font-family="Georgia,serif" font-size="13" letter-spacing="2" text-anchor="middle">
-            <text x="180" y="135">LEFT + EXECUTIVE</text><text x="380" y="135">RIGHT + EXECUTIVE</text>
-            <text x="180" y="345">LEFT + PLURALIST</text><text x="380" y="345">RIGHT + PLURALIST</text>
-          </g>
-          <circle cx="${x}" cy="${y}" r="27" fill="#d9f5f2" fill-opacity=".09"/>
-          <circle cx="${x}" cy="${y}" r="15" fill="#d9f5f2" fill-opacity=".2"/>
-          <circle cx="${x}" cy="${y}" r="7" fill="#fff" stroke="#8fe4d8" stroke-width="3"/>
-          <circle cx="${x}" cy="${y}" r="3" fill="#0a1220"/>
-        </svg>
-        <div class="compass-axis-x"><span>← LEFT · PUBLIC PROVISION &amp; REDISTRIBUTION</span><span>MARKET-LED · RIGHT →</span></div>
-      </div>
-      <div class="compass-y compass-y-bottom">PLURALIST DEMOCRACY / CIVIL LIBERTIES<br><span>Checks on executive power · dissent · limits on state power</span></div>
-    </div>
-    <div class="compass-readout"><span><b>Economic:</b> ${position} (${fmt(xScore)})</span><span><b>Authority / restraint:</b> ${vertical} (${fmt(authority)})</span></div>
-    <p class="compass-note">This is an illustrative map, not a validated political-compass test. The vertical coordinate averages democratic pluralism and state-power/liberty scores; these are related but distinct ideas. The upper end does not establish autocracy, and the lower end does not by itself establish a complete democratic ideology. Consult all seven dimension scores below.</p>
-  </section>`;
+  const point=(index,value,radius)=>{
+    const angle=(-90+index*360/polarities.length)*Math.PI/180;
+    const rr=radius*(value/100);
+    return [cx+Math.cos(angle)*rr,cy+Math.sin(angle)*rr];
+  };
+  const polygon=level=>polarities.map((p,i)=>point(i,level,r)).map(([x,y])=>x.toFixed(1)+","+y.toFixed(1)).join(" ");
+  const axes=polarities.map((p,i)=>{
+    const [x,y]=point(i,100,r);
+    const [lx,ly]=point(i,100,labelR);
+    const score=scores[p.key],normalised=(score+100)/2;
+    const [px,py]=point(i,normalised,r);
+    const anchor=Math.abs(lx-cx)<18?"middle":lx>cx?"start":"end";
+    const labelY=ly+(ly<cy?-5:ly>cy?13:4);
+    return {p,score,normalised,x,y,lx,ly:labelY,px,py,anchor};
+  });
+  const valuePoints=axes.map(a=>a.px.toFixed(1)+","+a.py.toFixed(1)).join(" ");
+  const grid=[20,40,60,80,100].map(v=>'<polygon points="'+polygon(v)+'" class="radar-grid"/>').join("");
+  const spokes=axes.map(a=>'<line x1="'+cx+'" y1="'+cy+'" x2="'+a.x.toFixed(1)+'" y2="'+a.y.toFixed(1)+'" class="radar-spoke"/>').join("");
+  const labels=axes.map(a=>'<text x="'+a.lx.toFixed(1)+'" y="'+a.ly.toFixed(1)+'" text-anchor="'+a.anchor+'" class="radar-label">'+recEsc(a.p.label)+'</text><text x="'+a.lx.toFixed(1)+'" y="'+(a.ly+17).toFixed(1)+'" text-anchor="'+a.anchor+'" class="radar-value">'+fmt(a.score)+'</text>').join("");
+  const dots=axes.map(a=>'<circle cx="'+a.px.toFixed(1)+'" cy="'+a.py.toFixed(1)+'" r="5" class="radar-dot"><title>'+recEsc(a.p.label)+': '+fmt(a.score)+'</title></circle>').join("");
+  return '<section class="radar-panel" aria-labelledby="radar-title"><div class="radar-heading"><span class="compass-kicker">Your results at a glance</span><h2 id="radar-title">Your political outlook, across seven dimensions</h2><p>Each spoke represents a separate dimension. The centre is −100; the outer edge is +100. The middle ring marks 0. No single left–right label is used to combine your answers.</p></div><div class="radar-chart-wrap"><svg class="radar-svg" viewBox="0 0 700 570" role="img" aria-labelledby="radar-svg-title radar-svg-desc"><title id="radar-svg-title">Seven-dimensional political outlook radar chart</title><desc id="radar-svg-desc">'+axes.map(a=>recEsc(a.p.label)+' '+fmt(a.score)).join('; ')+'. Each dimension is scored independently from minus 100 to plus 100; zero is the middle ring.</desc>'+grid+spokes+'<polygon points="'+valuePoints+'" class="radar-area"/>'+dots+labels+'</svg></div><div class="radar-scale"><span>Centre: −100</span><span>Middle ring: 0</span><span>Outer edge: +100</span></div><p class="compass-note">This chart is a visual summary of seven independent scores, not a validated political test. The filled area is only a visual aid: its size and shape are not an overall ideology score, and dimensions should be read separately.</p></section>';
 }
 function crossPressuresHtml(scores){
   const items=[];
