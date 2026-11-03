@@ -62,3 +62,12 @@ html.arrive.arrive-out .arrival{opacity:0;transition:opacity .55s ease;pointer-e
 .footer-links a{color:#c9d6e6;text-decoration:underline;text-underline-offset:3px}
 .footer-links a:hover{color:#fff}
 .textlink{color:var(--teal);font-weight:650;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+
+/* Phase 7 — shared accessibility safeguards. */
+.skip{position:fixed;left:12px;top:8px;transform:translateY(calc(-100% - 12px));width:max-content;max-width:calc(100vw - 24px);transition:none}
+.skip:focus{left:12px;transform:translateY(0);outline:3px solid var(--gold);outline-offset:3px}
+:target{scroll-margin-top:96px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
