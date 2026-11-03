@@ -56,18 +56,41 @@ function recommendationsHtml(scores){
 /* Milestone 4: two-axis compass and cross-dimensional reflection. */
 function politicalTendencyHtml(scores){
  const e=scores.economic,s=scores.social,c=scores.culture,d=scores.democracy,l=scores.liberty,g=scores.global,v=scores.values;
- const tags=[];
- const add=(label,reason)=>tags.push({label,reason});
- // Broad economic/social placement: deliberately avoids treating one axis as a complete ideology.
- if(e<=-25&&s<=-20)add("Centre-left / social-democratic themes","Your answers favour a stronger public role in the economy and collective action to reduce disadvantage.");
- else if(e>=25&&s>=20)add("Centre-right / market-oriented themes","Your answers favour market-led allocation alongside individual responsibility and opportunity.");
- else if(e<=-25&&s>=20)add("Economically left, responsibility-oriented mix","You favour a stronger public economic role, while placing comparatively more weight on individual responsibility and opportunity.");
- else if(e>=25&&s<=-20)add("Market-oriented with stronger social protection","You favour market-led economic allocation while also emphasising collective support and reducing disadvantage.");
- else if(Math.abs(e)<25&&Math.abs(s)<20)add("Centrist / mixed-economy themes","Your economic and social scores are relatively close to the middle, suggesting a mixed approach rather than a strong one-sided position.");
- else if(e<=-25)add("Economic centre-left tendency","Your economic answers favour more public provision and redistribution, while your social answers do not show the same degree of collective emphasis.");
- else if(e>=25)add("Economic centre-right tendency","Your economic answers favour market-led allocation, while your social answers do not show the same degree of individual-responsibility emphasis.");
- else if(s<=-25)add("Socially egalitarian tendency","Your answers emphasise collective support and reducing unequal starting points, without a strong economic left/right position.");
- else if(s>=25)add("Individual-responsibility emphasis","Your answers place relatively greater weight on individual responsibility and opportunity, without a strong economic left/right position.");
+ const secondary=[];
+ const add=(label,reason)=>secondary.push({label,reason});
+ // Primary placement uses the two relevant dimensions independently; it does not calculate a composite left-right score.
+ let primary,primaryWhy;
+ if(e<=-25&&s<=-20){
+   primary="Centre-left tendency";
+   primaryWhy="Both your economic and social answers lean toward public provision, collective support or reducing disadvantage.";
+ }else if(e>=25&&s>=20){
+   primary="Centre-right tendency";
+   primaryWhy="Both your economic and social answers lean toward market allocation, individual responsibility or opportunity.";
+ }else if(e<=-25&&s>=20){
+   primary="Mixed: economically left, responsibility-oriented socially";
+   primaryWhy="Your economic answers favour public provision and redistribution, while your social answers place more weight on individual responsibility and opportunity.";
+ }else if(e>=25&&s<=-20){
+   primary="Mixed: market-oriented economics, stronger social protection";
+   primaryWhy="Your economic answers lean toward market allocation, while your social answers emphasise collective support and reducing disadvantage.";
+ }else if(Math.abs(e)<25&&Math.abs(s)<20){
+   primary="Centrist / mixed-economy tendency";
+   primaryWhy="Both scores are relatively close to the middle. Your answers suggest a mixed approach rather than a strong one-sided position.";
+ }else if(e<=-25){
+   primary="Economically centre-left";
+   primaryWhy="Your economic answers favour more public provision and redistribution, while your social answers are closer to the middle or point in another direction.";
+ }else if(e>=25){
+   primary="Economically centre-right";
+   primaryWhy="Your economic answers favour market-led allocation, while your social answers are closer to the middle or point in another direction.";
+ }else if(s<=-20){
+   primary="Socially egalitarian";
+   primaryWhy="Your social answers emphasise collective support and reducing unequal starting points, while your economic answers are closer to the middle.";
+ }else if(s>=20){
+   primary="Individual-responsibility oriented";
+   primaryWhy="Your social answers place relatively greater weight on individual responsibility and opportunity, while your economic answers are closer to the middle.";
+ }else{
+   primary="Mixed / cross-pressured";
+   primaryWhy="Your economic and social answers do not form a strong shared direction.";
+ }
 
  if(c<=-25&&s<=-15)add("Socially liberal / progressive themes","Your answers combine openness to social change with support for individual autonomy or reducing social disadvantage.");
  else if(c>=25)add("Culturally conservative / gradualist themes","Your answers place relatively greater weight on continuity, tradition and gradual social change.");
@@ -78,10 +101,8 @@ function politicalTendencyHtml(scores){
  else if(g>=25)add("National-priority themes","Your answers give relatively greater weight to national sovereignty and domestic priorities.");
  if(v<=-30)add("Equity-focused approach to fairness","Your answers place greater weight on correcting unequal starting points.");
  else if(v>=30)add("Merit-focused approach to fairness","Your answers place greater weight on individual effort and merit.");
-
- if(!tags.length)add("Mixed / cross-pressured outlook","Your scores do not form a strong pattern across the broad combinations this questionnaire can describe.");
- const rows=tags.map(t=>'<div class="tendency-item"><span class="chip">'+recEsc(t.label)+'</span><p>'+recEsc(t.reason)+'</p></div>').join("");
- return '<section class="tendency-panel"><h3>What political traditions do your answers resemble?</h3><p class="sub">These are tentative, dimension-based descriptions — not a definitive identity. You may fit several at once.</p>'+rows+'<p class="tendency-caveat"><b>Important limits:</b> This questionnaire can suggest broad centre-left, centre-right, liberal, conservative, socialist-leaning or internationalist themes, but it cannot reliably classify someone as a communist, fascist, far-right extremist or member of a party. Those traditions require beliefs and commitments this assessment does not measure. “Democratic” describes support for a political system, not one point on the left–right spectrum. No label here is a party recommendation.</p></section>';
+ const rows=secondary.length?secondary.map(t=>'<div class="tendency-item"><span class="chip">'+recEsc(t.label)+'</span><p>'+recEsc(t.reason)+'</p></div>').join(""):'<p class="sub">No additional secondary tendency crossed the exploratory thresholds. Your seven dimension scores remain available below.</p>';
+ return '<section class="tendency-panel"><h3>Your broad political orientation</h3><p class="sub">A cautious summary based on your economic and social dimensions — not a definitive ideology or party identity.</p><div class="primary-tendency"><span class="primary-kicker">Primary pattern</span><h4>'+recEsc(primary)+'</h4><p>'+recEsc(primaryWhy)+'</p></div><h4 class="secondary-heading">Other tendencies in your answers</h4>'+rows+'<p class="tendency-caveat"><b>Important limits:</b> This primary description is a rule-based reading of two separate dimensions, not a combined score. Secondary tendencies can coexist with it. The questionnaire may suggest broad centre-left, centre-right, liberal, conservative, socialist-leaning or internationalist themes, but it cannot reliably classify someone as a communist, fascist, far-right extremist or member of a party. Those traditions require beliefs and commitments this assessment does not measure. “Democratic” describes support for a political system, not one point on the left–right spectrum. No label here is a party recommendation.</p></section>';
 }
 function compassHtml(scores){
   const cx=350,cy=285,r=178,labelR=245;
