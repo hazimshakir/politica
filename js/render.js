@@ -38,7 +38,7 @@ function recommendationsHtml(scores){
       }).join("");
       const bookList=BOOKS.filter(b=>b&&b.status==="ai-reviewed").map(b=>{
         const dims=Object.keys(b.argues||{});
-        return '<div class="insight"><strong>'+recEsc(b.title)+'</strong><p>'+recEsc(b.author)+', '+recEsc(b.year)+' · '+recEsc(b.premise||'')+'</p><p><b>Available areas:</b> '+labs(dims)+'.</p></div>';
+        return '<div class="insight"><strong>'+recEsc(b.title)+'</strong><p>'+recEsc(b.author)+', '+recEsc(b.year==null?'date uncertain':b.year)+' · '+(b.type==='survey'?'Broad introductory survey':recEsc(b.premise||''))+'</p><p><b>Available areas:</b> '+(b.type==='survey'?'Not assigned a single ideological position':labs(dims))+'.</p><p>Sources: '+src(b.sources)+'.</p></div>';
       }).join("");
       return head+'<p class="sub">The current pilot dataset does not have enough comparable dimensions to generate a personalised match for this profile. You can still explore these AI-reviewed pilot entries. They are provisional interpretations; source locators and assessments require further verification. They are not rankings or political identity labels.</p><h4>Pilot thinkers</h4>'+thinkerList+'<h4>Pilot books</h4>'+bookList+'</div>';
     }
