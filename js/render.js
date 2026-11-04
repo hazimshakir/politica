@@ -16,6 +16,36 @@ function renderQuiz(current,answers){
   document.getElementById("quizCard").innerHTML=`<div class="quiz-head"><span class="tag">${String(q.section+1).padStart(2,'0')} / ${s.title}</span><span class="counter">QUESTION ${current+1} OF ${all.length}</span></div><h2>${s.title}</h2><p class="hint">${s.desc}</p>${q.scenario?`<div class="scenario" id="scenarioText">${q.scenario}</div>`:''}<fieldset class="fs" id="questionSet" tabindex="-1"${q.scenario?' aria-describedby="scenarioText"':''}><legend class="qtext"><span class="sr-only">Question ${current+1} of ${all.length}. </span>${q.text}</legend><div class="options">${opts}</div><p class="keyboard-hint">Keyboard: ↑ / ↓ or ← / → to choose · Enter to continue</p></fieldset><div class="navrow"><button class="btn btn-light" onclick="previous()" ${current===0?'disabled':''}>← Back</button><button class="btn btn-dark" onclick="next()" ${answers[current]===undefined?'disabled':''}>${current===all.length-1?'View my profile':'Continue →'}</button></div>`}
 /* Thinker and book panel. Shows AI-assessed pilot entries with a clear provisional-status disclosure. */
 function recEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+/* Rotating discovery picks broaden the list without pretending unscored profiles are measured matches. */
+function explorationThinkers(scores,excludedIds){
+ const map={
+ economic:scores.economic<=-25?["socialist-marxist","social-democratic","gandhian"]:scores.economic>=25?["classical-liberal","liberal","libertarian"]:[],
+ social:scores.social<=-25?["social-justice-anti-caste","feminist","social-justice"]:scores.social>=25?["liberal","classical-liberal"]:[],
+ culture:scores.culture<=-25?["feminist","rationalist","secular-nationalist"]:scores.culture>=25?["conservative","gandhian"]:[],
+ democracy:scores.democracy<=-25?["liberal","republican"]:[],
+ liberty:scores.liberty<=-25?["libertarian","anarchist","liberal"]:[],
+ global:scores.global<=-25?["anti-colonial","nationalist"]:scores.global>=25?["nationalist"]:[],
+ values:scores.values<=-25?["social-justice-anti-caste","gandhian","feminist"]:scores.values>=25?["liberal","classical-liberal"]:[]
+ };
+ const wanted=new Set(Object.values(map).flat()),pool=(THINKERS||[]).filter(t=>!excludedIds.has(t.id)&&!publishedPhases(t).length);
+ const ranked=pool.map(t=>({t,matched:(t.traditions||[]).filter(tag=>wanted.has(tag))})).filter(x=>x.matched.length);
+ let candidates=ranked.length?ranked:pool.map(t=>({t,matched:[]}));
+ const key="politica.exploration.recent.v1";let history=[];try{history=JSON.parse(sessionStorage.getItem(key)||"[]")}catch{}
+ const fresh=candidates.filter(x=>!history.includes(x.t.id));if(fresh.length>=3)candidates=fresh;
+ const shuffled=candidates.slice().sort((a,b)=>b.matched.length-a.matched.length||Math.random()-.5),picks=[],families=new Set();
+ for(const x of shuffled){if(picks.length>=3)break;if(!families.has(x.t.family)){picks.push(x);families.add(x.t.family)}}
+ for(const x of shuffled){if(picks.length>=3)break;if(!picks.some(y=>y.t.id===x.t.id))picks.push(x)}
+ try{sessionStorage.setItem(key,[...picks.map(x=>x.t.id),...history].slice(0,9).join("|"))}catch{}
+ return picks.map(x=>({...x,reason:x.matched.length?"Related themes in your answers: "+x.matched.map(v=>v.replace(/-/g," ")).join(", ")+".":"A rotating discovery pick from the wider collection."}));
+}
+function explorationHtml(scores,excludedIds){
+ const picks=explorationThinkers(scores,excludedIds);if(!picks.length)return "";
+ return '<section class="rec-explore"><div class="rec-section-label">Explore beyond the scored matches</div><p class="rec-explore-intro">These profiles broaden your reading list. They are selected by broad themes and rotation, not numerical similarity; their positions have not been scored against your answers.</p><div class="rec-explore-grid">'+picks.map(({t,reason})=>{
+  const initials=recEsc((t.name||"?").split(/\\s+/).map(v=>v[0]).slice(0,2).join(""));
+  const tags=(t.traditions||[]).map(v=>recEsc(v.replace(/-/g," "))).join(" · ");
+  return '<article class="rec-explore-card"><div class="rec-explore-avatar" aria-hidden="true">'+initials+'</div><span class="rec-badge">Discovery pick</span><h3>'+recEsc(t.name)+'</h3><p class="rec-explore-years">'+recEsc(t.lifespan||"Historical profile")+' · '+recEsc(t.region||"")+'</p><p>'+recEsc(t.summary||"Explore this profile in the library.")+'</p><p class="rec-explore-reason">'+recEsc(reason)+'</p><small>Traditions: '+(tags||"Not assigned")+'</small></article>';
+ }).join("")+'</div><a class="rec-library-link" href="thinkers-library.html">Explore the full collection →</a></section>';
+}
 function recommendationsHtml(scores){
  const head='<section class="recommendations-section" aria-labelledby="recommendations-title"><div class="recommendations-head"><div><span class="rec-kicker">Further reading</span><h2 id="recommendations-title">People &amp; books to explore</h2><p>Short comparisons to help you explore ideas — not endorsements.</p><a class="rec-library-link" href="thinkers-library.html">Browse the full thinkers &amp; library collection&nbsp; →</a></div></div>';
  const none=head+'<p class="rec-empty">Personalised matches are not available for this profile yet. The pilot entries remain provisional and require further verification.</p></section>';
@@ -39,6 +69,7 @@ function recommendationsHtml(scores){
   };
   const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
   const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Useful contrast",c])].filter(([,c])=>okT(c.thinkerId));
+  const shownIds=new Set(cards.map(([,c])=>c.thinkerId));
   const books=bm.picks.filter(p=>okB(p.id));
   let h=head;
   if(cards.length){
@@ -52,6 +83,8 @@ function recommendationsHtml(scores){
     return '<article class="thinker-rec-card"><div class="thinker-rec-top"><div class="thinker-photo-wrap '+(photo?'':'no-photo')+'">'+image+'<span class="thinker-initials" aria-hidden="true">'+initials+'</span>'+'</div><div class="thinker-rec-title"><span class="rec-badge">'+recEsc(slot)+'</span><h3>'+recEsc(c.name)+'</h3><p>'+recEsc(c.lifespan)+' · '+recEsc(c.phase.label)+(c.phase.years?' · '+recEsc(c.phase.years):'')+'</p>'+credits+'</div></div><ul class="rec-bullets"><li><b>Overlap:</b> '+close+'</li><li><b>Different:</b> '+(partial!=="—"?"Partly: "+partial+" · ":"")+different+'</li><li><b>Not comparable:</b> '+labs(c.notComparable)+'</li></ul><details class="rec-details"><summary>View comparison &amp; sources</summary><ul class="rec-evidence">'+evidence+'</ul></details></article>';
    }).join("")+'</div>';
   }else h+='<p class="rec-empty">No thinker match is available for this profile yet.</p>';
+  h+=explorationHtml(scores,shownIds);
+  if(tm.notes.length)h+='<p class="rec-match-note">'+tm.notes.map(recEsc).join(" ")+"</p>";
   if(books.length){
    h+='<div class="rec-section-label books-label">Books</div><div class="book-rec-grid">'+books.map(p=>{
     const why=p.stance?'Useful comparison: '+lab(p.dimension)+'.':'Broad introductory survey.';
