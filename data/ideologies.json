@@ -16,7 +16,9 @@
       "related_tags": [
         "liberalism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-liberalism"
+      ]
     },
     {
       "id": "conservatism",
@@ -30,7 +32,9 @@
       "related_tags": [
         "conservatism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-conservatism"
+      ]
     },
     {
       "id": "socialism",
@@ -44,7 +48,9 @@
       "related_tags": [
         "socialism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-socialism"
+      ]
     },
     {
       "id": "social-democracy",
@@ -58,7 +64,9 @@
       "related_tags": [
         "socialism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-socialism"
+      ]
     },
     {
       "id": "democratic-socialism",
@@ -72,7 +80,9 @@
       "related_tags": [
         "socialism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-socialism"
+      ]
     },
     {
       "id": "marxism",
@@ -86,7 +96,9 @@
       "related_tags": [
         "socialism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-socialism"
+      ]
     },
     {
       "id": "marxism-leninism",
@@ -128,7 +140,9 @@
       "related_tags": [
         "anarchism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-anarchism"
+      ]
     },
     {
       "id": "libertarianism",
@@ -142,7 +156,9 @@
       "related_tags": [
         "libertarianism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-libertarianism"
+      ]
     },
     {
       "id": "nationalism",
@@ -212,7 +228,9 @@
       "related_tags": [
         "feminism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "sep-feminism-political"
+      ]
     },
     {
       "id": "green-politics",
@@ -282,7 +300,11 @@
       "related_tags": [
         "gandhian"
       ],
-      "source_ids": []
+      "source_ids": [
+        "oxford-gandhi-caste",
+        "cambridge-gandhi-state",
+        "cambridge-anticolonial-futures"
+      ]
     },
     {
       "id": "ambedkarite-thought",
@@ -296,7 +318,9 @@
       "related_tags": [
         "ambedkarite"
       ],
-      "source_ids": []
+      "source_ids": [
+        "oxford-ambedkar-2024"
+      ]
     },
     {
       "id": "nehruvian-thought",
@@ -325,7 +349,9 @@
         "liberalism",
         "constitutionalism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "oxford-liberalisms-india"
+      ]
     },
     {
       "id": "indian-marxist-traditions",
@@ -369,7 +395,9 @@
         "nationalism",
         "anti-colonial"
       ],
-      "source_ids": []
+      "source_ids": [
+        "cambridge-anticolonial-futures"
+      ]
     },
     {
       "id": "indian-secular-constitutionalism",
@@ -384,7 +412,9 @@
         "secularism",
         "constitutionalism"
       ],
-      "source_ids": []
+      "source_ids": [
+        "oxford-constitutionalism-india"
+      ]
     }
   ]
 }
