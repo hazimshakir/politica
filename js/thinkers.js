@@ -131,3 +131,6 @@ const THINKERS=[
  }}]}
 
 ];
+
+const EXCLUDED_THINKER_IDS = new Set(["periyar","phule","ram-manohar-lohia","deendayal-upadhyaya","ramakrishna-paramahamsa","ems-namboodiripad","k-karunakaran","ak-gopalan","jean-jacques-rousseau","edmund-burke","karl-popper","hannah-arendt","abul-ala-maududi","al-farabi","emmanuel-macron","atal-bihari-vajpayee"]);
+THINKERS.splice(0, THINKERS.length, ...THINKERS.filter(t => !EXCLUDED_THINKER_IDS.has(t.id)));
