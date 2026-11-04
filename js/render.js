@@ -68,12 +68,20 @@ function recommendationsHtml(scores){
    kautilya:{url:"assets/kautilya.webp",credit:"Portrait image supplied by the POLITICA project",source:null,alt:"User-supplied portrait of Kautilya"}
   };
   const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
-  const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Useful contrast",c])].filter(([,c])=>okT(c.thinkerId));
-  const shownIds=new Set(cards.map(([,c])=>c.thinkerId));
+  const pool=tm.allCandidates||[...tm.overlap,...tm.contrast],cards=[],familyCounts={};
+  for(const candidate of pool){
+   if(cards.length>=4)break;
+   const family=candidate.family||"unknown",limit=family==="indic"?1:family==="western"?2:1;
+   if((familyCounts[family]||0)>=limit)continue;
+   cards.push([cards.length===0?"Closest dimensional match":family==="indic"?"Indian tradition perspective":family==="western"?"International perspective":"Another tradition",candidate]);
+   familyCounts[family]=(familyCounts[family]||0)+1;
+  }
+  const filteredCards=cards.filter(([,c])=>okT(c.thinkerId));
+  const shownIds=new Set(filteredCards.map(([,c])=>c.thinkerId));
   const books=bm.picks.filter(p=>okB(p.id));
   let h=head;
-  if(cards.length){
-   h+='<div class="rec-section-label">Thinkers</div><div class="thinker-rec-grid">'+cards.map(([slot,c])=>{
+  if(filteredCards.length){
+   h+='<div class="rec-section-label">Thinkers</div><div class="thinker-rec-grid">'+filteredCards.map(([slot,c])=>{
     const person=THINKERS.find(t=>t.id===c.thinkerId),photo=portrait[c.thinkerId];
     const initials=recEsc(c.name.split(/\s+/).map(x=>x[0]).slice(0,2).join(""));
     const image=photo?'<img class="thinker-photo" src="'+photo.url+'" alt="Portrait of '+recEsc(c.name)+'" loading="lazy" onerror="this.closest(\'.thinker-photo-wrap\').classList.add(\'no-photo\');this.remove()">' : '';
@@ -82,7 +90,7 @@ function recommendationsHtml(scores){
     const credits=photo?(photo.source?'<a class="image-credit" href="'+photo.source+'" target="_blank" rel="noopener noreferrer">'+photo.credit+'</a>':'<span class="image-credit">'+photo.credit+'</span>'):'<span class="image-credit">No verified historical portrait available</span>';
     return '<article class="thinker-rec-card"><div class="thinker-rec-top"><div class="thinker-photo-wrap '+(photo?'':'no-photo')+'">'+image+'<span class="thinker-initials" aria-hidden="true">'+initials+'</span>'+'</div><div class="thinker-rec-title"><span class="rec-badge">'+recEsc(slot)+'</span><h3>'+recEsc(c.name)+'</h3><p>'+recEsc(c.lifespan)+' · '+recEsc(c.phase.label)+(c.phase.years?' · '+recEsc(c.phase.years):'')+'</p>'+credits+'</div></div><ul class="rec-bullets"><li><b>Overlap:</b> '+close+'</li><li><b>Different:</b> '+(partial!=="—"?"Partly: "+partial+" · ":"")+different+'</li><li><b>Not comparable:</b> '+labs(c.notComparable)+'</li></ul><details class="rec-details"><summary>View comparison &amp; sources</summary><ul class="rec-evidence">'+evidence+'</ul></details></article>';
    }).join("")+'</div>';
-  }else h+='<p class="rec-empty">No thinker match is available for this profile yet.</p>';
+  }else h+='<p class="rec-empty">No sufficiently comparable scored thinker is available for this profile.</p>';
   h+=explorationHtml(scores,shownIds);
   if(tm.notes.length)h+='<p class="rec-match-note">'+tm.notes.map(recEsc).join(" ")+"</p>";
   if(books.length){
