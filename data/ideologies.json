@@ -1,0 +1,420 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-04",
+  "description": "Introductory, non-scored catalogue. Not an exhaustive or validated classification.",
+  "exclusion_policy": "Religion-centred ideological families are intentionally excluded; religious context may appear only where historically relevant.",
+  "records": [
+    {
+      "id": "liberalism",
+      "name": "Liberalism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of traditions that gives central importance to individual liberty, equal civic standing, rights and justified political authority.",
+      "recurring_ideas": "Civil liberties; constitutional limits; consent and accountability; pluralism; diverse views on markets and welfare.",
+      "internal_debates": "Classical, social, egalitarian and other liberalisms differ on property, redistribution and the conditions needed for meaningful freedom.",
+      "classification_caution": "Not synonymous with laissez-faire economics or any single contemporary party.",
+      "related_tags": [
+        "liberalism"
+      ],
+      "source_ids": [
+        "sep-liberalism"
+      ]
+    },
+    {
+      "id": "conservatism",
+      "name": "Conservatism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A broad tradition emphasising continuity, inherited institutions, social practices and prudence in political change.",
+      "recurring_ideas": "Institutional continuity; tradition; gradual reform; social order; scepticism toward abstract political redesign.",
+      "internal_debates": "Burkean, traditionalist, national, religious, liberal-conservative and one-nation strands differ substantially.",
+      "classification_caution": "Do not equate every conservative tradition with authoritarianism or reaction.",
+      "related_tags": [
+        "conservatism"
+      ],
+      "source_ids": [
+        "sep-conservatism"
+      ]
+    },
+    {
+      "id": "socialism",
+      "name": "Socialism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A diverse family of traditions critical of capitalist ownership and power, proposing greater social control, equality or cooperation in economic life.",
+      "recurring_ideas": "Social ownership in varied forms; economic democracy; solidarity; reduction of class domination; debate over planning and markets.",
+      "internal_debates": "Democratic, revolutionary, market, libertarian and state-centred socialisms differ on institutions and transition.",
+      "classification_caution": "Socialism is not one uniform economic blueprint.",
+      "related_tags": [
+        "socialism"
+      ],
+      "source_ids": [
+        "sep-socialism"
+      ]
+    },
+    {
+      "id": "social-democracy",
+      "name": "Social democracy",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A democratic tradition seeking to reconcile a market economy with social protection, redistribution, labour rights and public services.",
+      "recurring_ideas": "Welfare state; collective bargaining; progressive taxation; public services; regulated markets; electoral democracy.",
+      "internal_debates": "Historically includes both reformist socialism and post-war mixed-economy traditions; contemporary versions vary on privatisation and fiscal policy.",
+      "classification_caution": "Not identical to democratic socialism, although the traditions overlap historically.",
+      "related_tags": [
+        "socialism"
+      ],
+      "source_ids": [
+        "sep-socialism"
+      ]
+    },
+    {
+      "id": "democratic-socialism",
+      "name": "Democratic socialism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of socialist approaches committed to democratic institutions and extending democracy into economic life.",
+      "recurring_ideas": "Political pluralism; public or cooperative ownership in some sectors; workplace democracy; social equality.",
+      "internal_debates": "Disagreements concern the role of markets, public ownership, planning and gradual versus transformative reform.",
+      "classification_caution": "Do not use as a synonym for every welfare-state policy.",
+      "related_tags": [
+        "socialism"
+      ],
+      "source_ids": [
+        "sep-socialism"
+      ]
+    },
+    {
+      "id": "marxism",
+      "name": "Marxism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A tradition of social analysis and political critique drawing on Karl Marx and later interpreters, especially concerning class, capitalism and historical change.",
+      "recurring_ideas": "Historical materialism; class relations; critique of capital; exploitation; emancipation; varied theories of state and revolution.",
+      "internal_debates": "Marxist schools disagree on philosophy, strategy, democracy, party organisation and the interpretation of Marx.",
+      "classification_caution": "Marxism is internally plural and is not interchangeable with the policies of any one state.",
+      "related_tags": [
+        "socialism"
+      ],
+      "source_ids": [
+        "sep-socialism"
+      ]
+    },
+    {
+      "id": "marxism-leninism",
+      "name": "Marxism–Leninism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A twentieth-century communist doctrine associated with Leninist party organisation and later codification in the Soviet state tradition.",
+      "recurring_ideas": "Vanguard party; imperialism theory; revolutionary transition; planned economy; party-state institutions.",
+      "internal_debates": "Its meaning and practice varied across states and movements; scholars distinguish doctrine from actual governing practice.",
+      "classification_caution": "Record authoritarian rule, repression and historical outcomes separately from stated doctrine.",
+      "related_tags": [
+        "marxism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "maoism",
+      "name": "Maoism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A revolutionary communist tradition associated with Mao Zedong, peasant mobilisation and protracted people's war, later adapted by movements beyond China.",
+      "recurring_ideas": "Peasant-based revolution; mass line; people's war; continuing class struggle; revolutionary mobilisation.",
+      "internal_debates": "Mao's policies and later Maoist movements differ by period and country; the Great Leap Forward and Cultural Revolution require explicit historical context.",
+      "classification_caution": "Do not conflate all Chinese state policy after 1949 with Maoist doctrine.",
+      "related_tags": [
+        "marxism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "anarchism",
+      "name": "Anarchism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of theories sceptical of the legitimacy of coercive hierarchy and state authority, often advocating voluntary association and non-dominating social organisation.",
+      "recurring_ideas": "Anti-authoritarianism; mutual aid; voluntary association; decentralisation; equality; direct action.",
+      "internal_debates": "Individualist, collectivist, communist, syndicalist, feminist and other strands differ on property and organisation.",
+      "classification_caution": "Anarchism does not simply mean disorder; distinguish philosophical theory from movements and tactics.",
+      "related_tags": [
+        "anarchism"
+      ],
+      "source_ids": [
+        "sep-anarchism"
+      ]
+    },
+    {
+      "id": "libertarianism",
+      "name": "Libertarianism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of views giving strong priority to individual liberty and limiting coercive state power.",
+      "recurring_ideas": "Individual rights; freedom of association; limits on state power; property and voluntary exchange in many strands.",
+      "internal_debates": "Right-libertarian and left-libertarian views differ on property, resources, markets and social equality.",
+      "classification_caution": "Meanings differ across countries; do not assume the US usage is universal.",
+      "related_tags": [
+        "libertarianism"
+      ],
+      "source_ids": [
+        "sep-libertarianism"
+      ]
+    },
+    {
+      "id": "nationalism",
+      "name": "Nationalism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of ideas that treats the nation as an important source of political identity, legitimacy or self-determination.",
+      "recurring_ideas": "National self-determination; collective identity; sovereignty; solidarity; cultural or civic membership.",
+      "internal_debates": "Civic, ethnic, anti-colonial, liberal, expansionist and state-building nationalisms differ in membership and political aims.",
+      "classification_caution": "Nationalism can support liberation or exclusion; evaluate each movement in historical context.",
+      "related_tags": [
+        "nationalism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "fascism",
+      "name": "Fascism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "An ultranationalist, authoritarian and revolutionary far-right family historically associated with dictatorship, political violence and suppression of pluralism.",
+      "recurring_ideas": "Myth of national rebirth; leader-centred rule; mass mobilisation; hierarchy; militarism; political violence; anti-liberalism.",
+      "internal_debates": "Historians debate definitions and national variants; Italian Fascism and German Nazism are related but not identical.",
+      "classification_caution": "Describe critically and historically; never normalise or present as an ordinary democratic policy option.",
+      "related_tags": [
+        "fascism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "populism",
+      "name": "Populism",
+      "scope": "international",
+      "kind": "political-concept",
+      "summary": "A contested political style or thin ideology that frames politics as a struggle between a virtuous people and a corrupt elite.",
+      "recurring_ideas": "People-versus-elite framing; claims to represent popular sovereignty; anti-establishment rhetoric.",
+      "internal_debates": "Can combine with left, right, nationalist, socialist or other programmes; scholars disagree whether it is ideology, strategy or discourse.",
+      "classification_caution": "Do not treat populism as a complete economic or constitutional programme.",
+      "related_tags": [
+        "populism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "republicanism",
+      "name": "Republicanism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A tradition concerned with civic self-government and freedom from domination through public institutions and citizen participation.",
+      "recurring_ideas": "Non-domination; rule of law; civic virtue; mixed or accountable government; popular sovereignty.",
+      "internal_debates": "Classical, civic-humanist, neo-Roman and contemporary republican theories differ on participation and institutional design.",
+      "classification_caution": "Not synonymous with the modern Republican Party in the United States.",
+      "related_tags": [
+        "republicanism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "feminism",
+      "name": "Feminist political thought",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A diverse body of thought analysing and challenging gendered power, inequality and exclusion in political, economic and social life.",
+      "recurring_ideas": "Gender equality; bodily autonomy; representation; care; anti-violence; scrutiny of public/private power.",
+      "internal_debates": "Liberal, socialist, radical, Black, postcolonial, intersectional and other approaches differ in analysis and strategy.",
+      "classification_caution": "Feminism is plural; do not reduce it to a single policy position.",
+      "related_tags": [
+        "feminism"
+      ],
+      "source_ids": [
+        "sep-feminism-political"
+      ]
+    },
+    {
+      "id": "green-politics",
+      "name": "Green politics",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of political approaches that places ecological limits, sustainability and environmental justice at the centre of public policy.",
+      "recurring_ideas": "Ecological sustainability; intergenerational justice; precaution; decentralisation; environmental democracy.",
+      "internal_debates": "Eco-socialist, eco-liberal, deep-ecological and green-growth approaches disagree on markets, technology and growth.",
+      "classification_caution": "Distinguish political green movements from environmental policy adopted by other traditions.",
+      "related_tags": [
+        "green-politics"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "decolonial-thought",
+      "name": "Decolonial and postcolonial political thought",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "Approaches examining how colonial rule and its legacies shape power, knowledge, institutions, identity and global inequality.",
+      "recurring_ideas": "Self-determination; critique of colonial knowledge and hierarchy; cultural and political agency; structural inequality.",
+      "internal_debates": "Postcolonial and decolonial scholarship have distinct genealogies and should not be collapsed into one school.",
+      "classification_caution": "Use specific authors and contexts; avoid treating the Global South as intellectually uniform.",
+      "related_tags": [
+        "decolonial"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "pan-africanism",
+      "name": "Pan-Africanism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "A family of movements and ideas advocating solidarity, dignity and political cooperation among African peoples and the global African diaspora.",
+      "recurring_ideas": "Anti-colonial solidarity; racial equality; self-determination; continental and diasporic cooperation.",
+      "internal_debates": "Includes cultural, political, socialist, federalist and nationalist strands with different institutional visions.",
+      "classification_caution": "Distinguish historical phases and continental from diasporic projects.",
+      "related_tags": [
+        "pan-africanism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "peronism",
+      "name": "Peronism / Justicialism",
+      "scope": "international",
+      "kind": "political-tradition",
+      "summary": "An Argentine political movement associated with Juan and Eva Perón, labour incorporation, social justice rhetoric and a strong national-popular political identity.",
+      "recurring_ideas": "Labour organisation; social rights; economic nationalism; state mediation; political mobilisation.",
+      "internal_debates": "Peronist coalitions have ranged across economic and political positions; governing practice changed across periods.",
+      "classification_caution": "Treat as a historically specific movement, not a universal ideological template.",
+      "related_tags": [
+        "peronism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "gandhian-thought",
+      "name": "Gandhian political thought",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A body of political thought associated with Gandhi's anti-colonial strategy, non-violence, self-rule and decentralised social-economic ideals.",
+      "recurring_ideas": "Satyagraha; ahimsa; swaraj; village self-government; trusteeship; constructive work.",
+      "internal_debates": "Gandhi's views changed and contain tensions, including debates on caste, varna, industrialisation, gender and modern state institutions.",
+      "classification_caution": "Represent his caste-related positions and historical changes accurately; do not sanitise contradictions.",
+      "related_tags": [
+        "gandhian"
+      ],
+      "source_ids": [
+        "oxford-gandhi-caste",
+        "cambridge-gandhi-state",
+        "cambridge-anticolonial-futures"
+      ]
+    },
+    {
+      "id": "ambedkarite-thought",
+      "name": "Ambedkarite political thought",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A tradition drawing on B. R. Ambedkar's critique of caste hierarchy and arguments for social democracy, constitutional rights and substantive equality.",
+      "recurring_ideas": "Annihilation of caste; liberty, equality and fraternity; constitutional morality; representation; social and economic democracy.",
+      "internal_debates": "Later Ambedkarite movements interpret his legacy in varied ways; distinguish Ambedkar's own writings from later party programmes.",
+      "classification_caution": "Do not reduce Ambedkarite thought to reservation policy alone.",
+      "related_tags": [
+        "ambedkarite"
+      ],
+      "source_ids": [
+        "oxford-ambedkar-2024"
+      ]
+    },
+    {
+      "id": "nehruvian-thought",
+      "name": "Nehruvian political thought",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A tradition associated with Jawaharlal Nehru's democratic, secular and developmental vision, mixed economy, planning and non-alignment.",
+      "recurring_ideas": "Parliamentary democracy; secular constitutionalism; scientific temper; public sector and planning; non-alignment.",
+      "internal_debates": "Nehru's ideas and policy practice evolved; later uses of 'Nehruvian' can refer to different combinations of these themes.",
+      "classification_caution": "Separate Nehru's writings, Congress programmes and later interpretations.",
+      "related_tags": [
+        "nehruvian"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "indian-constitutional-liberalism",
+      "name": "Indian constitutional liberalism",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "Liberal and constitutional strands in Indian political thought and practice, shaped by colonial, nationalist and radical reform traditions.",
+      "recurring_ideas": "Rights; constitutional limits; equal citizenship; rule of law; representative government; group-differentiated rights debates.",
+      "internal_debates": "Indian liberalism has multiple historical strands and has often combined individual rights with state-led reform and group protections.",
+      "classification_caution": "Not a single party identity; include colonial context and critiques.",
+      "related_tags": [
+        "liberalism",
+        "constitutionalism"
+      ],
+      "source_ids": [
+        "oxford-liberalisms-india"
+      ]
+    },
+    {
+      "id": "indian-marxist-traditions",
+      "name": "Indian Marxist and communist traditions",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A diverse set of Indian movements and intellectual traditions adapting Marxist analysis to colonialism, class, caste, agrarian relations and parliamentary politics.",
+      "recurring_ideas": "Class analysis; labour and peasant organisation; anti-imperialism; land reform; debates on caste and class.",
+      "internal_debates": "Includes parliamentary communist parties, revolutionary currents and independent Marxist scholarship with significant disagreements.",
+      "classification_caution": "Do not conflate distinct parties, movements or periods.",
+      "related_tags": [
+        "marxism"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "indian-feminist-reform",
+      "name": "Indian feminist and social-reform thought",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A broad field of Indian feminist, anti-caste and social-reform arguments addressing gender, education, labour, family, caste and political representation.",
+      "recurring_ideas": "Gender justice; education; anti-violence; social equality; labour rights; critique of patriarchal institutions.",
+      "internal_debates": "Includes liberal, socialist, anti-caste, Dalit, Adivasi, queer and other strands; not a single unified doctrine.",
+      "classification_caution": "Avoid presenting upper-caste or urban reform histories as the whole field.",
+      "related_tags": [
+        "feminism",
+        "social-justice"
+      ],
+      "source_ids": []
+    },
+    {
+      "id": "indian-anti-colonial-nationalism",
+      "name": "Indian anti-colonial nationalism",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A range of movements and ideas seeking an end to colonial rule and political self-determination in the Indian subcontinent.",
+      "recurring_ideas": "Self-rule; mass mobilisation; constitutional reform and revolutionary action; plural and competing visions of nationhood.",
+      "internal_debates": "Included constitutionalist, Gandhian, socialist, revolutionary, religiously inflected and other currents; their aims and methods differed.",
+      "classification_caution": "Describe plural histories; this dataset intentionally excludes religion-centred ideological families as standalone entries.",
+      "related_tags": [
+        "nationalism",
+        "anti-colonial"
+      ],
+      "source_ids": [
+        "cambridge-anticolonial-futures"
+      ]
+    },
+    {
+      "id": "indian-secular-constitutionalism",
+      "name": "Indian secular constitutionalism",
+      "scope": "india",
+      "kind": "indian-political-tradition",
+      "summary": "A constitutional approach to equal citizenship and state neutrality or principled engagement across religious communities, interpreted differently in Indian debates.",
+      "recurring_ideas": "Equal citizenship; freedom of conscience; non-discrimination; constitutional rights; minority protections.",
+      "internal_debates": "Indian secularism has multiple interpretations concerning state distance, reform and public religious practice.",
+      "classification_caution": "This entry is constitutional-political, not a religion-centred ideology.",
+      "related_tags": [
+        "secularism",
+        "constitutionalism"
+      ],
+      "source_ids": [
+        "oxford-constitutionalism-india"
+      ]
+    }
+  ]
+}

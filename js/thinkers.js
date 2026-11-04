@@ -4,8 +4,8 @@
    Scores use the same -100..+100 axes as the assessment (negative = left label, positive = right label in questions.js).
    A near-zero score means "mixed or less pronounced", not "supports both". score:null = not scored (anachronistic, thin or contested).
    Where views changed significantly, add one phase per period instead of one lifelong score. Never invent positions, quotes or references. */
-const FAMILIES=["indic","sinic","islamic","african","latin-american","caribbean","southeast-asian","indigenous","western"];
-const TRADITION_TAGS=["liberal","classical-liberal","liberal-egalitarian","conservative","socialist-marxist","social-democratic","libertarian","republican","anarchist","nationalist","communitarian-religious","gandhian","social-justice-anti-caste","realist","confucian","islamic","anti-colonial","feminist","ecological","rationalist","secular-nationalist"];
+const FAMILIES=["indic","sinic","islamic","african","latin-american","caribbean","southeast-asian","indigenous","western","west-asian"];
+const TRADITION_TAGS=["liberal","classical-liberal","liberal-egalitarian","conservative","socialist-marxist","social-democratic","libertarian","republican","anarchist","nationalist","communitarian-religious","gandhian","social-justice-anti-caste","realist","confucian","islamic","anti-colonial","feminist","ecological","rationalist","secular-nationalist","authoritarian","anti-slavery","fascist","racist-nationalist","totalitarian","authoritarian-nationalist","social-justice","nonviolent","revolutionary","social-liberal","constitutionalism","black-nationalist"];
 const draftCell=(score,conf,documented,sourceIds)=>({score,conf,documented,sourceIds,rationale:"AI interpretation: "+documented+" This is a provisional mapping to POLITICA’s broad dimension, not a claim that the historical figure used this modern framework.",reviews:[],assessment:{method:"AI-assisted",assessedOn:"2026-11-03"}});
 const nullCell=note=>({score:null,note});
 const THINKERS=[

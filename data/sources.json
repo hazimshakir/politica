@@ -1,0 +1,132 @@
+{
+  "version": "1.0.0",
+  "records": [
+    {
+      "id": "sep-liberalism",
+      "title": "Liberalism",
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/liberalism/",
+      "type": "scholarly-reference",
+      "scope": [
+        "liberalism",
+        "indian-constitutional-liberalism"
+      ]
+    },
+    {
+      "id": "sep-conservatism",
+      "title": "Conservatism",
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/conservatism/",
+      "type": "scholarly-reference",
+      "scope": [
+        "conservatism"
+      ]
+    },
+    {
+      "id": "sep-libertarianism",
+      "title": "Libertarianism",
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/libertarianism/",
+      "type": "scholarly-reference",
+      "scope": [
+        "libertarianism"
+      ]
+    },
+    {
+      "id": "sep-anarchism",
+      "title": "Anarchism",
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/anarchism/",
+      "type": "scholarly-reference",
+      "scope": [
+        "anarchism"
+      ]
+    },
+    {
+      "id": "sep-socialism",
+      "title": "Socialism",
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/socialism/",
+      "type": "scholarly-reference",
+      "scope": [
+        "socialism",
+        "social-democracy",
+        "democratic-socialism",
+        "marxism"
+      ]
+    },
+    {
+      "id": "sep-feminism-political",
+      "title": "Feminist Political Philosophy",
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/feminism-political/",
+      "type": "scholarly-reference",
+      "scope": [
+        "feminism",
+        "indian-feminist-reform"
+      ]
+    },
+    {
+      "id": "oxford-liberalisms-india",
+      "title": "Liberalisms in India",
+      "publisher": "The Oxford Handbook of Comparative Political Theory",
+      "url": "https://academic.oup.com/edited-volume/28217/chapter-abstract/213237580",
+      "type": "scholarly-reference",
+      "scope": [
+        "indian-constitutional-liberalism"
+      ]
+    },
+    {
+      "id": "oxford-ambedkar-2024",
+      "title": "Ambedkar's Political Philosophy: A Grammar of Public Life from the Social Margins",
+      "publisher": "Oxford University Press",
+      "url": "https://academic.oup.com/book/57546",
+      "type": "scholarly-reference",
+      "scope": [
+        "ambedkarite-thought"
+      ]
+    },
+    {
+      "id": "oxford-gandhi-caste",
+      "title": "Gandhi Against Caste",
+      "publisher": "Oxford University Press",
+      "url": "https://academic.oup.com/book/11979",
+      "type": "scholarly-reference",
+      "scope": [
+        "gandhian-thought"
+      ]
+    },
+    {
+      "id": "cambridge-gandhi-state",
+      "title": "On Gandhi's Critique of the State: Sources, Contexts, Conjunctures",
+      "publisher": "Modern Intellectual History / Cambridge University Press",
+      "url": "https://www.cambridge.org/core/journals/modern-intellectual-history/article/abs/on-gandhis-critique-of-the-state-sources-contexts-conjunctures/2573CF4F2484C988B54499E3DDF62C63",
+      "type": "scholarly-reference",
+      "scope": [
+        "gandhian-thought"
+      ]
+    },
+    {
+      "id": "cambridge-anticolonial-futures",
+      "title": "Gandhi’s Failure: Anticolonial Movements and Postcolonial Futures",
+      "publisher": "Perspectives on Politics / Cambridge University Press",
+      "url": "https://www.cambridge.org/core/journals/perspectives-on-politics/article/abs/gandhis-failure-anticolonial-movements-and-postcolonial-futures/05161C9E92966B35DA993EE03917FE52",
+      "type": "scholarly-reference",
+      "scope": [
+        "gandhian-thought",
+        "indian-anti-colonial-nationalism"
+      ]
+    },
+    {
+      "id": "oxford-constitutionalism-india",
+      "title": "The Constitution of India: Popular Sovereignty and Democratic Transformations",
+      "publisher": "Oxford University Press",
+      "url": "https://academic.oup.com/book/3428",
+      "type": "scholarly-reference",
+      "scope": [
+        "indian-secular-constitutionalism",
+        "indian-constitutional-liberalism"
+      ]
+    }
+  ]
+}

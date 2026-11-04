@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "records": [
+    {
+      "id": "gandhi",
+      "name": "Mohandas K. Gandhi",
+      "profile_id": "gandhi",
+      "scope": "india",
+      "note": "Existing POLITICA profile; relationships are interpretive and period-sensitive."
+    },
+    {
+      "id": "ambedkar",
+      "name": "B. R. Ambedkar",
+      "profile_id": "ambedkar",
+      "scope": "india",
+      "note": "Existing POLITICA profile; distinguish his own writings from later Ambedkarite movements."
+    },
+    {
+      "id": "nehru",
+      "name": "Jawaharlal Nehru",
+      "profile_id": "nehru",
+      "scope": "india",
+      "note": "Existing POLITICA profile; distinguish writings, party programmes and state practice."
+    },
+    {
+      "id": "kautilya",
+      "name": "Kautilya (Chanakya)",
+      "profile_id": "kautilya",
+      "scope": "india",
+      "note": "Classical political thinker; do not force a modern ideological label."
+    },
+    {
+      "id": "tagore",
+      "name": "Rabindranath Tagore",
+      "profile_id": null,
+      "scope": "india",
+      "note": "Literary and political thinker; not reducible to a party ideology."
+    },
+    {
+      "id": "bhagat-singh",
+      "name": "Bhagat Singh",
+      "profile_id": null,
+      "scope": "india",
+      "note": "Revolutionary and anti-colonial thinker; read dated writings."
+    },
+    {
+      "id": "subhas-chandra-bose",
+      "name": "Subhas Chandra Bose",
+      "profile_id": null,
+      "scope": "india",
+      "note": "Anti-colonial leader; evaluate political alliances and wartime context carefully."
+    },
+    {
+      "id": "mn-roy",
+      "name": "M. N. Roy",
+      "profile_id": null,
+      "scope": "india",
+      "note": "His intellectual trajectory crossed several traditions; periodisation matters."
+    },
+    {
+      "id": "john-locke",
+      "name": "John Locke",
+      "profile_id": null,
+      "scope": "international",
+      "note": "Early modern political philosopher; avoid projecting contemporary party categories."
+    },
+    {
+      "id": "john-rawls",
+      "name": "John Rawls",
+      "profile_id": null,
+      "scope": "international",
+      "note": "Liberal egalitarian political philosopher."
+    },
+    {
+      "id": "mao-zedong",
+      "name": "Mao Zedong",
+      "profile_id": null,
+      "scope": "international",
+      "note": "Political leader and theorist; distinguish doctrine from governing outcomes."
+    },
+    {
+      "id": "nelson-mandela",
+      "name": "Nelson Mandela",
+      "profile_id": null,
+      "scope": "international",
+      "note": "Anti-apartheid leader and president; not a single fixed ideological score."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "POLITICA typed relationship",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "person_id",
+    "ideology_id",
+    "type",
+    "description",
+    "confidence",
+    "source_ids"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "person_id": {
+      "type": "string"
+    },
+    "ideology_id": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "associated-with",
+        "intellectual-source",
+        "historical-participant",
+        "critical-interlocutor",
+        "not-classified"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "confidence": {
+      "enum": [
+        "introductory",
+        "medium",
+        "high"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
