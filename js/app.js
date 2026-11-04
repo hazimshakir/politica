@@ -94,6 +94,22 @@ function startOver(){
   document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");
   show();toast("Saved answers cleared.")}
 function restart(){answers={};current=0;reviewMode=false;finished=false;document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");show();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
+/* Keyboard controls: arrows choose a response; Enter advances. */
+document.addEventListener("keydown",function(e){
+  const card=document.getElementById("quizCard"),assessment=document.getElementById("assessment");
+  if(!card||finished||!assessment||assessment.classList.contains("hidden"))return;
+  const target=e.target;
+  if(target&&(/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))&&target.type!=="radio")return;
+  if(!card.contains(target)&&target!==document.body)return;
+  if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].includes(e.key)){
+    e.preventDefault();
+    const values=scale.map(x=>x[1]);let index=values.indexOf(answers[current]);
+    if(e.key==="ArrowRight"||e.key==="ArrowDown")index=(index+1)%values.length;
+    else index=index<=0?values.length-1:index-1;
+    choose(values[index]);return;
+  }
+  if(e.key==="Enter"&&answers[current]!==undefined){e.preventDefault();next();}
+});
 (function init(){
   const s=loadSaved();
   if(s){answers=s.answers;current=s.current}
