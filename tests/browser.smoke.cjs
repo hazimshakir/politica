@@ -27,6 +27,21 @@ const assert = require("node:assert/strict");
     assert.match(await page.locator(".counter").innerText(), /QUESTION 1 OF 35/);
     assert.equal(await page.locator('input[name="answer"]').count(), 5);
 
+    // Keyboard-only response and navigation controls.
+    const keyboard = await browser.newPage({ viewport: { width: 1365, height: 900 } });
+    await keyboard.goto("http://127.0.0.1:4173/assessment.html");
+    await keyboard.locator("#questionSet").focus();
+    await keyboard.keyboard.press("ArrowRight");
+    assert.equal(await keyboard.locator('input[name="answer"][value="2"]').isChecked(), true,
+      "ArrowRight should select the next response");
+    await keyboard.keyboard.press("Enter");
+    assert.match(await keyboard.locator(".counter").innerText(), /QUESTION 2 OF 35/,
+      "Enter should advance after a response is selected");
+    await keyboard.keyboard.press("ArrowDown");
+    assert.equal(await keyboard.locator('input[name="answer"][value="3"]').isChecked(), true,
+      "ArrowDown should move to the next response");
+    await keyboard.close();
+
     // Save one answer, reload, and confirm that it is restored.
     await page.locator('input[name="answer"][value="4"]').check({ force: true });
     assert.match(await page.locator("#progressCopy").innerText(), /1 of 35 answered/);
