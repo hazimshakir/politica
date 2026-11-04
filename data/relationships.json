@@ -1,0 +1,111 @@
+{
+  "version": "1.0.0",
+  "relationship_types": [
+    "associated-with",
+    "intellectual-source",
+    "historical-participant",
+    "critical-interlocutor",
+    "not-classified"
+  ],
+  "records": [
+    {
+      "id": "rel-001",
+      "person_id": "gandhi",
+      "ideology_id": "gandhian-thought",
+      "type": "associated-with",
+      "description": "Gandhi's own political writings and campaigns are a central source for this tradition; internal tensions and changes over time remain important.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-002",
+      "person_id": "ambedkar",
+      "ideology_id": "ambedkarite-thought",
+      "type": "intellectual-source",
+      "description": "Ambedkar's writings are foundational sources; later Ambedkarite movements are not identical to his complete body of thought.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-003",
+      "person_id": "nehru",
+      "ideology_id": "nehruvian-thought",
+      "type": "associated-with",
+      "description": "The tradition is named for and draws heavily on Nehru's writings and political practice.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-004",
+      "person_id": "mn-roy",
+      "ideology_id": "indian-marxist-traditions",
+      "type": "historical-participant",
+      "description": "Roy participated in communist politics before developing Radical Humanism; this relationship is period-specific, not a lifelong label.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-005",
+      "person_id": "john-locke",
+      "ideology_id": "liberalism",
+      "type": "intellectual-source",
+      "description": "Locke is a major early modern source for rights, consent and political authority debates.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-006",
+      "person_id": "john-rawls",
+      "ideology_id": "liberalism",
+      "type": "intellectual-source",
+      "description": "Rawls is a major source for contemporary liberal egalitarian political philosophy.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-007",
+      "person_id": "mao-zedong",
+      "ideology_id": "maoism",
+      "type": "associated-with",
+      "description": "Mao's writings and revolutionary practice are associated with this tradition; doctrine and state outcomes must be separately assessed.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-008",
+      "person_id": "bhagat-singh",
+      "ideology_id": "indian-anti-colonial-nationalism",
+      "type": "historical-participant",
+      "description": "Bhagat Singh participated in revolutionary anti-colonial politics; his own writings should guide interpretation.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-009",
+      "person_id": "subhas-chandra-bose",
+      "ideology_id": "indian-anti-colonial-nationalism",
+      "type": "historical-participant",
+      "description": "Bose was a major anti-colonial leader whose alliances and political proposals require historical contextualisation.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-010",
+      "person_id": "tagore",
+      "ideology_id": "indian-anti-colonial-nationalism",
+      "type": "critical-interlocutor",
+      "description": "Tagore engaged with nationalism critically; this is a relationship of debate, not simple ideological membership.",
+      "confidence": "introductory",
+      "source_ids": []
+    },
+    {
+      "id": "rel-011",
+      "person_id": "kautilya",
+      "ideology_id": "indian-constitutional-liberalism",
+      "type": "not-classified",
+      "description": "No direct membership is asserted; classical statecraft is included as comparative context only.",
+      "confidence": "introductory",
+      "source_ids": []
+    }
+  ]
+}
