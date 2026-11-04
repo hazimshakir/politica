@@ -330,3 +330,6 @@
  .assess .book-cover-placeholder.has-cover [hidden]{display:none!important}
  .assess .cover-rights-note{max-width:112px}
 }
+
+
+.keyboard-hint{margin:14px 0 0;color:#9fb0c4;font-size:11px;letter-spacing:.02em}
