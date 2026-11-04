@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://politica-ynnr.onrender.com/data/schemas/ideology.schema.json",
+  "title": "POLITICA ideology record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "scope",
+    "kind",
+    "summary",
+    "recurring_ideas",
+    "internal_debates",
+    "classification_caution",
+    "related_tags",
+    "source_ids"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2
+    },
+    "scope": {
+      "enum": [
+        "international",
+        "india"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "political-tradition",
+        "political-concept",
+        "indian-political-tradition"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 30
+    },
+    "recurring_ideas": {
+      "type": "string"
+    },
+    "internal_debates": {
+      "type": "string"
+    },
+    "classification_caution": {
+      "type": "string"
+    },
+    "related_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}
