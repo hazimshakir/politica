@@ -40,11 +40,14 @@ Open http://localhost:8000 in your browser. On systems where the command is name
 
 ### Run the tests
 
-Requirements: Node.js 20 or later. The current dependency-free matching test suite can be run with:
+Requirements: Node.js 20 or later. The dependency-free matching and static-site integrity suites can be run with:
 
 ```bash
 node tests/matching.test.js
+node tests/site-integrity.test.cjs
 ```
+
+The browser smoke suite runs in GitHub Actions with Chromium and checks the assessment journey, keyboard controls, catalogue navigation and library search.
 
 ## Seven dimensions
 

@@ -24,6 +24,19 @@ jobs:
       - name: Run matching tests
         run: node tests/matching.test.js
 
+  site-integrity:
+    name: Static site integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate sitemap, page metadata and catalogue references
+        run: node tests/site-integrity.test.cjs
+
   browser-smoke:
     name: Browser smoke test
     runs-on: ubuntu-latest

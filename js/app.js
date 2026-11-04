@@ -24,7 +24,8 @@ function showResults(restoring){
   document.getElementById("assessment").classList.add("hidden");
   const scores=calculateAll(answers);
   renderResults(scores);
-  window.lastScores=scores}
+  window.lastScores=scores;
+  const resultHeading=document.querySelector("#results h1");if(resultHeading){resultHeading.setAttribute("tabindex","-1");resultHeading.focus({preventScroll:true})}}
 function answerLabel(i){const s=scale.find(x=>x[1]===answers[i]);return s?s[0]:null}
 function answerText(){return all.map((q,i)=>`${i+1}. [${sections[q.section].title}] ${q.text}\nAnswer: ${answerLabel(i)?answerLabel(i)+" ("+answers[i]+"/5)":"Not answered"}`).join("\n\n")}
 function copyPrompt(){if(!confirm("Privacy warning: your copied answers may reveal personal political views. Share them carefully. Copy anyway?"))return;let prompt=`Please provide a politically neutral, nuanced interpretation of my voluntary political self-assessment. Do not recommend parties, candidates or votes. Treat this as self-reflection, not a validated psychological test. Analyse each dimension separately, identify evidence from my answers, explain mixed or contradictory preferences without forcing a label, distinguish established ideologies carefully, and state what cannot be inferred. Do not infer my identity, religion, caste or voting preference.\n\nMY ANSWERS:\n${answerText()}\n\nPlease discuss economic philosophy, social equality, culture, democracy, government and civil liberties, national/global outlook, and personal values. End with a cautious summary and useful follow-up questions.`;navigator.clipboard.writeText(prompt).then(()=>toast("Copied. Open ChatGPT and paste your prompt." )).catch(()=>{let t=document.createElement("textarea");t.value=prompt;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();toast("Copied. Open ChatGPT and paste your prompt.")});}
