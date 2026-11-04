@@ -27,6 +27,47 @@ const assert = require("node:assert/strict");
     assert.match(await page.locator(".counter").innerText(), /QUESTION 1 OF 35/);
     assert.equal(await page.locator('input[name="answer"]').count(), 5);
 
+    // Keyboard-only response and navigation controls.
+    const keyboard = await browser.newPage({ viewport: { width: 1365, height: 900 } });
+    await keyboard.goto("http://127.0.0.1:4173/assessment.html");
+    await keyboard.locator("#questionSet").focus();
+    await keyboard.keyboard.press("ArrowRight");
+    assert.equal(await keyboard.locator('input[name="answer"][value="1"]').isChecked(), true,
+      "ArrowRight should select the first response when none is selected");
+    await keyboard.keyboard.press("Enter");
+    assert.match(await keyboard.locator(".counter").innerText(), /QUESTION 2 OF 35/,
+      "Enter should advance after a response is selected");
+    await keyboard.keyboard.press("ArrowDown");
+    assert.equal(await keyboard.locator('input[name="answer"][value="1"]').isChecked(), true,
+      "ArrowDown should select the first response when the new question has no answer");
+    await keyboard.keyboard.press("ArrowDown");
+    assert.equal(await keyboard.locator('input[name="answer"][value="2"]').isChecked(), true,
+      "ArrowDown should move to the next response after an answer is selected");
+    await keyboard.close();
+
+    // Ideology catalogue data, search, and detail-page navigation.
+    const ideologies = await browser.newPage({ viewport: { width: 1365, height: 900 } });
+    await ideologies.goto("http://127.0.0.1:4173/ideologies.html");
+    await ideologies.locator("#ideology-grid .ideology-card").first().waitFor();
+    assert.match(await ideologies.locator("#ideology-count").innerText(), /27 traditions and concepts/);
+    await ideologies.locator("#ideology-search").fill("liberalism");
+    await ideologies.locator("#ideology-grid .ideology-card").first().getByRole("link", { name: /Explore this tradition/ }).click();
+    await ideologies.locator("#detail-title").waitFor();
+    assert.match(await ideologies.locator("#detail-title").innerText(), /liberalism/i);
+    await ideologies.close();
+
+    // Library renders the retained Kautilya profile and excludes removed profiles.
+    const library = await browser.newPage({ viewport: { width: 1365, height: 900 } });
+    await library.goto("http://127.0.0.1:4173/thinkers-library.html");
+    await library.locator("#library-grid .thinker-card").first().waitFor();
+    await library.locator("#library-search").fill("Kautilya");
+    assert.equal(await library.locator("#library-grid .thinker-card").count(), 1,
+      "Kautilya should remain in the library");
+    await library.locator("#library-search").fill("Periyar");
+    assert.equal(await library.locator("#library-grid .thinker-card").count(), 0,
+      "removed profiles should not appear in search");
+    await library.close();
+
     // Save one answer, reload, and confirm that it is restored.
     await page.locator('input[name="answer"][value="4"]').check({ force: true });
     assert.match(await page.locator("#progressCopy").innerText(), /1 of 35 answered/);
