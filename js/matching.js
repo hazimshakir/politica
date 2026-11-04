@@ -4,7 +4,7 @@
 */
 const MATCH_DIMS=["economic","social","culture","democracy","liberty","global","values"];
 const MATCH_CONFIG={weights:{high:1,medium:.6,low:.3},minDims:4,minWeight:2.5,close:30,different:60,maxSpread:25,mixedBelow:20,
-  overlapSlots:3,contrastSlots:2,maxWestern:2,minContrastClose:2,minContrastDifferent:2,maxBooksPerFamily:2};
+  overlapSlots:2,contrastSlots:2,maxWestern:2,maxPerFamily:1,minContrastClose:2,minContrastDifferent:2,maxBooksPerFamily:2};
 const _num=v=>typeof v==="number"&&isFinite(v);
 /* Returns null when a cell may be published, otherwise the reason it may not. */
 function cellProblem(cell,sources){
@@ -55,16 +55,20 @@ function matchThinkers(user,thinkers,cfg){
   (thinkers||[]).forEach(t=>{const ph=publishedPhases(t);let best=null;
     ph.forEach(p=>{const c=compareProfile(user,p.dims);if(!c.eligible)return;if(!best||c.D<best.c.D-1e-12||(Math.abs(c.D-best.c.D)<1e-12&&p.id<best.p.id))best={t,p,c,others:ph.length-1}});
     if(best)cands.push(best)});
-  const byId=(a,b)=>a.t.id<b.t.id?-1:a.t.id>b.t.id?1:0;let west=0;
-  const take=(arr,n,list)=>{for(const x of arr){if(list.length>=n)break;if(x.t.family==="western"&&west>=C.maxWestern)continue;list.push(x);if(x.t.family==="western")west++}};
-  const overlap=[];take(cands.slice().sort((a,b)=>a.c.D-b.c.D||byId(a,b)),C.overlapSlots,overlap);
-  const fams=new Set(overlap.map(x=>x.t.family));
-  const pool=cands.filter(x=>!overlap.includes(x)&&x.c.close>=C.minContrastClose&&x.c.diff>=C.minContrastDifferent)
-    .sort((a,b)=>(fams.has(a.t.family)-fams.has(b.t.family))||((b.t.family==="indic")-(a.t.family==="indic"))||b.c.diffShare-a.c.diffShare||byId(a,b));
+  const byId=(a,b)=>a.t.id<b.t.id?-1:a.t.id>b.t.id?1:0,byRelevance=(a,b)=>a.c.D-b.c.D||byId(a,b);
+  const familyCounts=new Map(),used=new Set();
+  const take=(arr,n,list)=>{for(const x of arr){if(list.length>=n)break;const family=x.t.family||"unknown",count=familyCounts.get(family)||0;
+    if(used.has(x.t.id)||count>=C.maxPerFamily)continue;
+    if(family==="western"&&count>=C.maxWestern)continue;
+    list.push(x);used.add(x.t.id);familyCounts.set(family,count+1)}};
+  const overlap=[];take(cands.slice().sort(byRelevance),C.overlapSlots,overlap);
+  const pool=cands.filter(x=>!used.has(x.t.id)&&x.c.close>=C.minContrastClose&&x.c.diff>=C.minContrastDifferent)
+    .sort((a,b)=>(familyCounts.get(a.t.family)||0)-(familyCounts.get(b.t.family)||0)||b.c.diffShare-a.c.diffShare||a.c.D-b.c.D||byId(a,b));
   const contrast=[];take(pool,C.contrastSlots,contrast);
-  if(overlap.length<C.overlapSlots||contrast.length<C.contrastSlots)notes.push("Showing fewer thinkers than the usual "+(C.overlapSlots+C.contrastSlots)+": not enough sufficiently reviewed, comparable entries. The evidence standard is not lowered.");
-  if(cands.length&&![...overlap,...contrast].some(x=>x.t.family==="indic"))notes.push("No reviewed Indian thinker met the comparison rules for this profile.");
-  return{overlap:overlap.map(_card),contrast:contrast.map(_card),notes,eligibleCount:cands.length}}
+  if(overlap.length<C.overlapSlots||contrast.length<C.contrastSlots)notes.push("Showing "+(overlap.length+contrast.length)+" evidence-based comparisons. There are not enough sufficiently comparable, source-documented profiles to fill every slot; the evidence standard has not been lowered.");
+  if(cands.length&&![...overlap,...contrast].some(x=>x.t.family==="indic"))notes.push("No Indian thinker met the comparison rules for this profile.");
+  return{overlap:overlap.map(_card),contrast:contrast.map(_card),notes,eligibleCount:cands.length};
+}
 function selectBooks(user,books,cfg){
   const C=Object.assign({},MATCH_CONFIG,cfg||{}),pub=publishedBooks(books),notes=[],picks=[],used=new Set(),authors=new Set(),fam={};
   const focus=MATCH_DIMS.filter(d=>_num(user[d])).sort((a,b)=>Math.abs(user[b])-Math.abs(user[a])||MATCH_DIMS.indexOf(a)-MATCH_DIMS.indexOf(b)).slice(0,2);
