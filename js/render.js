@@ -35,13 +35,13 @@ function explorationThinkers(scores,excludedIds){
  const shuffled=candidates.slice().sort((a,b)=>b.matched.length-a.matched.length||Math.random()-.5),picks=[],families=new Set();
  for(const x of shuffled){if(picks.length>=3)break;if(!families.has(x.t.family)){picks.push(x);families.add(x.t.family)}}
  for(const x of shuffled){if(picks.length>=3)break;if(!picks.some(y=>y.t.id===x.t.id))picks.push(x)}
- try{sessionStorage.setItem(key,[...picks.map(x=>x.t.id),...history].slice(0,9).join("|"))}catch{}
+ try{sessionStorage.setItem(key,JSON.stringify([...picks.map(x=>x.t.id),...history].slice(0,9)))}catch{}
  return picks.map(x=>({...x,reason:x.matched.length?"Related themes in your answers: "+x.matched.map(v=>v.replace(/-/g," ")).join(", ")+".":"A rotating discovery pick from the wider collection."}));
 }
 function explorationHtml(scores,excludedIds){
  const picks=explorationThinkers(scores,excludedIds);if(!picks.length)return "";
  return '<section class="rec-explore"><div class="rec-section-label">Explore beyond the scored matches</div><p class="rec-explore-intro">These profiles broaden your reading list. They are selected by broad themes and rotation, not numerical similarity; their positions have not been scored against your answers.</p><div class="rec-explore-grid">'+picks.map(({t,reason})=>{
-  const initials=recEsc((t.name||"?").split(/\\s+/).map(v=>v[0]).slice(0,2).join(""));
+  const initials=recEsc((t.name||"?").split(/\s+/).map(v=>v[0]).slice(0,2).join(""));
   const tags=(t.traditions||[]).map(v=>recEsc(v.replace(/-/g," "))).join(" · ");
   return '<article class="rec-explore-card"><div class="rec-explore-avatar" aria-hidden="true">'+initials+'</div><span class="rec-badge">Discovery pick</span><h3>'+recEsc(t.name)+'</h3><p class="rec-explore-years">'+recEsc(t.lifespan||"Historical profile")+' · '+recEsc(t.region||"")+'</p><p>'+recEsc(t.summary||"Explore this profile in the library.")+'</p><p class="rec-explore-reason">'+recEsc(reason)+'</p><small>Traditions: '+(tags||"Not assigned")+'</small></article>';
  }).join("")+'</div><a class="rec-library-link" href="thinkers-library.html">Explore the full collection →</a></section>';
