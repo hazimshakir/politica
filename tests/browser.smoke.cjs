@@ -32,13 +32,13 @@ const assert = require("node:assert/strict");
     await keyboard.goto("http://127.0.0.1:4173/assessment.html");
     await keyboard.locator("#questionSet").focus();
     await keyboard.keyboard.press("ArrowRight");
-    assert.equal(await keyboard.locator('input[name="answer"][value="2"]').isChecked(), true,
-      "ArrowRight should select the next response");
+    assert.equal(await keyboard.locator('input[name="answer"][value="1"]').isChecked(), true,
+      "ArrowRight should select the first response when none is selected");
     await keyboard.keyboard.press("Enter");
     assert.match(await keyboard.locator(".counter").innerText(), /QUESTION 2 OF 35/,
       "Enter should advance after a response is selected");
     await keyboard.keyboard.press("ArrowDown");
-    assert.equal(await keyboard.locator('input[name="answer"][value="3"]').isChecked(), true,
+    assert.equal(await keyboard.locator('input[name="answer"][value="2"]').isChecked(), true,
       "ArrowDown should move to the next response");
     await keyboard.close();
 
