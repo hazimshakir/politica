@@ -49,4 +49,7 @@ for (const file of ["index.html", ...requiredPages.filter(x => x !== "/").map(x 
   if (file !== "index.html") assert.ok(html.includes('rel="canonical"'), file + " needs a canonical URL");
 }
 assert.equal(ideologyData.records.length, 27, "update this expectation deliberately when catalogue grows");
-console.log("PASS: sitemap routes, canonical pages, ideology IDs, and source references");
+const app = read("js/app.js");
+assert.ok(app.split("function startOver()")[1].split("function restart()")[0].includes("clearProgress()"), "start over must clear all local assessment state");
+assert.ok(app.split("function restart()")[1].split("/* Keyboard controls")[0].includes("clearProgress()"), "retake must clear all local assessment state");
+console.log("PASS: sitemap, catalogue integrity and local assessment data clearing");

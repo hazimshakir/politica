@@ -91,10 +91,10 @@ function downloadShareCard(){
 }
 function startOver(){
   if(Object.keys(answers).length&&!confirm("Clear your saved answers and start again?"))return;
-  answers={};current=0;reviewMode=false;finished=false;
+  answers={};current=0;reviewMode=false;finished=false;clearProgress();
   document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");
   show();toast("Saved answers cleared.")}
-function restart(){answers={};current=0;reviewMode=false;finished=false;document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");show();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
+function restart(){answers={};current=0;reviewMode=false;finished=false;clearProgress();document.getElementById("results").classList.add("hidden");document.getElementById("assessment").classList.remove("hidden");show();document.getElementById("assessment").scrollIntoView({behavior:"smooth"})}
 /* Keyboard controls: arrows choose a response; Enter advances. */
 document.addEventListener("keydown",function(e){
   const card=document.getElementById("quizCard"),assessment=document.getElementById("assessment");
