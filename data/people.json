@@ -18,7 +18,7 @@
     {
       "id": "nehru",
       "name": "Jawaharlal Nehru",
-      "profile_id": "jawaharlal-nehru",
+      "profile_id": "nehru",
       "scope": "india",
       "note": "Existing POLITICA profile; distinguish writings, party programmes and state practice."
     },
@@ -74,14 +74,14 @@
     {
       "id": "mao-zedong",
       "name": "Mao Zedong",
-      "profile_id": "mao-zedong",
+      "profile_id": null,
       "scope": "international",
       "note": "Political leader and theorist; distinguish doctrine from governing outcomes."
     },
     {
       "id": "nelson-mandela",
       "name": "Nelson Mandela",
-      "profile_id": "nelson-mandela",
+      "profile_id": null,
       "scope": "international",
       "note": "Anti-apartheid leader and president; not a single fixed ideological score."
     }
