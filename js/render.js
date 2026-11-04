@@ -13,7 +13,7 @@ function renderQuiz(current,answers){
   document.getElementById("progressCopy").textContent=`${answered} of ${all.length} answered`;
   renderSteps(current,answers);
   let opts=scale.map(([label,val])=>`<label class="option ${answers[current]===val?'selected':''}"><input type="radio" name="answer" value="${val}"${answers[current]===val?' checked':''} onchange="choose(${val})"><span class="radio" aria-hidden="true"></span><span>${label}</span></label>`).join("");
-  document.getElementById("quizCard").innerHTML=`<div class="quiz-head"><span class="tag">${String(q.section+1).padStart(2,'0')} / ${s.title}</span><span class="counter">QUESTION ${current+1} OF ${all.length}</span></div><h2>${s.title}</h2><p class="hint">${s.desc}</p>${q.scenario?`<div class="scenario" id="scenarioText">${q.scenario}</div>`:''}<fieldset class="fs" id="questionSet" tabindex="-1"${q.scenario?' aria-describedby="scenarioText"':''}><legend class="qtext"><span class="sr-only">Question ${current+1} of ${all.length}. </span>${q.text}</legend><div class="options">${opts}</div></fieldset><div class="navrow"><button class="btn btn-light" onclick="previous()" ${current===0?'disabled':''}>← Back</button><button class="btn btn-dark" onclick="next()" ${answers[current]===undefined?'disabled':''}>${current===all.length-1?'View my profile':'Continue →'}</button></div>`}
+  document.getElementById("quizCard").innerHTML=`<div class="quiz-head"><span class="tag">${String(q.section+1).padStart(2,'0')} / ${s.title}</span><span class="counter">QUESTION ${current+1} OF ${all.length}</span></div><h2>${s.title}</h2><p class="hint">${s.desc}</p>${q.scenario?`<div class="scenario" id="scenarioText">${q.scenario}</div>`:''}<fieldset class="fs" id="questionSet" tabindex="-1"${q.scenario?' aria-describedby="scenarioText"':''}><legend class="qtext"><span class="sr-only">Question ${current+1} of ${all.length}. </span>${q.text}</legend><div class="options">${opts}</div><p class="keyboard-hint">Keyboard: ↑ / ↓ or ← / → to choose · Enter to continue</p></fieldset><div class="navrow"><button class="btn btn-light" onclick="previous()" ${current===0?'disabled':''}>← Back</button><button class="btn btn-dark" onclick="next()" ${answers[current]===undefined?'disabled':''}>${current===all.length-1?'View my profile':'Continue →'}</button></div>`}
 /* Thinker and book panel. Shows AI-assessed pilot entries with a clear provisional-status disclosure. */
 function recEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function recommendationsHtml(scores){
@@ -28,12 +28,14 @@ function recommendationsHtml(scores){
   const src=a=>(a||[]).map(s=>(s.url?'<a href="'+recEsc(s.url)+'" target="_blank" rel="noopener noreferrer">'+recEsc(s.citation)+'</a>':recEsc(s.citation))+(s.locator?" — "+recEsc(s.locator):"")).join("</li><li>");
   const okT=id=>{const t=THINKERS.find(x=>x.id===id);return t&&["reviewed","ai-reviewed"].includes(t.status)};
   const okB=id=>{const b=BOOKS.find(x=>x.id===id);return b&&["reviewed","ai-reviewed"].includes(b.status)};
+  const commonsPortrait=(file,alt)=>({url:"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(file)+"?width=480",credit:"Wikimedia Commons · see file page",source:"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(file),alt});
   const portrait={
-   gandhi:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_Gandhi.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Portrait_Gandhi.jpg"},
-   ambedkar:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dr._Bhimrao_Ambedkar.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Dr._Bhimrao_Ambedkar.jpg"},
-   hayek:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Friedrich_Hayek_portrait.jpg",credit:"Wikimedia Commons · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Friedrich_Hayek_portrait.jpg"},
-   marx:{url:"https://commons.wikimedia.org/wiki/Special:FilePath/Karl_Marx.jpg",credit:"Wikimedia Commons · public domain",source:"https://commons.wikimedia.org/wiki/File:Karl_Marx.jpg"},
-   kautilya:{url:"assets/kautilya.webp",credit:"Portrait image supplied by the POLITICA project",source:null}
+   gandhi:commonsPortrait("Mohandas K. Gandhi, portrait.jpg","Archival portrait of Mohandas K. Gandhi"),
+   ambedkar:commonsPortrait("Dr B R Ambedkar as Barrister in 1922.jpg","Portrait of B. R. Ambedkar"),
+   hayek:commonsPortrait("Friedrich Hayek portrait.jpg","Portrait of Friedrich A. Hayek"),
+   marx:commonsPortrait("Karl Marx Portrait.jpg","Portrait of Karl Marx"),
+   nehru:commonsPortrait("Shri Jawaharlal Nehru.jpg","Official portrait of Jawaharlal Nehru"),
+   kautilya:{url:"assets/kautilya.webp",credit:"Portrait image supplied by the POLITICA project",source:null,alt:"User-supplied portrait of Kautilya"}
   };
   const tm=matchThinkers(scores,THINKERS),bm=selectBooks(scores,BOOKS);
   const cards=[...tm.overlap.map(c=>["Closest overlap",c]),...tm.contrast.map(c=>["Useful contrast",c])].filter(([,c])=>okT(c.thinkerId));
@@ -42,11 +44,12 @@ function recommendationsHtml(scores){
   if(cards.length){
    h+='<div class="rec-section-label">Thinkers</div><div class="thinker-rec-grid">'+cards.map(([slot,c])=>{
     const person=THINKERS.find(t=>t.id===c.thinkerId),photo=portrait[c.thinkerId];
+    const initials=recEsc(c.name.split(/\s+/).map(x=>x[0]).slice(0,2).join(""));
     const image=photo?'<img class="thinker-photo" src="'+photo.url+'" alt="Portrait of '+recEsc(c.name)+'" loading="lazy" onerror="this.closest(\'.thinker-photo-wrap\').classList.add(\'no-photo\');this.remove()">' : '';
     const close=labs(c.overlaps),different=labs(c.differences),partial=labs(c.partlyDifferent);
     const evidence=c.rows.map(r=>'<li><b>'+recEsc(lab(r.dim))+'</b> · '+recEsc(r.relation)+'. '+(r.thinker? 'Them: '+recEsc(r.thinker.orientation.text)+'. '+recEsc(r.thinker.documented)+' Confidence: '+recEsc(r.thinker.conf)+'. Sources: '+src(r.thinker.sources)+'.':recEsc(r.note||"No comparable evidence."))+'</li>').join("");
     const credits=photo?(photo.source?'<a class="image-credit" href="'+photo.source+'" target="_blank" rel="noopener noreferrer">'+photo.credit+'</a>':'<span class="image-credit">'+photo.credit+'</span>'):'<span class="image-credit">No verified historical portrait available</span>';
-    return '<article class="thinker-rec-card"><div class="thinker-rec-top"><div class="thinker-photo-wrap '+(photo?'':'no-photo')+'">'+image+(!photo?'<span aria-hidden="true">'+recEsc(c.name.split(/\s+/).map(x=>x[0]).slice(0,2).join(""))+'</span>':'')+'</div><div class="thinker-rec-title"><span class="rec-badge">'+recEsc(slot)+'</span><h3>'+recEsc(c.name)+'</h3><p>'+recEsc(c.lifespan)+' · '+recEsc(c.phase.label)+(c.phase.years?' · '+recEsc(c.phase.years):'')+'</p>'+credits+'</div></div><ul class="rec-bullets"><li><b>Overlap:</b> '+close+'</li><li><b>Different:</b> '+(partial!=="—"?"Partly: "+partial+" · ":"")+different+'</li><li><b>Not comparable:</b> '+labs(c.notComparable)+'</li></ul><details class="rec-details"><summary>View comparison &amp; sources</summary><ul class="rec-evidence">'+evidence+'</ul></details></article>';
+    return '<article class="thinker-rec-card"><div class="thinker-rec-top"><div class="thinker-photo-wrap '+(photo?'':'no-photo')+'">'+image+'<span class="thinker-initials" aria-hidden="true">'+(photo?'':initials)+'</span>'+'</div><div class="thinker-rec-title"><span class="rec-badge">'+recEsc(slot)+'</span><h3>'+recEsc(c.name)+'</h3><p>'+recEsc(c.lifespan)+' · '+recEsc(c.phase.label)+(c.phase.years?' · '+recEsc(c.phase.years):'')+'</p>'+credits+'</div></div><ul class="rec-bullets"><li><b>Overlap:</b> '+close+'</li><li><b>Different:</b> '+(partial!=="—"?"Partly: "+partial+" · ":"")+different+'</li><li><b>Not comparable:</b> '+labs(c.notComparable)+'</li></ul><details class="rec-details"><summary>View comparison &amp; sources</summary><ul class="rec-evidence">'+evidence+'</ul></details></article>';
    }).join("")+'</div>';
   }else h+='<p class="rec-empty">No thinker match is available for this profile yet.</p>';
   if(books.length){
