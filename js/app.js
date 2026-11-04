@@ -101,14 +101,14 @@ document.addEventListener("keydown",function(e){
   const target=e.target;
   if(target&&(/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))&&target.type!=="radio")return;
   if(!card.contains(target)&&target!==document.body)return;
-  if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].includes(e.key)){
+  if(["ArrowLeft","ArrowUp","ArrowRight","ArrowDown"].includes(e.key)&&!(target&&target.closest("button"))){
     e.preventDefault();
     const values=scale.map(x=>x[1]);let index=values.indexOf(answers[current]);
     if(e.key==="ArrowRight"||e.key==="ArrowDown")index=(index+1)%values.length;
     else index=index<=0?values.length-1:index-1;
     choose(values[index]);return;
   }
-  if(e.key==="Enter"&&answers[current]!==undefined){e.preventDefault();next();}
+  if(e.key==="Enter"&&answers[current]!==undefined&&!(target&&target.closest("button"))){e.preventDefault();next();}
 });
 (function init(){
   const s=loadSaved();
