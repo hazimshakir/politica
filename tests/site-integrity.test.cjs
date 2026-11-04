@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, "..");
 const read = file => fs.readFileSync(path.join(root, file), "utf8");
 const base = "https://politica-ynnr.onrender.com";
 const sitemap = read("sitemap.xml");
-const urls = [...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(m => m[1]);
+const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
 assert.ok(urls.length >= 5, "sitemap should contain the main public pages");
 assert.equal(new Set(urls).size, urls.length, "sitemap URLs should be unique");
 
@@ -22,7 +22,7 @@ for (const item of ideologyData.records) {
   }
 }
 for (const source of sourceData.records) {
-  assert.ok(/^https:\\/\\//.test(source.url), "source URL must use HTTPS: " + source.id);
+  assert.ok(/^https:\/\//.test(source.url), "source URL must use HTTPS: " + source.id);
 }
 
 const requiredPages = ["/", "/assessment.html", "/seven-dimensions.html", "/thinkers-library.html", "/ideologies.html"];
@@ -44,7 +44,7 @@ for (const url of urls) {
 
 for (const file of ["index.html", ...requiredPages.filter(x => x !== "/").map(x => x.slice(1))]) {
   const html = read(file);
-  assert.match(html, /<title>[^<]+<\\/title>/i, file + " needs a title");
+  assert.match(html, /<title>[^<]+<\/title>/i, file + " needs a title");
   assert.match(html, /<meta name="description" content="[^"]+"/i, file + " needs a description");
   if (file !== "index.html") assert.ok(html.includes('rel="canonical"'), file + " needs a canonical URL");
 }
