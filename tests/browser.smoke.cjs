@@ -38,8 +38,11 @@ const assert = require("node:assert/strict");
     assert.match(await keyboard.locator(".counter").innerText(), /QUESTION 2 OF 35/,
       "Enter should advance after a response is selected");
     await keyboard.keyboard.press("ArrowDown");
+    assert.equal(await keyboard.locator('input[name="answer"][value="1"]').isChecked(), true,
+      "ArrowDown should select the first response when the new question has no answer");
+    await keyboard.keyboard.press("ArrowDown");
     assert.equal(await keyboard.locator('input[name="answer"][value="2"]').isChecked(), true,
-      "ArrowDown should move to the next response");
+      "ArrowDown should move to the next response after an answer is selected");
     await keyboard.close();
 
     // Ideology catalogue data, search, and detail-page navigation.
