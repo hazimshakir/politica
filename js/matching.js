@@ -64,7 +64,7 @@ function matchThinkers(user,thinkers,cfg){
   const contrast=[];take(pool,C.contrastSlots,contrast);
   if(overlap.length<C.overlapSlots||contrast.length<C.contrastSlots)notes.push("Showing fewer thinkers than the usual "+(C.overlapSlots+C.contrastSlots)+": not enough sufficiently reviewed, comparable entries. The evidence standard is not lowered.");
   if(cands.length&&![...overlap,...contrast].some(x=>x.t.family==="indic"))notes.push("No reviewed Indian thinker met the comparison rules for this profile.");
-  return{overlap:overlap.map(_card),contrast:contrast.map(_card),notes,eligibleCount:cands.length}}
+  return{overlap:overlap.map(_card),contrast:contrast.map(_card),allCandidates:cands.slice().sort((a,b)=>a.c.D-b.c.D||byId(a,b)).map(_card),notes,eligibleCount:cands.length}}
 function selectBooks(user,books,cfg){
   const C=Object.assign({},MATCH_CONFIG,cfg||{}),pub=publishedBooks(books),notes=[],picks=[],used=new Set(),authors=new Set(),fam={};
   const focus=MATCH_DIMS.filter(d=>_num(user[d])).sort((a,b)=>Math.abs(user[b])-Math.abs(user[a])||MATCH_DIMS.indexOf(a)-MATCH_DIMS.indexOf(b)).slice(0,2);
