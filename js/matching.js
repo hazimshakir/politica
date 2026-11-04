@@ -4,7 +4,7 @@
 */
 const MATCH_DIMS=["economic","social","culture","democracy","liberty","global","values"];
 const MATCH_CONFIG={weights:{high:1,medium:.6,low:.3},minDims:4,minWeight:2.5,close:30,different:60,maxSpread:25,mixedBelow:20,
-  overlapSlots:2,contrastSlots:2,maxWestern:2,maxPerFamily:1,minContrastClose:2,minContrastDifferent:2,maxBooksPerFamily:2};
+  overlapSlots:2,contrastSlots:2,maxWestern:2,maxPerFamily:2,maxIndic:1,minContrastClose:2,minContrastDifferent:2,maxBooksPerFamily:2};
 const _num=v=>typeof v==="number"&&isFinite(v);
 /* Returns null when a cell may be published, otherwise the reason it may not. */
 function cellProblem(cell,sources){
@@ -58,7 +58,7 @@ function matchThinkers(user,thinkers,cfg){
   const byId=(a,b)=>a.t.id<b.t.id?-1:a.t.id>b.t.id?1:0,byRelevance=(a,b)=>a.c.D-b.c.D||byId(a,b);
   const familyCounts=new Map(),used=new Set();
   const take=(arr,n,list)=>{for(const x of arr){if(list.length>=n)break;const family=x.t.family||"unknown",count=familyCounts.get(family)||0;
-    if(used.has(x.t.id)||count>=C.maxPerFamily)continue;
+    if(used.has(x.t.id)||count>=(family==="indic"?C.maxIndic:C.maxPerFamily))continue;
     if(family==="western"&&count>=C.maxWestern)continue;
     list.push(x);used.add(x.t.id);familyCounts.set(family,count+1)}};
   const overlap=[];take(cands.slice().sort(byRelevance),C.overlapSlots,overlap);
