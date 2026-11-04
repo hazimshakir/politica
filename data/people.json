@@ -32,42 +32,42 @@
     {
       "id": "tagore",
       "name": "Rabindranath Tagore",
-      "profile_id": "rabindranath-tagore",
+      "profile_id": null,
       "scope": "india",
       "note": "Literary and political thinker; not reducible to a party ideology."
     },
     {
       "id": "bhagat-singh",
       "name": "Bhagat Singh",
-      "profile_id": "bhagat-singh",
+      "profile_id": null,
       "scope": "india",
       "note": "Revolutionary and anti-colonial thinker; read dated writings."
     },
     {
       "id": "subhas-chandra-bose",
       "name": "Subhas Chandra Bose",
-      "profile_id": "subhas-chandra-bose",
+      "profile_id": null,
       "scope": "india",
       "note": "Anti-colonial leader; evaluate political alliances and wartime context carefully."
     },
     {
       "id": "mn-roy",
       "name": "M. N. Roy",
-      "profile_id": "mn-roy",
+      "profile_id": null,
       "scope": "india",
       "note": "His intellectual trajectory crossed several traditions; periodisation matters."
     },
     {
       "id": "john-locke",
       "name": "John Locke",
-      "profile_id": "john-locke",
+      "profile_id": null,
       "scope": "international",
       "note": "Early modern political philosopher; avoid projecting contemporary party categories."
     },
     {
       "id": "john-rawls",
       "name": "John Rawls",
-      "profile_id": "john-rawls",
+      "profile_id": null,
       "scope": "international",
       "note": "Liberal egalitarian political philosopher."
     },
