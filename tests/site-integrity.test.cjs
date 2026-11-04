@@ -50,6 +50,6 @@ for (const file of ["index.html", ...requiredPages.filter(x => x !== "/").map(x 
 }
 assert.equal(ideologyData.records.length, 27, "update this expectation deliberately when catalogue grows");
 const app = read("js/app.js");
-assert.match(app, /function startOver\(\)[\\s\\S]*?clearProgress\(\)/, "start over must clear all local assessment state");
-assert.match(app, /function restart\(\)[\\s\\S]*?clearProgress\(\)/, "retake must clear all local assessment state");
+assert.ok(app.split("function startOver()")[1].split("function restart()")[0].includes("clearProgress()"), "start over must clear all local assessment state");
+assert.ok(app.split("function restart()")[1].split("/* Keyboard controls")[0].includes("clearProgress()"), "retake must clear all local assessment state");
 console.log("PASS: sitemap, catalogue integrity and local assessment data clearing");
